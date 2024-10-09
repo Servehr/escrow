@@ -1,6 +1,5 @@
-import { HiArrowSmLeft, HiArrowSmRight, HiHome } from "react-icons/hi";
-import Logo from "../shared/Logo";
 import { Link } from "react-router-dom";
+import Logo from "../shared/Logo";
 
 
 function Register() 

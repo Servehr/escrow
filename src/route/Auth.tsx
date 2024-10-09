@@ -1,4 +1,4 @@
-import { Route, Routes, useRoutes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from '../auth/login';
 import Register from '../auth/register';
 import ResetPassword from '../auth/reset';
@@ -14,9 +14,7 @@ export const Auth = () =>
                 <Route path='login' element={<Login/>}></Route> 
                 <Route path='/register' element={<Register/>}></Route>
                 <Route path='/reset' element={<ResetPassword/>}></Route>
-                <Route path='/forgot' element={<ForgotPassword/>}></Route> 
-                {/* <Route path='change-password' element={<ChangePassword/>}></Route> */}
-                {/* <Route path='enquiry' element={<Enquiry/>}></Route>  */}
+                <Route path='/forgot' element={<ForgotPassword/>}></Route>
             </Routes>
     );
 }
