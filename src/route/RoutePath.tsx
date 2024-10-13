@@ -1,13 +1,15 @@
 
 import { Route, Routes } from "react-router-dom";
-import { Auth } from "./Auth";
+import { AuthRoute } from "./AuthRoute";
+import { DashboardRoute } from "./DashboardRoute";
 
 
 export const RoutePath = () => 
 {
     return (
             <Routes>
-                <Route path='/*' element={<Auth/>}></Route> 
+                <Route path='/*' element={<AuthRoute/>}></Route> 
+                <Route path='/dashboard/*' element={<DashboardRoute/>}></Route> 
             </Routes>
     );
 }

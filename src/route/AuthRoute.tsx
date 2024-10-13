@@ -5,7 +5,7 @@ import ResetPassword from '../auth/reset';
 import ForgotPassword from '../auth/forgot';
 
 
-export const Auth = () => 
+export const AuthRoute = () => 
 {
     return (
             
