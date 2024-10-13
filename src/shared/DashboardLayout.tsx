@@ -46,41 +46,11 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
             url: "/dashboard/members",
             icon: <HiMiniUser className='mr-2 mt-1 text-md' />
         },
-        // {
-        //     name: "Adverts",
-        //     url: "/dashboard/adverts",
-        //     icon: <HiMiniUserCircle className='mr-2 mt-1 text-md' />
-        // },
-        // {
-        //     name: "Plans/Packages",
-        //     url: "/dashboard/plans",
-        //     icon: <HiOutlineTag className='mr-2 mt-1 text-md' />
-        // },
-        // {
-        //     name: "FAQS",
-        //     url: "/dashboard/faqs",
-        //     icon: <HiBookmarkSquare className='mr-2 mt-1 text-md' />
-        // },
-        // {
-        //     name: "Location",
-        //     url: "/dashboard/location",
-        //     icon: <HiMapPin className='mr-2 mt-1 text-md' />
-        // },
         {
             name: "Services",
             url: "/dashboard/services",
             icon: <HiMiniUsers className='mr-2 mt-1 text-md' />
         },
-        // {
-        //     name: "CMS",
-        //     url: "/dashboard/cms",
-        //     icon: <HiMiniAdjustmentsHorizontal className='mr-2 mt-1 text-md' />
-        // },
-        // {
-        //     name: "Contact Messages",
-        //     url: "/dashboard/contact-messages",
-        //     icon: <HiEnvelope className='mr-2 mt-1 text-md' />
-        // },
         {
             name: "Settings",
             url: "/dashboard/settings",
@@ -149,8 +119,8 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
                                         <div 
                                               className='w-7/12'
                                         >                                                        
-                                          <div className='w-full flex justify-left font-bold text-[15px]'>Emeka Obinna </div>
-                                          <div className='w-full flex justify-left font-bold text-md'>Manager</div>
+                                          <div className='w-full flex justify-left font-bold text-[15px]'>Richard Festus</div>
+                                          <div className='w-full flex justify-left font-bold text-md'>C.E.O</div>
                                           <div className='w-full flex justify-left font-bold text-md'><HiMiniPower className='mr-1 text-2xl mt-2 cursor-pointer hover:text-red-600'/></div>
                                         </div>
                                     </div>
@@ -211,9 +181,9 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
                             <div 
                                   className='w-8/12'
                             >                                                        
-                              <div className='w-full flex justify-left font-bold text-[15px]'>Emeka Obinna</div>
-                              <div className='w-full flex justify-left font-bold text-md'>Manager</div>
-                              <div className='w-full flex justify-left font-bold text-md'><HiMiniPower className='mr-1 text-2xl mt-2 cursor-pointer hover:text-red-600'/></div>
+                            <div className='w-full flex justify-left font-bold text-[15px]'>Richard Festus</div>
+                            <div className='w-full flex justify-left font-bold text-md'>C.E.O</div>
+                            <div className='w-full flex justify-left font-bold text-md'><HiMiniPower className='mr-1 text-2xl mt-2 cursor-pointer hover:text-red-600'/></div>
                             </div>
                         </div>
                         <ul className='w-full mt-2'>

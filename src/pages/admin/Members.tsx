@@ -1,11 +1,12 @@
+import React from 'react'
 import DashboardLayout from '../../shared/DashboardLayout'
 
 
-export default function Transactions() 
+export default function Members() 
 {
     
     return (
-        <DashboardLayout pageName="Transactions"
+        <DashboardLayout pageName="Members"
         >
             <div className='grid grid-cols-12'
             >

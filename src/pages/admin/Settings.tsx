@@ -1,11 +1,11 @@
 import DashboardLayout from '../../shared/DashboardLayout'
 
 
-export default function CreateTransaction() 
+export default function Settings() 
 {
     
     return (
-        <DashboardLayout pageName="Create Transaction"
+        <DashboardLayout pageName="Settings"
         >
             <div className='grid grid-cols-12'
             >

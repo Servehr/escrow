@@ -2,11 +2,11 @@ import React from 'react'
 import DashboardLayout from '../../shared/DashboardLayout'
 
 
-export default function Dashboard() 
+export default function Services() 
 {
     
     return (
-        <DashboardLayout pageName="Dashboard"
+        <DashboardLayout pageName="Services"
         >
             <div className='grid grid-cols-12'
             >
