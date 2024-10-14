@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../shared/Logo";
+import { HiHome } from "react-icons/hi";
 
 export default function ForgotPassword() 
 {
@@ -53,22 +54,40 @@ export default function ForgotPassword()
                                     </button>
                               </div>
                               <div  
-                                    className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-10 px-5'
+                                    className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-10 px-5 cursor-pointer'
                               >                                       
                                     <div 
                                           className='d-flex justify-center text-center'
                                     >
                                           <div className=''>Access your account</div>
                                           <div className='text-md hover:text-blue-300 font-bold'>
-                                                <Link to={'/login'}>Login</Link>
+                                                <Link to={'/auth/login'}>Login</Link>
                                           </div>
                                     </div>
                                     <div 
-                                          className='d-flex justify-center text-center'
+                                          className='text-md d-flex justify-center items-center text-black hover:text-blue-300 font-bold text-md cursor-pointer'
+                                    >
+                                          <div className=''>
+                                                <Link to={'/'}
+                                                >                                
+                                                      <HiHome className='ml-1 text-2xl mt-2'/> 
+                                                </Link>
+                                          </div>
+                                          <div 
+                                                className='text-md hover:text-blue-300 font-bold'
+                                          >
+                                                <Link to={'/'}
+                                                >                                
+                                                      <div className='mt-1 flex justify-center text-xs items-center'>Home</div>
+                                                </Link>
+                                          </div>
+                                    </div>
+                                    <div 
+                                          className='d-flex justify-center text-center cursor-pointer'
                                     >
                                         <div className=''>If you don't have an account </div>
                                         <div className='text-md hover:text-blue-300 font-bold'>
-                                            <Link to={'/register'}>Create one now.</Link>
+                                            <Link to={'/auth/register'}>Create one now.</Link>
                                         </div>
                                     </div>
                               </div>

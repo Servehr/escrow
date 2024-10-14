@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../shared/Logo";
+import { HiHome } from "react-icons/hi";
 
 
 function Register() 
@@ -108,15 +109,33 @@ function Register()
                                     >
                                         <div className=''>Access Dashboard</div>
                                         <div className='text-md hover:text-blue-300 font-bold'>
-                                            <Link to={'/login'}>Login</Link>
+                                            <Link to={'/auth/login'}>Login</Link>
                                         </div>
-                                    </div>                                    
+                                    </div> 
+                                    <div 
+                                          className='text-md d-flex justify-center items-center hover:text-blue-300 font-bold text-md cursor-pointer'
+                                    >
+                                          <div className=''>
+                                                <Link to={'/'}
+                                                >                                
+                                                      <HiHome className='ml-1 text-2xl mt-2'/> 
+                                                </Link>
+                                          </div>
+                                          <div 
+                                                className='text-md hover:text-blue-300 font-bold'
+                                          >
+                                                <Link to={'/'}
+                                                >                                
+                                                      <div className='mt-1 flex justify-center text-xs items-center'>Home</div>
+                                                </Link>
+                                          </div>
+                                    </div>                              
                                     <div 
                                           className='d-flex justify-center text-center'
                                     >
                                         <div className=''>I can remember my password again</div>
                                         <div className='text-md hover:text-blue-300 font-bold'>
-                                            <Link to={'/forgot'}>Reset It Here</Link>
+                                            <Link to={'/auth/forgot'}>Reset It Here</Link>
                                         </div>
                                     </div>
                               </div>

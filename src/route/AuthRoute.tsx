@@ -9,9 +9,8 @@ export const AuthRoute = () =>
 {
     return (
             
-            <Routes>
-                <Route path='' element={<Login/>}></Route> 
-                <Route path='login' element={<Login/>}></Route> 
+            <Routes> 
+                <Route path='/login' element={<Login/>}></Route> 
                 <Route path='/register' element={<Register/>}></Route>
                 <Route path='/reset' element={<ResetPassword/>}></Route>
                 <Route path='/forgot' element={<ForgotPassword/>}></Route>
