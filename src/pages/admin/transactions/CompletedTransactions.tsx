@@ -16,16 +16,13 @@ export default function CompletedTransactions()
 
 
   const [showingStates, setShowStates] = useState<boolean>(false)
-  const [action, setAction] = useState<boolean>(false)
   
 
   const ShowStates = (page: any) => 
   {
-      setShowStates(true)
-  }
-
-  const pages = (page: any) => {
-      setAction(true)
+        console.log(showingStates)
+        console.log(page)
+        setShowStates(true)
   }
 
   type ActiveTransProps =
@@ -114,12 +111,12 @@ export default function CompletedTransactions()
       },
       {
           header: 'Flag',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-green-600 hover:text-black" width={5} height={5}/></a>),
+          cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-green-600 hover:text-black" width={5} height={5}/></a>),
           accessorKey: '',
       },
       {
           header: 'View Detail',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => setVeiwTransactionDetail(true)}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
+          cell: () => (<a href="#" onClick={() => setVeiwTransactionDetail(true)}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
           accessorKey: '',
       }
   ],[])

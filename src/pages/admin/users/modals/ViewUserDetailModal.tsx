@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../../../../component/Modal";
 
 
@@ -14,6 +14,11 @@ type UserModalPropos =
 export const ViewUserDetailModal = ({onClick, userModal}: UserModalPropos)  =>
   {
           const [loading, setIsLoading] = useState(false)
+
+          useEffect(() => {
+                  setIsLoading(false)
+                  console.log(loading)
+          })
   
           return (
                   <Modal 

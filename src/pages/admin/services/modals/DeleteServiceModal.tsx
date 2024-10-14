@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../../../../component/Modal";
 import { BeatLoader } from "react-spinners";
 
@@ -14,6 +14,10 @@ type SerivceModalPropos =
 export const DeleteServiceModal = ({onClick, serviceModal}: SerivceModalPropos)  =>
 {
         const [loading, setIsLoading] = useState(false)
+
+        useEffect(() => {
+                setIsLoading(false)
+        })
 
         return (
                 <Modal 

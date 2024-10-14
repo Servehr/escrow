@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 type IconProperties = 
 {
@@ -15,9 +15,14 @@ type IconProperties =
 export const Icons = ({width=5, height=5, strokeWidth=1.5, iconName, mT=1, leftP=0, color=''}: IconProperties)  =>
 {
     const dimension: string = `w-${width} h-${height} mt-${mT} ml${leftP} hover:outline-yellow-100 hover:outline-dashed hover:text-black hover:fill-white`
-    const iconHover: string = `flex-shrink-0 mt-2 text-gray-950 font-semibold transition duration-75 dark:text-gray-400 hover:text-white`
+    // const iconHover: string = `flex-shrink-0 mt-2 text-gray-950 font-semibold transition duration-75 dark:text-gray-400 hover:text-white`
 
     const [user, setUser] = useState<string>("")
+    
+
+    useEffect(() => {
+        setUser("")
+})
     // setUser(iconName)
 
     return (

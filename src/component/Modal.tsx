@@ -20,12 +20,12 @@ type ModalPropos =
 }
 // overLay = 'react-modal-overlay'
 
-export const Modal = ({children, overLay = 'react-modal-overlay', isOpen, onClick, color='', text, size='md', state='', title, heading, centralize=false, wrapperWidth=500, margin, content=''}: ModalPropos)  =>
+export const Modal = ({children, overLay = 'react-modal-overlay', isOpen, onClick, wrapperWidth=500, margin, content=''}: ModalPropos)  =>
 {
-    const css = `btn btn-${color} btn-outline-primary-${color} btn-${size} ${state}`  
-    const center = centralize ? `modal-dialog-centered` : ''
-    const width = `modal-dialog-${size}`
-    const style = `modal-dialog ${width} ${center}`
+    // const css = `btn btn-${color} btn-outline-primary-${color} btn-${size} ${state}`  
+    // const center = centralize ? `modal-dialog-centered` : ''
+    // const width = `modal-dialog-${size}`
+    // const style = `modal-dialog ${width} ${center}`
     const overlay = overLay
     
     return (

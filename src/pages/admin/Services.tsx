@@ -3,7 +3,7 @@ import { useMemo, useState } from "react"
 import { Show } from "../../shared/Show"
 import { Icons } from "../../shared/Icons"
 import { Table } from "../../shared/Table"
-import { HiFlag, HiOutlinePlus } from "react-icons/hi"
+import { HiOutlinePlus } from "react-icons/hi"
 import DashboardLayout from '../../shared/DashboardLayout'
 import { DeleteServiceModal } from "./services/modals/DeleteServiceModal"
 import { AddServiceModal } from "./services/modals/AddServiceModal"
@@ -18,16 +18,13 @@ export default function Services()
 
 
     const [showingStates, setShowStates] = useState<boolean>(false)
-    const [action, setAction] = useState<boolean>(false)
     
 
     const ShowStates = (page: any) => 
     {
+        console.log(showingStates)
+        console.log(page)
         setShowStates(true)
-    }
-
-    const pages = (page: any) => {
-        setAction(true)
     }
 
     type ServiceProps =
@@ -71,12 +68,12 @@ export default function Services()
         },
         {
             header: 'Edit',
-            cell: (row: CellContext<ServiceProps, unknown>) => (<a href="#" onClick={() => setServiceToEdit(true)}><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
+            cell: () => (<a href="#" onClick={() => setServiceToEdit(true)}><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
             accessorKey: '',
         },
         {
             header: 'Delete',
-            cell: (row: CellContext<ServiceProps, unknown>) => (<a href="#" onClick={() => setServiceToDelete(true)}><Icons iconName="delete" color="red" width={4} height={4}/></a>),
+            cell: () => (<a href="#" onClick={() => setServiceToDelete(true)}><Icons iconName="delete" color="red" width={4} height={4}/></a>),
             accessorKey: '',
         }
     ],[])

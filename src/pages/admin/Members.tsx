@@ -3,7 +3,7 @@ import { useMemo, useState } from "react"
 import { Show } from "../../shared/Show"
 import { Icons } from "../../shared/Icons"
 import { Table } from "../../shared/Table"
-import { HiFlag, HiOutlinePlus } from "react-icons/hi"
+import { HiOutlinePlus } from "react-icons/hi"
 import DashboardLayout from '../../shared/DashboardLayout'
 import { AddUserModal } from "./users/modals/AddUserModal"
 import { EditUserModal } from "./users/modals/EditUserModal"
@@ -20,16 +20,13 @@ export default function Members()
 
 
     const [showingStates, setShowStates] = useState<boolean>(false)
-    const [action, setAction] = useState<boolean>(false)
     
 
     const ShowStates = (page: any) => 
     {
+        console.log(page)
+        console.log(showingStates)
         setShowStates(true)
-    }
-
-    const pages = (page: any) => {
-        setAction(true)
     }
 
     type ActiveTransProps =
@@ -100,17 +97,17 @@ export default function Members()
         },
         {
             header: 'View',
-            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => setViewUserOpen(true)}><Icons iconName="eye" color="green" width={4} height={4}/></a>),
+            cell: () => (<a href="#" onClick={() => setViewUserOpen(true)}><Icons iconName="eye" color="green" width={4} height={4}/></a>),
             accessorKey: '',
         },
         {
             header: 'Edit',
-            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => setEditUserOpen(true)}><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
+            cell: () => (<a href="#" onClick={() => setEditUserOpen(true)}><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
             accessorKey: '',
         },
         {
             header: 'Delete',
-            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => setDeleteUserOpen(true)}><Icons iconName="delete" color="red" width={4} height={4}/></a>),
+            cell: () => (<a href="#" onClick={() => setDeleteUserOpen(true)}><Icons iconName="delete" color="red" width={4} height={4}/></a>),
             accessorKey: '',
         }
     ],[])
