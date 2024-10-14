@@ -68,7 +68,7 @@ export const ContactUs = () =>
                                     </div>
                                     <div className="flex flex-wrap -m-2 mt-2 mb-2 md:mx-5 px-3">
                                         <span className="w-full font-bold text-sm">Message</span>
-                                        <textarea onChange={(e) => { 
+                                        <textarea onChange={() => { 
                                                                
                                             } } defaultValue={''} 
                                             className="shadow form-textarea mb-2 block w-full border rounded w-full 
