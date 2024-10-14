@@ -5,7 +5,7 @@ export default function CreateTransactions()
 {
     
     return (
-        <DashboardLayout pageName="Dashboard"
+        <DashboardLayout pageName="Create Transaction"
         >
             <div className='grid grid-cols-12'
             >

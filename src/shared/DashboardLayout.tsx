@@ -1,11 +1,12 @@
 import React from 'react'
-import { HiCog6Tooth, HiHome,  HiMiniPencilSquare, HiMiniPower, HiMiniUser, HiMiniUsers } from 'react-icons/hi2'
+import { HiCog6Tooth, HiHome,  HiMiniPencilSquare, HiMiniPower } from 'react-icons/hi2'
 import { BsFillTelephoneInboundFill, BsXCircle } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
+import { HiOutlineUserGroup, HiOutlineViewList } from 'react-icons/hi'
 
 
 type ILayoutProps = {
@@ -39,14 +40,14 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
             icon: <HiMiniPencilSquare className='mr-2 mt-1 text-md' />
         },
         {
-            name: "Members",
-            url: "/dashboard/members",
-            icon: <HiMiniUser className='mr-2 mt-1 text-md' />
+            name: "Users",
+            url: "/dashboard/users",
+            icon: <HiOutlineUserGroup className='mr-2 mt-1 text-md' />
         },
         {
             name: "Services",
             url: "/dashboard/services",
-            icon: <HiMiniUsers className='mr-2 mt-1 text-md' />
+            icon: <HiOutlineViewList className='mr-2 mt-1 text-md' />
         },
         {
             name: "Settings",
@@ -57,11 +58,11 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
 
     return (
           <div 
-                className="relative min-h-screen md:flex"
+                className="relative min-h-screen md:flex bg-gray-100"
           >
 
               <section 
-                        className='md:w-0/12 w-12/12 md:hidden p-2 flex justify-between relative bg-gray-600'
+                        className='md:w-0/12 w-12/12 md:hidden p-2 flex justify-between relative bg-[#506f9d]'
               >
                   <span className='flex justify-center items-center 10/12 md:absolute z-50 md:-mt-5 mt-1'
                   >
@@ -118,10 +119,16 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
                                         >                                                        
                                           <div className='w-full flex justify-left font-bold text-[15px]'>Richard Festus</div>
                                           <div className='w-full flex justify-left font-bold text-md'>C.E.O</div>
-                                          <div className='w-full flex justify-left font-bold text-md'><HiMiniPower className='mr-1 text-2xl mt-2 cursor-pointer hover:text-red-600'/></div>
+                                          <div 
+                                                className='w-full flex justify-left font-bold text-md'
+                                          >
+                                                <HiMiniPower className='mr-1 text-2xl mt-2 cursor-pointer hover:text-red-600'/>
+                                          </div>
                                         </div>
                                     </div>
-                                    <ul className='w-full'>
+                                    <ul 
+                                        className='w-full mt-7'
+                                    >
                                         {
                                           
                                             admin.map((user, index) => {
@@ -183,7 +190,9 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
                             <div className='w-full flex justify-left font-bold text-md'><HiMiniPower className='mr-1 text-2xl mt-2 cursor-pointer hover:text-red-600'/></div>
                             </div>
                         </div>
-                        <ul className='w-full mt-2'>
+                        <ul 
+                              className='w-full mt-7'
+                        >
                             {
                               
                                 admin.map((user, index) => {
@@ -210,14 +219,28 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
                     className='w-full'
                 >
                     <div 
-                          className='bg-gray-300 flex justify-between'
+                          className='md:bg-[#d1dbea] flex justify-between'
                     >
                         <div className='col-span-3 text-2xl p-5'>{pageName}</div>
                         <div className='col-span-6'></div>
-                        <div className='col-span-6 font-bold text-md p-5'>Welcom User</div>
+                        <div 
+                                className='flex col-span-6 font-bold text-md p-5'
+                        >
+                            {/* <HiOutlineUser className='text-[30px] mx-2 text-blue-600' /> */}
+                            <span className='text-[16px] mx-2 text-blue-600 mt-1'>Welcome User</span>
+                            <div 
+                                    className='flex justify-left font-bold text-md'
+                            >
+                                <HiMiniPower className='mr-1 text-[30px] mt-1 cursor-pointer hover:text-red-600'/>
+                            </div>
+                        </div>
                     </div>
-                    
-                  { children }
+
+                    <div 
+                            className='px-1'
+                    >
+                        { children }
+                    </div>
               </div>
 
           </div>

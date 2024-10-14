@@ -16,7 +16,7 @@ export const DashboardRoute = () =>
                 <Route path='' element={<Dashboard />}></Route> 
                 <Route path='/create-transaction' element={<CreateTransactions />}></Route> 
                 <Route path='/transactions' element={<Transactions />}></Route> 
-                <Route path='/members' element={<Members />}></Route> 
+                <Route path='/users' element={<Members />}></Route> 
                 <Route path='/services' element={<Services />}></Route> 
                 <Route path='/settings' element={<Settings />}></Route> 
             </Routes>
