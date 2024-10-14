@@ -35,14 +35,14 @@ export const ContactUs = () =>
                                     <div className="flex flex-wrap -m-2 mt-2 mb-2 md:mx-5">
                                         <div className="p-2 w-1/2">
                                             <span className="w-full font-bold text-sm">First Name</span>
-                                            <input onBlur={(e) => {
+                                            <input onBlur={() => {
                                                        
                                                 }} type="text" id="firstname" defaultValue={''}  name="firstname" placeholder="Enter Your Firstname" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 text-sm py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" 
                                             />
                                         </div>
                                         <div className="p-2 w-1/2">
                                             <span className="w-full font-bold text-sm">Surname</span>
-                                            <input onKeyUp={(e) => {   
+                                            <input onKeyUp={() => {   
                                                         
                                                 }} type="text" id="surname" defaultValue={''} name="surname" placeholder="Enter Your Surname" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 text-sm leading-8 transition-colors duration-200 ease-in-out" 
                                             />
@@ -52,14 +52,14 @@ export const ContactUs = () =>
                                     <div className="flex flex-wrap -m-2 mt-2 mb-2 md:mx-5">
                                         <div className="p-2 w-1/2">
                                             <span className="w-full font-bold text-sm">Phone Number</span>
-                                            <input onBlur={(e) => {
+                                            <input onBlur={() => {
                                                        
                                                 }} type="text" id="phoneNumber" defaultValue={''}  name="phoneNumber" placeholder="Enter Your Phone Number" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 text-sm py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" 
                                             />
                                         </div>
                                         <div className="p-2 w-1/2">
                                             <span className="w-full font-bold text-sm">Email</span>
-                                            <input onKeyUp={(e) => {   
+                                            <input onKeyUp={() => {   
                                                         
                                                 }} type="email" id="email" defaultValue={''} name="email" placeholder="Enter Your Email" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 text-sm leading-8 transition-colors duration-200 ease-in-out" 
                                             />
