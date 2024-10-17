@@ -27,7 +27,7 @@ export default function CreateTransactions()
                 className='w-full mx-auto py-20 flex justify-center items-center'
             >
                 <div  
-                    className='w-6/12 d-flex mx-auto gap-10 md:mb-3'
+                    className='w-full px-5 md:mx-0 md:w-6/12 d-flex mx-auto gap-10 md:mb-3'
                 > 
                     <div 
                         className="mb-4 md:col-span-12"

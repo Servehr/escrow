@@ -1,8 +1,11 @@
+import { useEffect } from 'react'
 import DashboardLayout from '../../shared/DashboardLayout'
+import { appStore } from '../../state/store'
 
 
 export default function Dashboard() 
 {
+    const appState = appStore((state: any) => state)
     
     const summary: { name: string, count: number }[] = 
     [
@@ -39,6 +42,12 @@ export default function Dashboard()
             count: 50
         }
     ]
+
+
+    useEffect(() => 
+    {
+       console.log(appState.getUser())
+    }, [])
 
     return (
         <DashboardLayout pageName="Dashboard"

@@ -3,6 +3,8 @@ import Login from '../auth/login';
 import Register from '../auth/register';
 import ResetPassword from '../auth/reset';
 import ForgotPassword from '../auth/forgot';
+import Activated from '../auth/activated';
+import Registered from '../auth/registered';
 
 
 export const AuthRoute = () => 
@@ -14,6 +16,8 @@ export const AuthRoute = () =>
                 <Route path='/register' element={<Register/>}></Route>
                 <Route path='/reset' element={<ResetPassword/>}></Route>
                 <Route path='/forgot' element={<ForgotPassword/>}></Route>
+                <Route path='/registered' element={<Registered/>}></Route>
+                <Route path='/activated' element={<Activated/>}></Route>
             </Routes>
     );
 }
