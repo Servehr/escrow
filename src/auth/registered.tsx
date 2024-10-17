@@ -9,7 +9,7 @@ function Registered()
 {
       // const appState = appStore((state: any) => state)
       // const [activated, setActivated] = useState<number>(-1)
-      const navigate = useNavigate()
+      // const navigate = useNavigate()
 
       // useEffect(() => 
       // {
