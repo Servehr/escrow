@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import Logo from '../shared/Logo'
 import { HiCheck } from 'react-icons/hi'
-import { useEffect, useState } from 'react'
-import { appStore } from '../state/store'
+// import { useEffect, useState } from 'react'
+// import { appStore } from '../state/store'
 
 
 function Registered() 
