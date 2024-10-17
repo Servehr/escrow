@@ -24,8 +24,7 @@ export default function ForgotPassword()
 
       useEffect(() => 
       {
-            setErrMsgStyle('bg-red-600 p-3 text-white font-bold rounded-md')
-            
+            setErrMsgStyle('bg-red-600 p-3 text-white font-bold rounded-md')            
       }, [])
 
 
@@ -43,6 +42,7 @@ export default function ForgotPassword()
                   { 
                         if(res.statusCode === 200)
                         {
+                              setErrMsgStyle('bg-green-600 p-3 text-white font-bold rounded-md')    
                               setCustomStyle('bg-green-600 p-3 text-white font-bold rounded-md')
                               setValidationMessage(res.message)
                               setIsLoading(false) 
