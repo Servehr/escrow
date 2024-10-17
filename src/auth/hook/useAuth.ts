@@ -2,8 +2,7 @@ import { handShake } from "../../service/handshake"
 import { ILogin } from "../Interface/Auth/ILogin"
 import { IRegistration } from "../Interface/Auth/IRegistration"
 import { IReset } from "../Interface/Auth/IReset"
-import { TLoginHandShake } from "../type/TLoginHandShake"
-
+// import { TLoginHandShake } from "../type/TLoginHandShake"
 
 
 export const useRegister = () =>
