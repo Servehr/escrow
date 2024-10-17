@@ -7,27 +7,27 @@ import { appStore } from '../state/store'
 
 function Registered() 
 {
-      const appState = appStore((state: any) => state)
-      const [activated, setActivated] = useState<number>(-1)
+      // const appState = appStore((state: any) => state)
+      // const [activated, setActivated] = useState<number>(-1)
       const navigate = useNavigate()
 
-      useEffect(() => 
-      {
-            if(appState.getRegistered() === 1)
-            {
-                  navigate('/auth/login')
-            }
-            setActivated(appState.getRegistered())
-            setTimeout(() => 
-            {
-                  setActivated(appState.getRegistered()+1)
-            }, 20000)
-      }, [])
+      // useEffect(() => 
+      // {
+            // if(appState.getRegistered() === 1)
+            // {
+            //       navigate('/auth/login')
+            // }
+            // setActivated(appState.getRegistered())
+            // setTimeout(() => 
+            // {
+            //       setActivated(appState.getRegistered()+1)
+            // }, 20000)
+      // }, [])
 
-      useEffect(() => 
-      {
-            navigate('/auth/login')
-      }, [activated])
+      // useEffect(() => 
+      // {
+      //       navigate('/auth/login')
+      // }, [activated])
 
 
       return (

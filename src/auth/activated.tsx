@@ -1,33 +1,33 @@
 import { useNavigate } from 'react-router-dom'
 import Logo from '../shared/Logo'
 import { HiShieldCheck } from 'react-icons/hi'
-import { useEffect, useState } from 'react'
-import { appStore } from '../state/store'
+// import { useEffect, useState } from 'react'
+// import { appStore } from '../state/store'
 
 
 function Activated() 
 {
-      const appState = appStore((state: any) => state)
-      const [activated, setActivated] = useState<number>(-1)
+      // const appState = appStore((state: any) => state)
+      // const [activated, setActivated] = useState<number>(-1)
       const navigate = useNavigate()
 
-      useEffect(() => 
-      {
-            if(appState.getActivated() === 1)
-            {
-                  navigate('/auth/login')
-            }
-            setActivated(appState.getActivated())
-            setTimeout(() => 
-            {
-                  setActivated(appState.getActivated()+1)
-            }, 20000)
-      }, [])
+      // useEffect(() => 
+      // {
+      //       if(appState.getActivated() === 1)
+      //       {
+      //             navigate('/auth/login')
+      //       }
+      //       setActivated(appState.getActivated())
+      //       setTimeout(() => 
+      //       {
+      //             setActivated(appState.getActivated()+1)
+      //       }, 20000)
+      // }, [])
 
-      useEffect(() => 
-      {
-            navigate('/auth/login')
-      }, [activated])
+      // useEffect(() => 
+      // {
+      //       navigate('/auth/login')
+      // }, [activated])
 
 
       return (
