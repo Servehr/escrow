@@ -54,7 +54,7 @@ export default function ForgotPassword()
                               }, 10000)  
                         }      
                   }).catch(() => {
-                        setValidationMessage("Application Error")
+                        setValidationMessage("Check your internet connecteion")
                         setIsLoading(false)
                         setTimeout(() => {
                            setValidationMessage("")

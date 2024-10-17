@@ -37,7 +37,7 @@ export const request = async ( options: any ) =>
         {
             const response: any = {
                 statusCode: responseData.data.status,
-                message: 'sucessful',
+                message: responseData.data.message,
                 statusText: responseData.statusText,
                 data: responseData.data
             }
