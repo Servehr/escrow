@@ -11,7 +11,7 @@ const createProductSlice: StateCreator<IProductOnHomePage> = (set, get) => (
         },
         setLoading(loading: any)
         {
-            set((state: any) => ({isLoading: loading}))
+            set(() => ({isLoading: loading}))
         },
 
         error: null,
@@ -21,7 +21,7 @@ const createProductSlice: StateCreator<IProductOnHomePage> = (set, get) => (
         },
         setError(error: any)
         {
-            set((state: any) => ({error: error}))
+            set(() => ({error: error}))
         },
         
         products: [],
@@ -31,7 +31,7 @@ const createProductSlice: StateCreator<IProductOnHomePage> = (set, get) => (
         },
         setProducts(products: any)
         {
-            set((state) => ({ products: products }))
+            set(() => ({ products: products }))
         },
 
         toWishList: false,
@@ -41,7 +41,7 @@ const createProductSlice: StateCreator<IProductOnHomePage> = (set, get) => (
         },
         setWishList()
         {
-            set((state) => ({ toWishList: this.toWishList }))
+            set(() => ({ toWishList: this.toWishList }))
         }
     }   
 )

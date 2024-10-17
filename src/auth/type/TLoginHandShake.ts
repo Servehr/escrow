@@ -1,4 +1,5 @@
-import { IRegistration } from "../Interface/IRegistration"
+import { IRegistration } from "../Interface/Auth/IRegistration"
+
 
 export type TLoginHandShake = 
 {

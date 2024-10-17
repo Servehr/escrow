@@ -10,7 +10,7 @@ export const useRegister = () =>
 {    
     const RegisterUser = async (user: IRegistration) => 
     {  
-        const dataPoint: TLoginHandShake = {
+        const dataPoint: any = {
             url: ['auth/signup'],
             method: 'POST',
             data: user,
@@ -27,7 +27,7 @@ export const useLogin = () =>
 {    
     const LoginUser = async (user: ILogin) => 
     {  
-        const dataPoint: TLoginHandShake = {
+        const dataPoint: any = {
             url: ['auth/login'],
             method: 'POST',
             data: user,
@@ -44,7 +44,7 @@ export const useForgot = () =>
 {    
     const ForgotUser = async (email: string) => 
     {  
-        const dataPoint: TLoginHandShake = {
+        const dataPoint: any = {
             url: ['auth/forgot-password'],
             method: 'POST',
             data: { email },
@@ -61,7 +61,7 @@ export const useReset = () =>
 {   
     const ResetUser = async (user: IReset) => 
     {
-        const dataPoint: TLoginHandShake = {
+        const dataPoint: any = {
             url: ['auth/set-new-password'],
             method: 'PUT',
             data: user,
@@ -77,7 +77,7 @@ export const checkReset = () =>
 {   
     const CheckUser = async (id: number) => 
     {  
-        const dataPoint: TLoginHandShake = {
+        const dataPoint: any = {
             url: ['auth/check-user-reset'],
             method: 'GET',
             data: { id },
