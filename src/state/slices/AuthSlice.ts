@@ -32,26 +32,6 @@ const createAuthSlice: StateCreator<IAuthentication> = (set, get) => (
         setUser(user: any)
         {
             set(() => ({ user: user }))
-        },
-
-        registered: 0,
-        getRegistered()
-        {
-            return get().registered
-        },
-        setRegistered()
-        {
-            set(() => ({ registered: this.registered }))
-        },
-
-        activated: 0,
-        getActivated()
-        {
-            return get().activated
-        },
-        setActivated()
-        {
-            set(() => ({ activated: this.activated }))
         }
     }   
 )

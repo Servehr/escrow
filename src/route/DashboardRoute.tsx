@@ -5,6 +5,7 @@ import CreateTransactions from '../pages/admin/CreateTransactions';
 import Members from '../pages/admin/Members';
 import Services from '../pages/admin/Services';
 import Settings from '../pages/admin/Settings';
+import NotFound from '../auth/notFound';
 
 
 
@@ -13,12 +14,13 @@ export const DashboardRoute = () =>
     return (
             
             <Routes>
-                <Route path='' element={<Dashboard />}></Route> 
+                <Route path='/' element={<Dashboard />}></Route> 
                 <Route path='/create-transaction' element={<CreateTransactions />}></Route> 
                 <Route path='/transactions' element={<Transactions />}></Route> 
                 <Route path='/users' element={<Members />}></Route> 
                 <Route path='/services' element={<Services />}></Route> 
                 <Route path='/settings' element={<Settings />}></Route> 
+                <Route path='/*' element={<NotFound />}></Route> 
             </Routes>
     );
 }

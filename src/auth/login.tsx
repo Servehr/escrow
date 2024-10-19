@@ -32,6 +32,10 @@ function Login()
 
       useEffect(() => 
       {
+         if(appState.getUser().token)
+         {
+            navigate('/dashboard')
+         }
          setErrMsgStyle('text-md text-red-600 font-bold')
       }, [])
 
@@ -54,7 +58,9 @@ function Login()
                               const credentials: IAuthModel = {
                                     firstname: res.data.data.firstname,
                                     surname: res.data.data.surname,
-                                    token: res.data.plus
+                                    token: res.data.plus,
+                                    verified: res.data.data.verified,
+                                    reset: res.data.data.reset,
                               }
                               appState.setUser(credentials)
                               setIsLoading(false) 

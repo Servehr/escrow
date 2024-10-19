@@ -29,6 +29,14 @@ function Activated()
       //       navigate('/auth/login')
       // }, [activated])
 
+      // useEffect(() => 
+      //       {
+      //             if(appState.getUser().verified === 'verified')
+      //             {
+      //                   navigate('/auth/login')
+      //             }
+      //       }, [])
+
 
       return (
             <>

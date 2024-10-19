@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // const client = axios.create({baseURL: import.meta.env.BASE_URL })
-// const client = axios.create({baseURL: 'http://127.0.0.1:8181/api/'})
-const client = axios.create({baseURL: 'https://www.scentsbyhoppey.com/api/'})
+const client = axios.create({baseURL: 'http://127.0.0.1:8181/api/'})
+// const client = axios.create({baseURL: 'https://www.scentsbyhoppey.com/api/'})
 
 
 export const request = async ( options: any ) => 

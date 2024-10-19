@@ -5,6 +5,7 @@ import ResetPassword from '../auth/reset';
 import ForgotPassword from '../auth/forgot';
 import Activated from '../auth/activated';
 import Registered from '../auth/registered';
+import NotFound from '../auth/notFound';
 
 
 export const AuthRoute = () => 
@@ -18,6 +19,7 @@ export const AuthRoute = () =>
                 <Route path='/forgot' element={<ForgotPassword/>}></Route>
                 <Route path='/registered' element={<Registered/>}></Route>
                 <Route path='/activated' element={<Activated/>}></Route>
+                <Route path='/*' element={<NotFound />}></Route> 
             </Routes>
     );
 }

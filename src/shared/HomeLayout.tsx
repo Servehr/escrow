@@ -4,9 +4,12 @@ import { BsFillTelephoneInboundFill, BsXCircle } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from './Logo'
 import { HiPhoneOutgoing, HiPuzzle, HiTemplate} from 'react-icons/hi'
+import { appStore } from '../state/store'
+import { logUserOut } from '../auth/hook/useAuth'
+import { IAuthModel } from '../state/slices/interface/IAuth'
 
 
 type ILayoutProps = {
@@ -16,11 +19,24 @@ type ILayoutProps = {
 
 export default function HomeLayout({children, pageName}: ILayoutProps) 
 {
+    const appState = appStore((state: any) => state)
+    const navigate = useNavigate()
     const [isMenuOpen, setMenu] = useState<boolean>(false)
+    const [user, setUser] = useState<any>()
+    const [refresh, setRefresh] = useState<number>(Math.random())
+    const { LogOut } = logUserOut()
 
-    useEffect(() => {
-      setMenu(false)
+    useEffect(() => 
+    {
+        setUser(appState.getUser().token)
+        setMenu(false)
     }, [])
+
+    useEffect(() => 
+    {
+        console.log(appState.getUser().token)
+        setUser(appState.getUser().token)
+    }, [refresh])
       
     const admin = 
     [
@@ -51,13 +67,38 @@ export default function HomeLayout({children, pageName}: ILayoutProps)
         },
     ]
 
+    const logUserSessionOut = () => 
+    {
+        console.log("Before")
+        const credentials: IAuthModel = {
+            firstname: "",
+            surname: "",
+            token: "",
+            verified: "",
+            reset: ""
+        }
+        appState.setUser(credentials)
+        setRefresh(Math.random()*Math.random())
+
+        // if(appState.getUser().token)
+        // {
+        //     const loggingOut = LogOut()
+        //     loggingOut.then(() => 
+        //     {
+        //         navigate('/auth/login')
+        //     }).catch(() => {
+    
+        //     })
+        // }
+    }
+
     return (
           <div 
                 className="relative min-h-screen md:flex bg-gray-100"
           >
 
               <section 
-                        className='md:w-0/12 w-12/12 md:hidden p-2 flex justify-between relative bg-[#506f9d]'
+                        className='md:w-0/12 w-12/12 md:hidden p-2 px-4 flex justify-between relative bg-[#506f9d]'
               >
                   <span className='flex justify-center items-center 10/12 md:absolute z-50 md:-mt-5 mt-1'
                   >
@@ -205,16 +246,36 @@ export default function HomeLayout({children, pageName}: ILayoutProps)
                             >
                                 <HiMiniPower className='mr-1 text-[30px] mt-1 cursor-pointer hover:text-red-600'/>
                             </div> */}
-                            <Link to={'/auth/login'} 
-                                  className='hover:text-[#506f9d] hover:font-bold px-3 py-1 mt-5 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
-                            >
-                                Login
-                            </Link>
-                            <Link to={'/auth/register'} 
-                                  className='hover:text-[#506f9d] hover:font-bold px-3 py-1 mt-5 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
-                            >
-                                Register
-                            </Link>
+                            
+                            {
+                                !user && <>
+                                    <Link to={'/auth/login'} 
+                                        className='hover:text-[#506f9d] hover:font-bold px-3 py-1 mt-5 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
+                                    >
+                                        Login
+                                    </Link>
+                                    <Link to={'/auth/register'} 
+                                        className='hover:text-[#506f9d] hover:font-bold px-3 py-1 mt-5 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
+                                    >
+                                        Register
+                                    </Link>
+                                </>
+                            }
+                            {
+                                user && <>
+                                    <Link to={'/dashboard'} 
+                                        className='hover:text-[#506f9d] hover:font-bold px-3 py-1 mt-5 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
+                                    >
+                                        Dashboard
+                                    </Link>
+                                    <Link to={'/#'} 
+                                        className='hover:text-red-600 hover:font-bold px-3 py-1 mt-5 text-sm hover:border-2 hover:border-red-600 hover:rounded-full flex justify-center items-center'
+                                        onClick={logUserSessionOut}
+                                    >
+                                        <HiMiniPower className='mr-1 text-xl mt-0 cursor-pointer hover:text-red-600'/> Logout
+                                    </Link>
+                                </>
+                            }
                         </div>
                     </div>
 

@@ -46,7 +46,7 @@ export default function Dashboard()
 
     useEffect(() => 
     {
-       console.log(appState.getUser())
+       console.log(appState.getUser().token)
     }, [])
 
     return (

@@ -1,4 +1,5 @@
 import { handShake } from "../../service/handshake"
+import { appStore } from "../../state/store"
 import { ILogin } from "../Interface/Auth/ILogin"
 import { IRegistration } from "../Interface/Auth/IRegistration"
 import { IReset } from "../Interface/Auth/IReset"
@@ -85,4 +86,22 @@ export const checkReset = () =>
         return await handShake(dataPoint) 
     }
     return { CheckUser }
+}
+
+
+export const logUserOut = () =>
+{   
+    const appState = appStore((state) => state)
+    const LogOut = async () => 
+    {  
+        const dataPoint: any = {
+            url: ['auth/logout'],
+            method: 'POST',
+            data: '',
+            isHeader: true,
+            token: appState.getUser().token
+        }
+        return await handShake(dataPoint) 
+    }
+    return { LogOut }
 }

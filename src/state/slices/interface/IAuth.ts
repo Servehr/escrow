@@ -3,13 +3,17 @@ export interface IAuthModel
     firstname: string;
     surname: string;
     token: string;
+    verified: string;
+    reset: string;
 }
 
 export const AuthInitialData = 
 {
     firstname: "",
     surname: "",
-    token: ""
+    token: "",
+    verified: "",
+    reset: ""
 }
 
 export interface IAuthentication
@@ -25,12 +29,4 @@ export interface IAuthentication
     user: IAuthModel
     getUser: () => void
     setUser: (user: any) => void
-
-    registered: number,
-    getRegistered: () => void 
-    setRegistered: (registered: any) => void 
-
-    activated: number,
-    getActivated: () => void 
-    setActivated: (activated: any) => void 
 }
