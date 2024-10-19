@@ -4,11 +4,11 @@ import { BsFillTelephoneInboundFill, BsXCircle } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logo from './Logo'
 import { HiPhoneOutgoing, HiPuzzle, HiTemplate} from 'react-icons/hi'
 import { appStore } from '../state/store'
-import { logUserOut } from '../auth/hook/useAuth'
+// import { logUserOut } from '../auth/hook/useAuth'
 import { IAuthModel } from '../state/slices/interface/IAuth'
 
 
@@ -20,11 +20,11 @@ type ILayoutProps = {
 export default function HomeLayout({children, pageName}: ILayoutProps) 
 {
     const appState = appStore((state: any) => state)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [isMenuOpen, setMenu] = useState<boolean>(false)
     const [user, setUser] = useState<any>()
     const [refresh, setRefresh] = useState<number>(Math.random())
-    const { LogOut } = logUserOut()
+    // const { LogOut } = logUserOut()
 
     useEffect(() => 
     {
@@ -69,7 +69,6 @@ export default function HomeLayout({children, pageName}: ILayoutProps)
 
     const logUserSessionOut = () => 
     {
-        console.log("Before")
         const credentials: IAuthModel = {
             firstname: "",
             surname: "",
