@@ -2,13 +2,11 @@ import { useEffect, useState } from "react"
 import DashboardLayout from '../../shared/DashboardLayout'
 import Message from "../../auth/helper/Message"
 import { BeatLoader } from "react-spinners"
-import { useNavigate } from "react-router-dom"
 
 
 export default function Profile() 
 {
     // const { RegisterUser } = useRegister()
-    const navigate = useNavigate()
 
     const FIRSTNAME_MESSAGE = "Enter First name"
     const SURNAME_MESSAGE = "Enter Surname"
@@ -43,23 +41,25 @@ export default function Profile()
     useEffect(() => 
     {
        setErrMsgStyle('text-md text-red-600 font-bold')
+       setValidationMessage("")
+       allFields()
     }, [])
     
     const allFields = () => 
+    {
+        let allow: string = 'passed'
+        if(!firstname){ setFirstNameMessage(FIRSTNAME_MESSAGE); allow = 'failed' }
+        if(!surname){ setSurnameMessage(SURNAME_MESSAGE); allow = 'failed' }
+        if(!phone){ setPhoneMessage(PHONE_MESSAGE); allow = 'failed' }
+        if(!email){ setEmailMessage(EMAIL_MESSAGE); allow = 'failed' }
+        if(!country){ setCountryMessage(COUNTRY_MESSAGE); allow = 'failed' }
+        if(!state){ setStateMessage(STATE_MESSAGE); allow = 'failed' }
+        if(allow === 'failed')
         {
-              let allow: string = 'passed'
-              if(!firstname){ setFirstNameMessage(FIRSTNAME_MESSAGE); allow = 'failed' }
-              if(!surname){ setSurnameMessage(SURNAME_MESSAGE); allow = 'failed' }
-              if(!phone){ setPhoneMessage(PHONE_MESSAGE); allow = 'failed' }
-              if(!email){ setEmailMessage(EMAIL_MESSAGE); allow = 'failed' }
-              if(!country){ setCountryMessage(COUNTRY_MESSAGE); allow = 'failed' }
-              if(!state){ setStateMessage(STATE_MESSAGE); allow = 'failed' }
-              if(allow === 'failed')
-              {
-                    setIsLoading(false)
-              }
-              return allow
+            setIsLoading(false)
         }
+        return allow
+    }
     
     const Gender: { name: string, value: number }[] = 
     [

@@ -1,11 +1,7 @@
 import { useState } from "react"
 import { ValidOrInvalid } from "../pages/admin/transactions/modals/ValidOrInvalid"
 
-type ShowProperties = {
-    display: any
-    color?: string
-    textSize?: string
-}
+
 
 type OpenRequestProps = 
 {

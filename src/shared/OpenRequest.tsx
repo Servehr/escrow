@@ -1,11 +1,6 @@
 import { useState } from "react"
 import { AcceptOrReject } from "../pages/admin/transactions/modals/AcceptOrReject"
 
-type ShowProperties = {
-    display: any
-    color?: string
-    textSize?: string
-}
 
 type OpenRequestProps = 
 {

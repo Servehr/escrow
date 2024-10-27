@@ -9,9 +9,6 @@ import { HistoryModal } from "./transactions/modals/HistoryModal"
 
 export default function History() 
 {
-    const [addService, setServiceToAdd] = useState<boolean>(false)
-    const [editService, setServiceToEdit] = useState<boolean>(false)
-    const [deleteServiceModal, setServiceToDelete] = useState<boolean>(false)
     const [openViewModal, setViewModalOpen] = useState<boolean>(false)
 
 

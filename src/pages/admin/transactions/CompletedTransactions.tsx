@@ -3,7 +3,6 @@ import { useMemo, useState } from "react"
 import { Show } from "../../../shared/Show"
 import { Icons } from "../../../shared/Icons"
 import { Table } from "../../../shared/Table"
-import { HiFlag } from "react-icons/hi"
 import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
 

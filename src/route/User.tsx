@@ -6,7 +6,7 @@ import UnAuthorized from '../auth/unauthorized';
 import NotFound from '../auth/notFound';
 import Transaction from '../pages/Transaction';
 import { WhyUs } from '../pages/WhyUs';
-import { AboutUs } from '../pages/AboutuS';
+import { AboutUs } from '../pages/AboutUs';
 import { Service } from '../pages/Service';
 
 

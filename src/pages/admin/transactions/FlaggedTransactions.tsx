@@ -6,7 +6,6 @@ import { Table } from "../../../shared/Table"
 import { HiFlag } from "react-icons/hi"
 import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
-import { ValidOrInvalid } from "./modals/ValidOrInvalid"
 import { ApproveRequest } from "../../../shared/ApproveRequest"
 
 
@@ -113,7 +112,7 @@ export default function FlaggedTransactions()
       },
       {
           header: 'Validate',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#">
+          cell: () => (<a href="#">
                                                                 <ApproveRequest onClick={(x) => {
                                                                             console.log(x)
                                                                     }}

@@ -14,7 +14,7 @@ export const AboutUs = () =>
                     <div 
                             className='w-2/2 md:w-1/2 container'
                     > 
-                        AboutuS
+                        AboutUs
                     </div>
                     <div 
                          className='w-2/2 md:w-1/2 container'

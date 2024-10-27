@@ -7,14 +7,11 @@ import { HiFlag } from "react-icons/hi"
 import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
 import { OpenRequest } from "../../../shared/OpenRequest"
-import { AcceptOrReject } from "./modals/AcceptOrReject"
 
 
 export default function ActiveTransactions() 
 {
     const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
-    const [acceptOrReject, setAcceptOrReject] = useState<boolean>(false)
-    const [validate, setValidate] = useState<boolean>(false)
     const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
 
 

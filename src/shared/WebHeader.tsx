@@ -18,6 +18,7 @@ export default function WebHeader()
   useEffect(() => 
   {
       setUser(appState.getUser().token)
+      console.log(isMenuOpen)
   }, [])
 
     
