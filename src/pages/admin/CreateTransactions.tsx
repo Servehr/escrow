@@ -51,7 +51,7 @@ export default function CreateTransactions()
             {/* border-2 border-gray-100
                 className="flex space-x-20 w-12/12 mt-10 overflow-x-scroll scrollbar-track-white scrollbar-thin overflow-y-hidden px-1 md:px-5 border-2 bg-white border-bg-[#d1dbea]"  */}
                 <div
-                    className="w-12/12 md:px-5 border-2 pt-5 pb-14 bg-white border-[#d1dbea]" 
+                    className="w-12/12 md:pl-1 border-2 pt-5 pb-14 bg-white border-[#d1dbea]" 
                 >
                     <div className='grid grid-cols-12 px-5 mx-auto mt-1'
                     >
@@ -59,7 +59,7 @@ export default function CreateTransactions()
                             className='col-span-12 md:col-span-6 pl-1 md:mt-0'
                         >
                             <div  
-                                className='w-full md:mx-0 d-flex mx-auto gap-10 md:mb-3 px-10'
+                                className='w-full md:mx-0 d-flex mx-auto gap-10 md:mb-3'
                             > 
                                 <div 
                                     className="mb-4 md:col-span-12"
@@ -214,7 +214,7 @@ export default function CreateTransactions()
                         className='mb-10 mt-7 md:mt-2 w-full flex justify-left items-center'
                     > 
                         <button 
-                                className="block w-fit bg-[#435f88] ml-5 hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
+                                className="block w-fit bg-[#435f88] ml-8 hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
                         >
                             Create Transaction
                         </button>

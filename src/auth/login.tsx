@@ -64,7 +64,7 @@ function Login()
                               }
                               appState.setUser(credentials)
                               setIsLoading(false) 
-                              navigate('/dashboard')
+                              navigate('/')
                         } else {
                               setValidationMessage(res.message)
                               setIsLoading(false) 
