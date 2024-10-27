@@ -115,7 +115,7 @@ function Login()
                         <div 
                               className='w-full d-flex gap-10'
                         >
-                              <div 
+                              {/* <div 
                                     className='w-full'
                               >
                                     <h3 
@@ -123,7 +123,7 @@ function Login()
                                           >
                                           Login
                                     </h3>
-                              </div>
+                              </div> */}
                               <div 
                                     className="w-full p-10 md:px-9 md:pt-10 md:pb-5 d-flex items-center justify-center rounded-md md:rounded-xl bg-white mb-20 md:mb-0"
                               >
