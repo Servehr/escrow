@@ -28,7 +28,7 @@ export const ContactUs = () =>
                          className='w-2/2 md:w-1/2 container'
                     >                                
                         <div 
-                                className="col-span-12 md:col-span-6 h-fit bg-white py-7 px-3 md:border-2 md:border-gray-200 border-shadow mb-20 md:rounded-lg"
+                                className="col-span-12 md:col-span-6 h-fit bg-white py-7 px-3 md:border-2 md:border-gray-200 border-shadow md:rounded-lg"
                         >                            
                                     
                                     <h1 className="font-bold text-lg px-7 md:text-black md:ml-0 py-3 rounded-md bg-[#506f9d] md:bg-white text-white">Leave a message</h1>
@@ -87,8 +87,36 @@ export const ContactUs = () =>
                                     <div className="p-1"></div>
                                 </div>
                     </div>
-
                 </div>
+            </div>            
+                                           
+            <div 
+                className='w-full py-20 bg-white'
+            >
+                <div 
+                        className='container mx-auto flex justify-between items-center gap-5'
+                    >
+                        <div 
+                            className='col-span-3 text-2xl'
+                        >
+                                
+                        </div>
+                        <div 
+                            className='col-span-3 text-2xl pt-2'
+                        >
+                                                            
+                        </div>
+                        <div 
+                            className='col-span-3 text-2xl pt-2'
+                        >
+                                                               
+                        </div>
+                        <div 
+                            className='col-span-3 text-2xl pt-2'
+                        >
+                                                               
+                        </div>
+                    </div>
             </div>
         </HomeLayout>
     )

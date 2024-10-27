@@ -5,6 +5,9 @@ import { StartTransaction } from '../pages/StartTransaction';
 import UnAuthorized from '../auth/unauthorized';
 import NotFound from '../auth/notFound';
 import Transaction from '../pages/Transaction';
+import { WhyUs } from '../pages/WhyUs';
+import { AboutUs } from '../pages/AboutuS';
+import { Service } from '../pages/Service';
 
 
 
@@ -16,6 +19,9 @@ export const UserRoute = () =>
                 <Route path='' element={<Home />}></Route> 
                 <Route path='/contact-us' element={<ContactUs />}></Route> 
                 <Route path='/start-transaction' element={<StartTransaction />}></Route>
+                <Route path='/why-us' element={<WhyUs />}></Route>
+                <Route path='/about-us' element={<AboutUs />}></Route>
+                <Route path='/services' element={<Service />}></Route>
                 <Route path='/transaction' element={<Transaction />}></Route>
                 <Route path='/unauthorized' element={<UnAuthorized />}></Route> 
                 <Route path='/*' element={<NotFound />}></Route> 

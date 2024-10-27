@@ -11,18 +11,18 @@ export default function Transactions()
     const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
 
     const tabsData = [   
-      {
-        label: "Active",
+       {
+            label: "Pending",
+            content: <FlaggedTransactions />
+       },
+       {
+        label: "Open",
         content: <ActiveTransactions />
-      },   
+      }, 
       {
         label: "Completed",
         content: <CompletedTransactions />
-      },   
-      {
-        label: "Flagged",
-        content: <FlaggedTransactions />
-      },  
+      },
       {
         label: "Cancelled",
         content: <CancelledTransactions />
@@ -30,7 +30,8 @@ export default function Transactions()
     ]
     
     return (
-        <DashboardLayout pageName="Transactions"
+        <DashboardLayout 
+            pageName="Transactions"
         >
             <div className='grid grid-cols-12'
             >

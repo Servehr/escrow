@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom"
 import { handShake } from "../../service/handshake"
+import { IAuthModel } from "../../state/slices/interface/IAuth"
 import { appStore } from "../../state/store"
 import { ILogin } from "../Interface/Auth/ILogin"
 import { IRegistration } from "../Interface/Auth/IRegistration"
@@ -91,17 +93,35 @@ export const checkReset = () =>
 
 export const logUserOut = () =>
 {   
+    const navigate = useNavigate()
     const appState = appStore((state) => state)
     const LogOut = async () => 
-    {  
-        const dataPoint: any = {
-            url: ['auth/logout'],
-            method: 'POST',
-            data: '',
-            isHeader: true,
-            token: appState.getUser().token
-        }
-        return await handShake(dataPoint) 
+    {
+        const credentials: IAuthModel = 
+        {
+           firstname: "",
+           surname: "",
+           token: "",
+           verified: "",
+           reset: ""
+       }
+       appState.setUser(credentials)
+       localStorage.clear()
+       setTimeout(() => {            
+            navigate('/auth/login')
+       }, 3000)
+    //    setRefresh(Math.random()*Math.random())        
     }
+    // const LogOut = async () => 
+    // {  
+    //     const dataPoint: any = {
+    //         url: ['auth/logout'],
+    //         method: 'POST',
+    //         data: '',
+    //         isHeader: true,
+    //         token: appState.getUser().token
+    //     }
+    //     return await handShake(dataPoint) 
+    // }
     return { LogOut }
 }

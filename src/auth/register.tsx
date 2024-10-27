@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../shared/Logo";
 import { HiHome } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { useRegister } from "./hook/useAuth";
 import { BeatLoader } from "react-spinners";
 import Message from "./helper/Message";
+import GpayLogo from "../shared/Logo";
 
 
 function Register()
@@ -115,178 +115,178 @@ function Register()
                     <div 
                           className='w-full flex justify-center items-center mb-10'
                       >
-                          <Logo /> 
+                          <GpayLogo width={200} /> 
                     </div>
                     <div 
                           className='w-full d-flex gap-10'
                     >
-                      <div 
-                            className='w-full'
-                      >
-                            <h3 
-                                  className='flex text-white text-xl font-bold justify-center mb-5 uppercase'
-                              >
-                                  Signup to become a member
-                            </h3>
-                      </div>
-                      <div 
-                              className="w-full p-10 md:px-9 md:pt-10 md:pb-5 d-flex items-center justify-center rounded-md md:rounded-xl bg-gray-200 hover:text-white mb-20 md:mb-0"
+                        <div 
+                              className='w-full'
                         >
-                                  <div 
-                                        className='w-full d-flex md:flex gap-10 md:mb-3'
-                                  >           
-                                        <div 
-                                              className="mb-4 md:w-1/2 w-2/2"
-                                        >
-                                              <input  
-                                                         className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                         type="text" name="firstname" id="firstname" placeholder="Enter Firtsname"
-                                                         onChange={(e) => {
-                                                            setFirstName(e.target.value)
-                                                         }}
-                                                         onBlur={(e) => {
+                              <h3 
+                                    className='flex text-white text-xl font-bold justify-center mb-5 uppercase'
+                                    >
+                                    Signup to become a member
+                              </h3>
+                        </div>
+                        <div 
+                                    className="w-full p-10 md:px-9 md:pt-10 md:pb-5 d-flex items-center justify-center rounded-md md:rounded-xl bg-gray-200 hover:text-white mb-20 md:mb-0"
+                              >
+                                    <div 
+                                          className='w-full d-flex md:flex gap-10 md:mb-3'
+                                    >           
+                                          <div 
+                                                className="mb-4 md:w-1/2 w-2/2"
+                                          >
+                                                <input  
+                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                                            type="text" name="firstname" id="firstname" placeholder="Enter Firtsname"
+                                                            onChange={(e) => {
+                                                                  setFirstName(e.target.value)
+                                                            }}
+                                                            onBlur={(e) => {
+                                                                  if(e.target.value === "")
+                                                                  {
+                                                                        setFirstNameMessage(FIRSTNAME_MESSAGE)
+                                                                  }
+                                                            }}
+                                                            onFocus={() => {
+                                                                  setFirstNameMessage("")                                                            
+                                                            }}
+                                                      />
+                                                      { firstnameMessage && <Message msg={firstnameMessage} status={errMsgStyle} />}
+                                          </div>
+                                          <div 
+                                                className="mb-4 md:w-1/2 w-2/2"
+                                          >
+                                                <input  
+                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                                            type="text" name="surname" id="surname" placeholder="Enter Surname" 
+                                                            onChange={(e) => {
+                                                            setSurname(e.target.value)
+                                                            }}
+                                                            onBlur={(e) => {
                                                             if(e.target.value === "")
                                                             {
-                                                                  setFirstNameMessage(FIRSTNAME_MESSAGE)
+                                                                  setSurnameMessage(SURNAME_MESSAGE)
                                                             }
-                                                         }}
-                                                         onFocus={() => {
-                                                            setFirstNameMessage("")                                                            
-                                                         }}
-                                                />
-                                                { firstnameMessage && <Message msg={firstnameMessage} status={errMsgStyle} />}
-                                        </div>
-                                        <div 
-                                              className="mb-4 md:w-1/2 w-2/2"
-                                        >
-                                              <input  
-                                                      className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                      type="text" name="surname" id="surname" placeholder="Enter Surname" 
-                                                      onChange={(e) => {
-                                                           setSurname(e.target.value)
+                                                            }}
+                                                            onFocus={() => {
+                                                            setSurnameMessage("")                                                            
+                                                            }}
+                                                      />
+                                                      { surnameMessage && <Message msg={surnameMessage} status={errMsgStyle} />}
+                                          </div>
+                                    </div>
+                                    <div  
+                                          className='w-full d-flex md:flex gap-10 md:mb-3'
+                                    >                                          
+                                          <div 
+                                                className="mb-4 md:w-full"
+                                          >
+                                                <input  
+                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                                            type="email" name="email" id="email" placeholder="Enter Email" 
+                                                            onChange={(e) => {
+                                                            setEmail(e.target.value)
+                                                            }}
+                                                            onBlur={(e) => {
+                                                            if(e.target.value === "")
+                                                            {
+                                                                  setEmailMessage(EMAIL_MESSAGE)
+                                                            }
+                                                            }}
+                                                            onFocus={() => {
+                                                            setEmailMessage("")                                                            
+                                                            }}
+                                                      />
+                                                      { emailMessage && <Message msg={emailMessage} status={errMsgStyle} />}
+                                          </div>
+                                          <div 
+                                                className="mb-4 md:w-full"
+                                          >
+                                                <input  
+                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                                            type="text" name="phone" id="phone" placeholder="Enter Phone" 
+                                                            onChange={(e) => {
+                                                            setPhone(e.target.value)
+                                                            }}
+                                                            onBlur={(e) => {
+                                                            if(e.target.value === "")
+                                                            {
+                                                                  setPhoneMessage(PHONE_MESSAGE)
+                                                            }
+                                                            }}
+                                                            onFocus={() => {
+                                                            setPhoneMessage("")                                                            
+                                                            }}
+                                                      />
+                                                      { phoneMessage && <Message msg={phoneMessage} status={errMsgStyle} />}
+                                          </div>
+                                    </div>
+                                    <div  
+                                          className='w-full d-flex md:flex gap-10 md:mb-3'
+                                    >                                          
+                                          <div 
+                                                className="mb-4 md:w-full"
+                                          >
+                                                <input  
+                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                                            type="password" name="password" id="password" placeholder="Enter Password"
+                                                            onChange={(e) => {
+                                                            setPassword(e.target.value)
+                                                            }}
+                                                            onBlur={(e) => {
+                                                            if(e.target.value === "")
+                                                            {
+                                                                  setPasswordMessage(PASSWORD_MESSAGE)
+                                                            }
+                                                            }}
+                                                            onFocus={() => {
+                                                            setPasswordMessage("")                                                            
+                                                            }}
+                                                      />
+                                                      { passwordMessage && <Message msg={passwordMessage} status={errMsgStyle} /> }
+                                          </div>
+                                          <div 
+                                                className="mb-4 md:w-full"
+                                          >
+                                                <input  
+                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                                            type="password" name="cPassword" id="cPassword" placeholder="Enter Passowrd Again"
+                                                            onChange={(e) => {
+                                                            setConfirmPassword(e.target.value)
+                                                            }}
+                                                            onBlur={(e) => {
+                                                            if(e.target.value === "")
+                                                            {
+                                                                  setConfirmPasswordMessage(CONFIRM_PASSWORD_MESSAGE)
+                                                            }
+                                                            }}
+                                                            onFocus={() => {
+                                                            setConfirmPasswordMessage("")                                                            
+                                                            }}
+                                                      />
+                                                      { confirmPasswordMessage && <Message msg={confirmPasswordMessage} status={errMsgStyle} />}
+                                          </div>
+                                    </div>
+                                    {
+                                          validationMsg && <Message msg={validationMsg} status={errMsgStyle} customStyle="bg-red-600 p-3 text-white font-bold rounded-md" />
+                                    }
+                                    <div  
+                                          className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-5'
+                                    >   
+                                          <button 
+                                                      className="block w-fit bg-[#435f88] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
+                                                      onClick={() => {
+                                                            CreateUser()
                                                       }}
-                                                      onBlur={(e) => {
-                                                         if(e.target.value === "")
-                                                         {
-                                                               setSurnameMessage(SURNAME_MESSAGE)
-                                                         }
-                                                      }}
-                                                      onFocus={() => {
-                                                         setSurnameMessage("")                                                            
-                                                      }}
-                                                />
-                                                { surnameMessage && <Message msg={surnameMessage} status={errMsgStyle} />}
-                                        </div>
-                                  </div>
-                                  <div  
-                                        className='w-full d-flex md:flex gap-10 md:mb-3'
-                                  >                                          
-                                        <div 
-                                              className="mb-4 md:w-full"
-                                        >
-                                              <input  
-                                                      className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                      type="email" name="email" id="email" placeholder="Enter Email" 
-                                                      onChange={(e) => {
-                                                          setEmail(e.target.value)
-                                                      }}
-                                                      onBlur={(e) => {
-                                                         if(e.target.value === "")
-                                                         {
-                                                               setEmailMessage(EMAIL_MESSAGE)
-                                                         }
-                                                      }}
-                                                      onFocus={() => {
-                                                          setEmailMessage("")                                                            
-                                                      }}
-                                                />
-                                                { emailMessage && <Message msg={emailMessage} status={errMsgStyle} />}
-                                        </div>
-                                        <div 
-                                              className="mb-4 md:w-full"
-                                        >
-                                              <input  
-                                                      className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                      type="text" name="phone" id="phone" placeholder="Enter Phone" 
-                                                      onChange={(e) => {
-                                                          setPhone(e.target.value)
-                                                      }}
-                                                      onBlur={(e) => {
-                                                         if(e.target.value === "")
-                                                         {
-                                                               setPhoneMessage(PHONE_MESSAGE)
-                                                         }
-                                                      }}
-                                                      onFocus={() => {
-                                                         setPhoneMessage("")                                                            
-                                                      }}
-                                                />
-                                                { phoneMessage && <Message msg={phoneMessage} status={errMsgStyle} />}
-                                        </div>
-                                  </div>
-                                  <div  
-                                        className='w-full d-flex md:flex gap-10 md:mb-3'
-                                  >                                          
-                                        <div 
-                                              className="mb-4 md:w-full"
-                                        >
-                                              <input  
-                                                      className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                      type="password" name="password" id="password" placeholder="Enter Password"
-                                                      onChange={(e) => {
-                                                          setPassword(e.target.value)
-                                                      }}
-                                                      onBlur={(e) => {
-                                                         if(e.target.value === "")
-                                                         {
-                                                               setPasswordMessage(PASSWORD_MESSAGE)
-                                                         }
-                                                      }}
-                                                      onFocus={() => {
-                                                         setPasswordMessage("")                                                            
-                                                      }}
-                                                />
-                                                { passwordMessage && <Message msg={passwordMessage} status={errMsgStyle} /> }
-                                        </div>
-                                        <div 
-                                              className="mb-4 md:w-full"
-                                        >
-                                              <input  
-                                                      className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                      type="password" name="cPassword" id="cPassword" placeholder="Enter Passowrd Again"
-                                                      onChange={(e) => {
-                                                         setConfirmPassword(e.target.value)
-                                                      }}
-                                                      onBlur={(e) => {
-                                                         if(e.target.value === "")
-                                                         {
-                                                               setConfirmPasswordMessage(CONFIRM_PASSWORD_MESSAGE)
-                                                         }
-                                                      }}
-                                                      onFocus={() => {
-                                                         setConfirmPasswordMessage("")                                                            
-                                                      }}
-                                                />
-                                                { confirmPasswordMessage && <Message msg={confirmPasswordMessage} status={errMsgStyle} />}
-                                        </div>
-                                  </div>
-                                  {
-                                      validationMsg && <Message msg={validationMsg} status={errMsgStyle} customStyle="bg-red-600 p-3 text-white font-bold rounded-md" />
-                                  }
-                                  <div  
-                                        className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-5'
-                                  >   
-                                        <button 
-                                                className="block w-fit bg-[#435f88] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
-                                                onClick={() => {
-                                                      CreateUser()
-                                                }}
-                                                disabled={isLoading}
-                                        >
-                                              
-                                              {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Register" )          }
-                                        </button>
-                                  </div>
+                                                      disabled={isLoading}
+                                          >
+                                                
+                                                {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Register" )          }
+                                          </button>
+                                    </div>
                         </div>
                       </div>
                       

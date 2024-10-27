@@ -29,7 +29,8 @@ export default function Transaction()
 
     
     return (
-        <HomeLayout pageName="Transactions"
+        <HomeLayout 
+            pageName="Transactions"
         >
             {/* border-2 border-gray-100
                 className="flex space-x-20 w-12/12 mt-10 overflow-x-scroll scrollbar-track-white scrollbar-thin overflow-y-hidden px-1 md:px-5 border-2 bg-white border-bg-[#d1dbea]"  */}
@@ -114,27 +115,19 @@ export default function Transaction()
                     <div 
                          className='col-span-12 md:col-span-6 pl-1 mt-10 md:mt-0'
                     >
-                        <p className='font-bold text-[20px] ml-5 mt-3 text-gray-500 border-b-2 border-gray-200 p-2 rounded-lg'>Product Description</p>
+                        <p className='font-bold text-[20px] ml-1 md:ml-5 text-gray-500 border-2 border-gray-200 p-2 rounded-lg'>Mortgage</p>
+                        <p className='font-bold text-[20px] ml-1 md:ml-5 text-gray-500 p-2 rounded-lg'>Duplex</p>
+                        <p className='font-bold text-[20px] ml-1 md:ml-5 -mt-2 text-gray-500 p-2 rounded-lg'>250,000,000.00</p>
                         <div 
                             className='text-[16px] ml-1 md:ml-5 mt-3 text-gray-500'
                         >
                             <div 
-                                className='mb-7'
-                            >
-                                <span className='font-bold text-lg text-black'>Alec Elec Power-Bank</span>, PowerCore Slim 20000, Ultra Slim Portable Charger, Compact 20000mAh External Battery, 
-                                High-Speed PowerIQ Charging Technology for Mobile phones, ipad, and more The New Generation Power-Bank 
-                                P2W (20000mAh) is light, convenient and portable. The dual USB output ports support multiple charging protocols, 
-                                making it a partner in your travels that won't let you down.The Power-Bank P2W (20000mAh) can charge at up to 
-                                18W (12V, 1.5A/9V, 2.0A), cutting back significantly on charging time. Order for this Power-Bank P2W, 20000mAh 
-                                online from Jumia Nigeria and have it delivered to you.
-                            </div>
-                            <div 
                                 className=''
                             >
                                 <div 
-                                    className='font-bold text-lg text-black mb-2 bg-blue-100 p-2 mt-3'
+                                    className='font-bold text-lg text-black mb-2 bg-blue-100 p-2 mt-5'
                                 >
-                                        General Reqiurement
+                                        <span className='font-bold text-lg text-gray-500'>Item/Service Description:</span>
                                 </div> 
                                 <ul 
                                     className='list-inside list-disc w-full border-2 border-gray-100 p-2'
@@ -148,31 +141,29 @@ export default function Transaction()
                                     <li><span className='font-bold'>Dimensions:</span>135 * 65 * 25mm</li>
                                     <li><span className='font-bold'>Color:</span>Black/White</li>
                                 </ul>
-                                <div 
-                                    className='font-bold text-lg text-black mb-2 bg-blue-100 p-2 mt-3'
-                                >
-                                        Specification
-                                </div> 
-                                <ul 
-                                    className='list-inside list-disc w-full border-2 border-gray-100 p-2'
-                                >
-                                    <li><span className='font-bold'>SKU:</span>GE779EA3TXI2ZNAFAMZ</li>
-                                    <li><span className='font-bold'>Product Line:</span>Zeemak Ltd - AC</li>
-                                    <li><span className='font-bold'>Weight (kg):</span>0.2</li>
-                                    <li><span className='font-bold'>Color:</span>Black </li>
-                                    <li><span className='font-bold'>Product Type:</span>Power Bank</li>
-                                </ul>
-
                             </div>
-
+                            <div 
+                                className='mb-7 mt-5'
+                            >
+                                <span className='font-bold text-lg text-gray-500 mr-10'>Agreement:</span> PowerCore Slim 20000, Ultra Slim Portable Charger, Compact 20000mAh External Battery, 
+                                High-Speed PowerIQ Charging Technology for Mobile phones, ipad, and more The New Generation Power-Bank 
+                                P2W (20000mAh) is light, convenient and portable. The dual USB output ports support multiple charging protocols, 
+                                making it a partner in your travels that won't let you down.The Power-Bank P2W (20000mAh) can charge at up to 
+                                18W (12V, 1.5A/9V, 2.0A), cutting back significantly on charging time. Order for this Power-Bank P2W, 20000mAh 
+                                online from Jumia Nigeria and have it delivered to you.
+                            </div>
+                        </div>                        
+                        <div 
+                            className='font-bold text-[20px] text-gray-500 p-2 rounded-lg'
+                        >
+                            <span className='font-bold text-lg text-gray-500 mr-10'>Duration:</span>10-05-2024 - 31-12-2024
                         </div>
 
                     </div>
 
                 </div>
                 <div className='p-20'></div>
-            </div> 
-
+            </div>
         </HomeLayout>
     )
 }

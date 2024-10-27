@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import Logo from "../shared/Logo";
 import { HiHome } from "react-icons/hi";
 import { useState, useEffect } from "react";
 import Message from "./helper/Message";
 import { BeatLoader } from "react-spinners";
 import { useForgot } from "./hook/useAuth";
+import GpayLogo from "../shared/Logo";
 
 export default function ForgotPassword() 
 {
@@ -91,7 +91,7 @@ export default function ForgotPassword()
                         <div 
                               className='w-full flex justify-center items-center mb-10'
                               >
-                              <Logo /> 
+                              <GpayLogo width={200} />
                         </div>
                         <div 
                               className='w-full d-flex gap-10'

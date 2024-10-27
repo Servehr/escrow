@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom'
-import Logo from '../shared/Logo'
 import { HiHome } from 'react-icons/hi'
 import { useState, useEffect } from 'react'
 import { useLogin } from './hook/useAuth'
@@ -7,6 +6,7 @@ import Message from './helper/Message'
 import { BeatLoader } from 'react-spinners'
 import { appStore } from "../state/store";
 import { IAuthModel } from '../state/slices/interface/IAuth'
+import GpayLogo from '../shared/Logo'
 
 
 function Login() 
@@ -110,7 +110,7 @@ function Login()
                         <div 
                               className='w-full flex justify-center items-center mb-10'
                               >
-                              <Logo /> 
+                              <GpayLogo width={200} /> 
                         </div>
                         <div 
                               className='w-full d-flex gap-10'

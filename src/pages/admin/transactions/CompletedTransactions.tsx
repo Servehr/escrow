@@ -110,11 +110,6 @@ export default function CompletedTransactions()
           accessorKey: 'percentage',
       },
       {
-          header: 'Flag',
-          cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-green-600 hover:text-black" width={5} height={5}/></a>),
-          accessorKey: '',
-      },
-      {
           header: 'View Detail',
           cell: () => (<a href="#" onClick={() => setVeiwTransactionDetail(true)}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
           accessorKey: '',

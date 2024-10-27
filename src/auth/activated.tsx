@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import Logo from '../shared/Logo'
 import { HiShieldCheck } from 'react-icons/hi'
+import GpayLogo from '../shared/Logo'
 // import { useEffect, useState } from 'react'
 // import { appStore } from '../state/store'
 
@@ -49,7 +49,7 @@ function Activated()
                               <div 
                                     className='w-full flex justify-center items-center mb-10'
                                     >
-                                    <Logo /> 
+                                    <GpayLogo width={200} />
                               </div>
                               <div 
                                     className='w-full d-flex gap-10'

@@ -6,11 +6,15 @@ import { Table } from "../../../shared/Table"
 import { HiFlag } from "react-icons/hi"
 import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
+import { OpenRequest } from "../../../shared/OpenRequest"
+import { AcceptOrReject } from "./modals/AcceptOrReject"
 
 
 export default function ActiveTransactions() 
 {
     const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
+    const [acceptOrReject, setAcceptOrReject] = useState<boolean>(false)
+    const [validate, setValidate] = useState<boolean>(false)
     const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
 
 
@@ -110,9 +114,23 @@ export default function ActiveTransactions()
         },
         {
             header: 'Flag',
-            cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-green-600 hover:text-black" width={5} height={5}/></a>),
+            cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-black-600 hover:text-red-600" width={5} height={5}/></a>),
             accessorKey: '',
         },
+        {
+            header: 'Accept/Reject',
+            cell: () => (<a href="#"><OpenRequest onClick={(x) => {
+                                            console.log(x)
+                                        }} 
+                                    />
+            </a>),
+            accessorKey: '',
+        },
+        // {
+        //     header: 'Edit',
+        //     cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
+        //     accessorKey: '',
+        // },
         {
             header: 'View Detail',
             cell: () => (<a href="#" onClick={() => setVeiwTransactionDetail(true)}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),

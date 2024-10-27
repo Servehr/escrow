@@ -3,8 +3,14 @@ import HomeLayout from "../shared/HomeLayout"
 import { BeatLoader } from "react-spinners"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { HiOutlineShoppingCart, HiOutlineLibrary, HiOutlineTruck } from "react-icons/hi"
 
-
+type CategoryProp = 
+{
+    name: string
+    value: number
+    icon: any
+}
 export const Home = () =>
 {
     const navigate = useNavigate()
@@ -20,6 +26,25 @@ export const Home = () =>
         "Risk free transaction",
         "Tracked Negation",
         "Assurance"
+    ]
+
+    const categories: CategoryProp[] = 
+    [
+        {
+            name: 'Item',
+            value: 1,
+            icon: <HiOutlineShoppingCart />
+        },
+        {
+            name: 'Mortgage',
+            value: 2,
+            icon: <HiOutlineLibrary />
+        },
+        {
+            name: 'Vehicles',
+            value: 3,
+            icon: <HiOutlineTruck />
+        },
     ]
 
     const Search = () => 
@@ -81,8 +106,9 @@ export const Home = () =>
                                 className="w-full border mb-3 rounded-md p-3 bg-opacity-100 h-[80px] rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-[20px] outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
                                 type="text" name="code" id="code" placeholder="Enter User or Product Code"
                             />
+                            {/* bg-[#435f88] hover:bg-[#6f7277] */}
                             <button 
-                                    className="block w-full bg-[#435f88] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
+                                    className="block w-full bg-blue-900 hover:bg-[#435f88] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
                                     onClick={() => {
                                         navigate('/transaction')
                                         Search()
@@ -93,8 +119,84 @@ export const Home = () =>
                             </button>
                         </div>                        
                     </div>
-
                 </div>
+            </div>     
+            <div 
+                className='pt-8 pb-3 bg-[#506f9d] p-5 -mt-10 md:mt-0'
+            >
+                <div 
+                    className='md:container d-flex md:flex mx-auto mt-5 md:mt-0 gap-5 md:py-5 rounded-xl justity-center items-center'
+                > 
+                    {
+                        categories.map((category: CategoryProp, index: number) => {
+                            return (                                                               
+                                <div 
+                                    key={index}
+                                    className="flex justify-center items-center w-12/12 md:w-4/12 mb-5 text-md md:text-2xl text-center border-2 border-gray-200 bg-blue-100 md:col-span-6 h-fit md:p-10 rounded-lg"
+                                >     
+                                    <span 
+                                        className="w-fll px-5 md:py-2 py-5 text-5xl -mr-5"
+                                    >
+                                        {category?.icon}
+                                    </span>
+                                    <span 
+                                        className="w-fll p-5"
+                                    >
+                                        {category?.name}
+                                    </span>
+                                </div> 
+                            )
+                        })
+                    }                      
+                </div>
+
+                <div 
+                    className='md:container md:px-10 d-flex md:flex mx-auto md:p-5 pt-7 md:mt-0 gap-10 rounded-xl justity-center items-center'
+                > 
+                    <div 
+                        className="w-full flex justify-center items-center -mt-5 md:mt-0 mb-5 md:mb-5"
+                    >
+                        <button 
+                                className="flex justify-center items-center block w-fit bg-[#435f88] hover:bg-blue-900 border-shadow text-white font-bold px-20 py-7 rounded-lg ring-2 ring-inset"
+                                onClick={() => {
+                                    navigate('/dashboard/create-transaction')
+                                    Search()
+                                }}
+                                disabled={isLoading}
+                        >
+                            {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Start Transaction" )          }
+                        </button>
+                    </div>
+                </div>
+            </div>
+                                           
+            <div 
+                className='w-full py-60 bg-white'
+            >
+                <div 
+                        className='container mx-auto flex justify-between items-center gap-5'
+                    >
+                        <div 
+                            className='col-span-3 text-2xl'
+                        >
+                                
+                        </div>
+                        <div 
+                            className='col-span-3 text-2xl pt-2'
+                        >
+                                                            
+                        </div>
+                        <div 
+                            className='col-span-3 text-2xl pt-2'
+                        >
+                                                               
+                        </div>
+                        <div 
+                            className='col-span-3 text-2xl pt-2'
+                        >
+                                                               
+                        </div>
+                    </div>
             </div>
         {/* start-transaction */}
         </HomeLayout>

@@ -6,6 +6,8 @@ import { Table } from "../../../shared/Table"
 import { HiFlag } from "react-icons/hi"
 import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
+import { ValidOrInvalid } from "./modals/ValidOrInvalid"
+import { ApproveRequest } from "../../../shared/ApproveRequest"
 
 
 export default function FlaggedTransactions() 
@@ -110,8 +112,18 @@ export default function FlaggedTransactions()
           accessorKey: 'percentage',
       },
       {
+          header: 'Validate',
+          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#">
+                                                                <ApproveRequest onClick={(x) => {
+                                                                            console.log(x)
+                                                                    }}
+                                                                />
+          </a>),
+          accessorKey: 'percentage',
+      },
+      {
           header: 'Flag',
-          cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-green-600 hover:text-black" width={5} height={5}/></a>),
+          cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-black-600 hover:text-red-600" width={5} height={5}/></a>),
           accessorKey: '',
       },
       {
