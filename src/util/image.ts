@@ -9,6 +9,7 @@ export function readableFileSize(attachmentSize: number, MinimumSize = 0, Maximu
     }
       
     const sizeInKb = fileSize / MaximumSize;
+    console.log({MinimumSize})
       
     if (sizeInKb > MaximumSize) {
        return `${(sizeInKb / MaximumSize).toFixed(precision)} mb`;
