@@ -16,7 +16,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
 {
     const [userPassport, setUserPassport] = useState<string>("")
     const [uploadText, setUploadText] = useState<string>("Click to upload pictures")
-    let photograph!: HTMLDivElement
+    let photograph: HTMLDivElement
 
     
     const [previewUrls, setPreviewUrls] = useState<any[]>([]);   
@@ -39,7 +39,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
 
     useEffect(() => 
     {        
-        let photo: HTMLInputElement | null = null
+        let photo: HTMLInputElement
         photo = document.querySelector('#passport')!
         onClick(previewUrls, true)  
     }, [userPassport, refresh, previewUrls])
@@ -147,6 +147,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
         const newImages = [...images];
         newImages.splice(index, 1);
         // setImages(newImages);
+        console.log({image})
         const newPreviewUrls = [...previewUrls];
         imageSizes.splice(index, 1);
         newPreviewUrls.splice(index, 1);

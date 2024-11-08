@@ -256,7 +256,7 @@ export default function FlaggedTransactions()
             }
 
             {
-                viewTransactionDetail && <TransactionDetailModal onClick={(x) => 
+                viewTransactionDetail && <TransactionDetailModal onClick={() => 
                                         {
                                                 setVeiwTransactionDetail(false)
                                         } } 

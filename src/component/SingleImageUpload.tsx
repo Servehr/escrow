@@ -25,7 +25,7 @@ export default function SingleImageUpload({width, ICloudColour}: ImageProps)
         {   
             photograph = document.querySelector('.theArea')!
         }, 200)
-        console.log({passport, width})
+        console.log({passport, width, photograph})
     }, [])
 
     useEffect(() => 
