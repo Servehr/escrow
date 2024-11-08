@@ -6,6 +6,8 @@ import ForgotPassword from '../auth/forgot';
 import Activated from '../auth/activated';
 import Registered from '../auth/registered';
 import NotFound from '../auth/notFound';
+import Protected from './Protected';
+import { CompleteProfile } from '../pages/CompleteProfile';
 
 
 export const AuthRoute = () => 
@@ -19,6 +21,7 @@ export const AuthRoute = () =>
                 <Route path='/forgot' element={<ForgotPassword/>}></Route>
                 <Route path='/registered' element={<Registered/>}></Route>
                 <Route path='/activated' element={<Activated/>}></Route>
+                <Route path='/complete-profile' element={<Protected><CompleteProfile/></Protected>}></Route>
                 <Route path='/*' element={<NotFound />}></Route> 
             </Routes>
     );

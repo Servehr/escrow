@@ -5,23 +5,23 @@ import { BeatLoader } from "react-spinners";
 type SerivceModalPropos = 
 {
     onClick: (isOpen: boolean) => void,
-    serviceModal: boolean,
-    service?: string,
-    returnTo?: string,
-    message?: string,
+    categoryModal: boolean,
+    categId?: number,
+    categName?: string,
 } 
 
-export const DeleteServiceModal = ({onClick, serviceModal}: SerivceModalPropos)  =>
+export const DeleteServiceModal = ({onClick, categoryModal, categId, categName}: SerivceModalPropos)  =>
 {
         const [loading, setIsLoading] = useState(false)
 
         useEffect(() => {
                 setIsLoading(false)
+                console.log({categId, categName})
         })
 
         return (
                 <Modal 
-                        onClick={onClick} isOpen={serviceModal} wrapperWidth={800} margin={'100px auto 0px auto'}
+                        onClick={onClick} isOpen={categoryModal} wrapperWidth={800} margin={'100px auto 0px auto'}
                 >
                         <div 
                                         className='col-span-12 pt-1 pb-5 overflow-y-auto xm:overflow-y-scroll justify-center item-center'
@@ -37,7 +37,7 @@ export const DeleteServiceModal = ({onClick, serviceModal}: SerivceModalPropos) 
                                         {
                                                 <button 
                                                         className="py-3 px-4 bg-red-700 hover:bg-red-800 text-white font-semibold text-sm rounded-xl w-max"
-                                                        onClick={() => onClick(serviceModal) }
+                                                        onClick={() => onClick(categoryModal) }
                                                 >
                                                                 Cancel
                                                 </button>

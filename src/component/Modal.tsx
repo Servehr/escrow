@@ -27,6 +27,8 @@ export const Modal = ({children, overLay = 'react-modal-overlay', isOpen, onClic
     // const width = `modal-dialog-${size}`
     // const style = `modal-dialog ${width} ${center}`
     const overlay = overLay
+    // 07066558838 - Normal Call
+    // 08116751013 - WhatsApp - Dare 
     
     return (
           <>

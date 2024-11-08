@@ -4,6 +4,8 @@ import { BeatLoader } from "react-spinners"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { HiOutlineShoppingCart, HiOutlineLibrary, HiOutlineTruck } from "react-icons/hi"
+import Message from "../auth/helper/Message"
+import delay from "delay"
 
 type CategoryProp = 
 {
@@ -14,12 +16,32 @@ type CategoryProp =
 export const Home = () =>
 {
     const navigate = useNavigate()
+    const PRODUCT_CODE: string = "Enter Product Code"
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isSearching, setIsSearching] = useState<boolean>(false)
+    const [validationMsg, setValidationMessage] = useState<string>('')    
+    const [code, setCode] = useState<string>('')
+
+    const [errMsgStyle, setErrMsgStyle] = useState<string>('')      
 
     useEffect(() => 
     {
-        setIsLoading(false)
+       setErrMsgStyle('text-md text-red-600 font-bold')
+       setIsLoading(false)
+       setIsSearching(false)
     }, [])
+
+    useEffect(() => 
+    {
+       setTimeout(() => 
+       {
+          setValidationMessage('')  
+       }, 10000)
+    }, [validationMsg])
+
+    useEffect(() => 
+    {
+    }, [code])
 
     const whyUs: string[] = [
         "Ease of use",
@@ -27,6 +49,19 @@ export const Home = () =>
         "Tracked Negation",
         "Assurance"
     ]
+
+    const Confirm = async () => 
+    {
+        setIsSearching(true)
+        await delay(3000)
+        if(!code && (code === ""))
+        {
+            setValidationMessage(PRODUCT_CODE)
+            setIsSearching(false)
+        } else {
+            navigate(`/confirm?product-code=${code}`)
+        }
+    }
 
     const categories: CategoryProp[] = 
     [
@@ -101,22 +136,30 @@ export const Home = () =>
                     >                                
                         <div 
                             className="col-span-12 md:col-span-6 h-fit md:p-10 md:rounded-lg"
-                        >        
+                        >
                             <input  
                                 className="w-full border mb-3 rounded-md p-3 bg-opacity-100 h-[80px] rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-[20px] outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
                                 type="text" name="code" id="code" placeholder="Enter User or Product Code"
+                                onChange={(e) => {
+                                    let selected: string = e.target.value
+                                    if(selected === "")
+                                    {
+                                        setValidationMessage(PRODUCT_CODE)
+                                    } else {
+                                        setCode(selected)
+                                        setValidationMessage("")
+                                    }
+                                }}
                             />
                             {/* bg-[#435f88] hover:bg-[#6f7277] */}
                             <button 
                                     className="block w-full bg-blue-900 hover:bg-[#435f88] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
-                                    onClick={() => {
-                                        navigate('/transaction')
-                                        Search()
-                                   }}
+                                    onClick={Confirm}
                                     disabled={isLoading}
                             >
-                                {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Search" )          }
+                                {  isSearching ? ( <BeatLoader size={9} color="#fff" />) : ( "Search" )          }
                             </button>
+                            { validationMsg && <Message msg={validationMsg} status={`${errMsgStyle} uppercase`} /> }
                         </div>                        
                     </div>
                 </div>

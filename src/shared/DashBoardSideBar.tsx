@@ -4,16 +4,19 @@ import { HiMiniPencilSquare, HiCog6Tooth, HiMiniPower } from "react-icons/hi2"
 import { Link } from "react-router-dom"
 import GpayLogo from "./Logo"
 import { logUserOut } from "../auth/hook/useAuth"
+import { appStore } from "../state/store"
 
 
 export default function DashBoardSideBar()
 {
+  const userState = appStore((state) => state)
   const [isMenuOpen, setMenu] = useState<boolean>(false)
   const { LogOut } = logUserOut()
 
-  useEffect(() => {
-    setMenu(false)
-    console.log({isMenuOpen})
+  useEffect(() => 
+  {
+      setMenu(false)
+      console.log({isMenuOpen})
   }, [])
     
   const admin = 
@@ -84,8 +87,9 @@ export default function DashBoardSideBar()
                             <div 
                                   className='w-8/12'
                             >                                                        
-                            <div className='w-full flex justify-left font-bold text-[15px]'>Richard Festus</div>
-                            <div className='w-full flex justify-left font-bold text-md'>C.E.O</div>
+                            <div className='w-full flex justify-left font-bold text-[15px]'>{userState.getUser().firstname} {userState.getUser().surname}</div>
+                            {/* <div className='w-full flex justify-left font-bold text-[15px]'>{userState.getUser().token}</div> */}
+                            {/* <div className='w-full flex justify-left font-bold text-md'>C.E.O</div> */}
                             <div 
                                 className='w-full flex justify-left font-bold text-md'
                             >

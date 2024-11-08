@@ -1,5 +1,5 @@
 import { CellContext, ColumnDef } from "@tanstack/react-table"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Show } from "../../shared/Show"
 import { Icons } from "../../shared/Icons"
 import { Table } from "../../shared/Table"
@@ -8,17 +8,43 @@ import DashboardLayout from '../../shared/DashboardLayout'
 import { DeleteServiceModal } from "./services/modals/DeleteServiceModal"
 import { AddServiceModal } from "./services/modals/AddServiceModal"
 import { EditServiceModal } from "./services/modals/EditServiceModal"
+import { useTransaction } from '../../auth/hook/useTransaction';
+import { RotateLoader } from "react-spinners"
 
 
 export default function Services() 
 {
+    const { Categories } = useTransaction()
+    const [categon, setCategories] = useState<any[]>([])
+    const [error, setError] = useState<string>('')
+
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [categId, setCategId] = useState<number>(-1)
+    const [categName, setCategName] = useState<string>("")
     const [addService, setServiceToAdd] = useState<boolean>(false)
+
     const [editService, setServiceToEdit] = useState<boolean>(false)
     const [deleteServiceModal, setServiceToDelete] = useState<boolean>(false)
 
-
     const [showingStates, setShowStates] = useState<boolean>(false)
     
+    useEffect(() => 
+    {
+        setIsLoading(true)
+        const allCategories = Categories()
+        allCategories.then((categories) => 
+        {
+            setCategories(categories?.data?.data)
+            console.log(categories?.data?.data)
+            setIsLoading(false)
+        }).then(() => {
+            setError("Try again")
+            setIsLoading(false)
+        })
+        setCategId(-1)
+        setCategName("")
+        console.log(error)
+    }, [])
 
     const ShowStates = (page: any) => 
     {
@@ -33,25 +59,9 @@ export default function Services()
         description: string,
     }
       
-    const ActiveTrans: ServiceProps[] = 
-    [
-        {
-          name: 'E-Commerce',
-          description: 'xxxxxx xxxxxxx xxxxxxx',
-        },
-        {
-          name: 'Mortgage',
-          description: 'xxxxxx xxxxxxx xxxxxxx',
-        },
-        {
-          name: 'Agriculture',
-          description: 'xxxxxx xxxxxxx xxxxxxx',
-        },
-    ]
-
     const AllActiveTransactions = () => 
     {
-        return ActiveTrans
+        return categon
     }
 
     const ActiveTransAct = useMemo<ColumnDef<ServiceProps>[]>(
@@ -91,7 +101,23 @@ export default function Services()
                                 }}
                 />
             </div>
-            <div 
+            {
+               ((isLoading === true) && (categon.length === 0)) && <div className="col-span-12 h-[500px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+               >
+                   <RotateLoader className='w-12 h-12' />
+               </div>
+            }
+            {
+               ((isLoading === false) && (categon.length === 0)) && <div className="col-span-12 h-[500px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+               >
+                   {/* <h1>Category is empty, transaction cannot begin</h1> */}
+                   <RotateLoader className='w-12 h-12' />
+               </div>
+            }
+            { 
+            
+                ((isLoading === false) && categon && (categon.length > 0)) &&
+                <div 
                     className='mx-1 md:mx-4 -mt-5'
                 >                          
                     <Table data={AllActiveTransactions()} 
@@ -108,30 +134,34 @@ export default function Services()
                     >
                     </div>              
                 </div>
+            }
+            
+            {
+                addService && <AddServiceModal onClick={() => {
+                                                setServiceToAdd(false)
+                                        } }
+                                        categoryModal={addService}
+                                    />
+            }
 
-                {
-                    addService && <AddServiceModal onClick={() => {
-                                                    setServiceToAdd(false)
-                                            } } 
-                                            serviceModal ={addService} 
-                                        />
-                }
+            {
+                editService && <EditServiceModal onClick={() => {
+                                                setServiceToEdit(false)
+                                        } } 
+                                        categoryModal={editService} 
+                                        categId={categId}
+                                    />
+            }
 
-                {
-                    editService && <EditServiceModal onClick={() => {
-                                                    setServiceToEdit(false)
-                                            } } 
-                                            serviceModal ={editService} 
-                                        />
-                }
-
-                {
-                    deleteServiceModal && <DeleteServiceModal onClick={() => {
-                                                    setServiceToDelete(false)
-                                            } } 
-                                            serviceModal ={deleteServiceModal} 
-                                        />
-                }
+            {
+                deleteServiceModal && <DeleteServiceModal onClick={() => {
+                                                setServiceToDelete(false)
+                                        } } 
+                                        categoryModal ={deleteServiceModal} 
+                                        categName={categName}
+                                        categId={categId}
+                                    />
+            }
         </DashboardLayout>
     )
 }

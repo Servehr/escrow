@@ -1,24 +1,45 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../../../../component/Modal";
 import { BeatLoader } from "react-spinners";
+import { useTransaction } from "../../../../auth/hook/useTransaction";
 
 type ValidOrInvalidedModalPropos = 
 {
-    onClick: (isOpen: boolean) => void,
+    onClick: (isOpen: boolean | string) => void,
     validOrInvalidModal: boolean,
     validOrInvalid?: string,
     returnTo?: string,
     message?: string,
-    validate: string
+    validate: string,
+    detail: any
 } 
 
-export const ValidOrInvalid = ({onClick, validOrInvalidModal, validate}: ValidOrInvalidedModalPropos)  =>
+export const ValidOrInvalid = ({onClick, validOrInvalidModal, validate, detail}: ValidOrInvalidedModalPropos)  =>
 {
-        const [loading, setIsLoading] = useState(false)
+        const { Validity } = useTransaction()
+        const [loading, setIsLoading] = useState<boolean>(false)
+        const [message, setMessage] = useState<string>('')
+        const [error, setError] = useState<string>('')
 
         useEffect(() => {
                 setIsLoading(false)
+                console.log(error)
         })
+
+        const Validate = (status: string, type: string) => 
+        {
+            setIsLoading(true)
+            console.log({detail, message, status})
+            const validityCheck = Validity(detail?.seller_id, detail?.buyer_id, type, detail?.id, message, status)
+            validityCheck.then(() => 
+            {
+               setIsLoading(false)
+               onClick('successful')
+            }).then(() => {
+               setError("Try again")
+               setIsLoading(false)
+            })
+        }
 
         return (
                 <Modal 
@@ -39,8 +60,11 @@ export const ValidOrInvalid = ({onClick, validOrInvalidModal, validate}: ValidOr
                                              >
                                                         <textarea  
                                                                 className="w-full border rounded-md p-3 bg-white bg-opacity-75 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                                name="password" id="password" placeholder="Tell us your reason why you consider it invalid" 
+                                                                name="text" id="message" placeholder="Tell us your reason why you consider it invalid" 
                                                                 rows={3}
+                                                                onChange={(e: any) => {
+                                                                   setMessage(e.target.value) 
+                                                                }}
                                                         >
                                                         </textarea>                                     
                                                 </div>
@@ -58,8 +82,10 @@ export const ValidOrInvalid = ({onClick, validOrInvalidModal, validate}: ValidOr
                                                         {
                                                         <button 
                                                                         className="py-3 px-4 bg-red-600 hover:bg-red-800 text-white font-semibold text-sm rounded-xl w-max"
-                                                                        onClick={() => console.log('')}
-                                                                                >
+                                                                        onClick={() => {
+                                                                                Validate('invalid', 'pending')
+                                                                        }}
+                                                                        >
                                                                         {       loading ? ( <BeatLoader size={9} color="#fff" />) : ( "Invalid" )          }
                                                         </button>
                                                         }
@@ -82,8 +108,10 @@ export const ValidOrInvalid = ({onClick, validOrInvalidModal, validate}: ValidOr
                                                         {
                                                         <button 
                                                                         className="py-4 px-4 bg-green-800 hover:bg-green-700 text-white font-semibold text-sm rounded-xl w-full"
-                                                                        onClick={() => console.log('')}
-                                                                                >
+                                                                        onClick={() => {
+                                                                                Validate('valid', 'pending')
+                                                                        }}
+                                                                        >
                                                                         {       loading ? ( <BeatLoader size={9} color="#fff" />) : ( "Valid" )          }
                                                         </button>
                                                         }

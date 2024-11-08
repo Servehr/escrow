@@ -1,23 +1,80 @@
 import { CellContext, ColumnDef } from "@tanstack/react-table"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Show } from "../../../shared/Show"
 import { Icons } from "../../../shared/Icons"
 import { Table } from "../../../shared/Table"
-import { HiFlag } from "react-icons/hi"
-import { FlagModal } from "./modals/FlagModal"
+// import { HiFlag } from "react-icons/hi"
+// import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
 import { OpenRequest } from "../../../shared/OpenRequest"
+import currencyFormatter from "../../../util/currency-formatter"
+import { useTransaction } from "../../../auth/hook/useTransaction"
+import { RotateLoader } from "react-spinners"
+import { appStore } from "../../../state/store"
 
 
 export default function ActiveTransactions() 
 {
-    const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
+    const tabPage = appStore((state) => state)
+    const { OpenTransaction } = useTransaction()
+    // const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
     const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
-
-
+    const [openTransaction, setOpenTransaction] = useState<any[]>([])
+  
     const [showingStates, setShowStates] = useState<boolean>(false)
-    
+    const [refreshPage, setRefreshPage] = useState<number>(tabPage.getFlagPendingTab())
+  
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<string>('')
 
+    // const [rowId, setRowId] = useState<number>(-1)
+    const [detail, setDetail] = useState<any>("")
+
+    useEffect(() => 
+    {
+        callApi()
+    }, [refreshPage])
+
+  
+    useEffect(() => 
+    {
+       setIsLoading(true)
+       callApi()
+       console.log(error)
+    }, [])
+
+    const callApi = () => 
+    {
+        const open = OpenTransaction()
+        open.then((openTrans) => 
+        {          
+           let theData: any[] = []
+           openTrans?.data?.data?.map((open: any) => 
+           {
+                 let buyer: string = (open?.buyer != undefined) ? open?.buyer?.firstname + ' ' + open?.buyer?.surname : 'Awaiting Confirmation'
+                 let seller: string = (open?.seller != undefined) ? open?.seller?.firstname + ' ' + open?.seller?.surname : 'Awaiting Confirmation'
+                 let sellerId: number = (open?.seller != undefined) ? open?.seller?.id : null
+                 let buyerId: number = (open?.buyer != undefined) ? open?.buyer?.id : null
+                 let category: string = open?.category?.name
+                 let name: string = open?.transaction?.name
+                 let amount: string = open?.transaction?.amount
+                 let request: string = open?.transaction?.request
+                 let start: string = open?.transaction?.start
+                 let end: string = open?.transaction?.end
+                 let validity: string = open?.transaction?.validity
+                 let identifier: string = open?.transaction?.identifier
+                 let delivery_status: string = open?.transaction?.delivery_status
+                 let data:any = {id: open?.transaction?.id, sellerId, buyerId, seller, buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: open?.images, description: open?.transaction?.description, agreement: open?.transaction?.agreement }
+                 theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, data })
+           })
+           setOpenTransaction(theData)
+           setIsLoading(false)
+        }).then(() => {
+           setError("Try again")
+           setIsLoading(false)
+        })
+    }
+  
     const ShowStates = (page: any) => 
     {
         console.log(showingStates)
@@ -25,59 +82,49 @@ export default function ActiveTransactions()
         setShowStates(true)
     }
 
+    // const FlaggedColumnId = (x: boolean, id: any) =>
+    // {
+    //   setRowId(id)
+    //   setFlagModalOpen(x)
+    // }
+
+    const ViewColumnId = (x: boolean, trans: any) =>
+    {
+      setDetail(trans)
+      setVeiwTransactionDetail(x)
+    }
+  
     type ActiveTransProps =
     {
         category: string,
+        name: string,
         seller: string,
         buyer: string,
-        transactionId: string,
         amount: number,
-        initiatedDate: string,
-        percentage: number,
+        request: string,
+        start: string,
+        end: string,
+        validity: string,
+        data: string
     }
-      
-    const ActiveTrans: ActiveTransProps[] = 
-    [
-        {
-          category: 'E-Commerce',
-          seller: 'Kingsley Effiong',
-          buyer: 'Mathew Peter',
-          transactionId: 'UF79KFKCUF0EODKE',
-          amount: 4500,
-          percentage: 450,
-          initiatedDate: '10-11-2024',
-        },
-        {
-          category: 'Mortgage',
-          seller: 'Thomas Lee',
-          buyer: 'Christain Pulisic',
-          transactionId: 'QPF0948464JRKFMFFRMGJ',
-          amount: 2900,
-          percentage: 290,
-          initiatedDate: '15-11-2024',
-        },
-        {
-          category: 'Cars',
-          seller: 'Tijani Bayero',
-          buyer: 'Emeka Paul',
-          transactionId: '183736DDHCJKICKOOEKEJ',
-          amount: 5500,
-          percentage: 550,
-          initiatedDate: '20-12-2024',
-        },
-    ]
-
-    const AllActiveTransactions = () => 
+  
+  
+    const AllOpenTransaction = () => 
     {
-        return ActiveTrans
+        return openTransaction
     }
 
     const ActiveTransAct = useMemo<ColumnDef<ActiveTransProps>[]>(
         () => [
         {
-          header: 'Category',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-          accessorKey: 'category',
+        header: 'Category',
+        cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+        accessorKey: 'category',
+        },
+        {
+            header: 'Service/Product Name',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'name',
         },
         {
             header: 'Seller',
@@ -89,100 +136,136 @@ export default function ActiveTransactions()
             cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
             accessorKey: 'buyer',
         },
+        // {
+        //     header: 'Validity',
+        //     cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+        //     accessorKey: 'validity',
+        // },
         {
-            header: 'Transaction Id',
+            header: 'Delivery Status',
             cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-            accessorKey: 'transactionId',
+            accessorKey: 'delivery_status',
         },
         {
             header: 'Amount',
-            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={currencyFormatter(row.renderValue())} /></a>),
             accessorKey: 'amount',
         },
         {
-            header: 'Date',
+            header: 'Request',
             cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-            accessorKey: 'initiatedDate',
+            accessorKey: 'request',
         },
         {
-            header: 'Percentage',
+            header: 'Start Date',
             cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-            accessorKey: 'percentage',
+            accessorKey: 'start',
         },
         {
-            header: 'Flag',
-            cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-black-600 hover:text-red-600" width={5} height={5}/></a>),
-            accessorKey: '',
+            header: 'End Date',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'end',
+        },
+        {
+            header: 'Product Code',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'identifier',
+            enableHiding: true
         },
         {
             header: 'Accept/Reject',
-            cell: () => (<a href="#"><OpenRequest onClick={(x) => {
-                                            console.log(x)
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#"><OpenRequest onClick={(x: string | boolean) => {
+                                            if(x === 'successful')
+                                            {
+                                                setTimeout(() => {
+                                                    setRefreshPage(Math.random()*((3391)*3219))
+                                                })
+                                            }
                                         }} 
+                                        detail={row.renderValue()}
                                     />
             </a>),
-            accessorKey: '',
+            accessorKey: 'data',
         },
         // {
-        //     header: 'Edit',
-        //     cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
-        //     accessorKey: '',
+        //     header: 'Flag',
+        //     cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => FlaggedColumnId(true, row.renderValue())}><HiFlag className="text-black-600 hover:text-red-600" width={5} height={5}/></a>),
+        //     accessorKey: 'id',
         // },
         {
             header: 'View Detail',
-            cell: () => (<a href="#" onClick={() => setVeiwTransactionDetail(true)}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
-            accessorKey: '',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ViewColumnId(true, row.renderValue())}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
+            accessorKey: 'data',
         }
     ],[])
 
 
 
     return (
-            <>            
-                <div 
-                    className='mx-5 font-bold text-md mt-5 text-blue-700 uppercase'
-                > 
-                        <h1 
-                            className='text-black'
-                        >
-                            All Active Transactions
-                        </h1>
+        <>   
+            {
+                ((isLoading === true) && (openTransaction.length === 0)) && <div className="col-span-12 h-[300px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+                >
+                    <RotateLoader className='w-12 h-12' />
                 </div>
-                
-                <div 
-                    className=''
-                >                          
-                    <Table data={AllActiveTransactions()} 
-                            columns={ActiveTransAct} 
-                            showNavigation={false} 
-                            searchPlaceHolder='search for transactions ...' 
-                            path='transactions' 
-                            from='transactions' 
-                            headerTextColor="white"
-                    /> 
-
+            }
+            {
+                ((isLoading === false) && (openTransaction.length === 0)) && <div className="col-span-12 h-[500px] flex justify-center items-center bg-white" style={{ marginTop: '10px', paddingTop: '0px' }}
+                >
+                    <h1 className="font-bold text-blue-400">No Active Transaction Yet</h1>
+                </div>
+            }    
+            { 
+            
+                ((isLoading === false) && openTransaction && (openTransaction.length > 0)) && <>
                     <div 
-                        className="py-10"
-                    >
-                    </div>              
-                </div>
+                            className='mx-5 font-bold text-md mt-5 text-blue-700 uppercase'
+                    > 
+                            <h1 
+                                className='text-black'
+                            >
+                                All Active Transactions
+                            </h1>
+                    </div>
+                    
+                    <div 
+                            className=''
+                    >                          
+                        <Table data={AllOpenTransaction()} 
+                                columns={ActiveTransAct} 
+                                showNavigation={false} 
+                                searchPlaceHolder='search for transactions ...' 
+                                path='transactions' 
+                                from='transactions' 
+                                headerTextColor="white"
+                        /> 
 
-                {
-                    openFlagModal && <FlagModal onClick={() => {
-                                                    setFlagModalOpen(false)
-                                            } } 
-                                            flagModal={openFlagModal} 
-                                        />
-                }
+                        <div 
+                                className="py-10"
+                        >
+                        </div>              
+                    </div>
+                </>
+            }
 
-                {
-                    viewTransactionDetail && <TransactionDetailModal onClick={() => {
-                                                    setVeiwTransactionDetail(false)
-                                            } } 
-                                            transactionModal={viewTransactionDetail} 
-                                        />
-                }
-            </>
+            {/* {
+                openFlagModal && <FlagModal onClick={() => {
+                                                setFlagModalOpen(false)
+                                        } } 
+                                        flagModal={openFlagModal}                                     
+                                        rowId={rowId} 
+                                    />
+            } */}
+
+            {
+                viewTransactionDetail && <TransactionDetailModal onClick={() => {
+                                                setVeiwTransactionDetail(false)
+                                        } } 
+                                        transactionModal={viewTransactionDetail} 
+                                        detail={detail}
+                                    />
+            }
+        </>
     )
 
 }

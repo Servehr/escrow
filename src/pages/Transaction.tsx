@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Images from './preview/images';
-import Videos from './preview/videos';
 import HomeLayout from '../shared/HomeLayout';
 import { BeatLoader } from 'react-spinners';
+import VideoUpload from './preview/VideoUpload';
 
 
 export default function Transaction() 
@@ -23,7 +23,10 @@ export default function Transaction()
       },   
       {
         label: "Videos",
-        content: <Videos />
+        content: <VideoUpload width={0} ICloudColour={''} allowedFileTypes={[]} onClick={() => {
+                        console.log("")
+                }}
+        />
       }
     ]
 

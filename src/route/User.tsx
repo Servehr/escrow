@@ -8,6 +8,8 @@ import Transaction from '../pages/Transaction';
 import { WhyUs } from '../pages/WhyUs';
 import { AboutUs } from '../pages/AboutUs';
 import { Service } from '../pages/Service';
+import { Confirm } from '../pages/Confirm';
+import Protected from './Protected';
 
 
 
@@ -23,6 +25,7 @@ export const UserRoute = () =>
                 <Route path='/about-us' element={<AboutUs />}></Route>
                 <Route path='/services' element={<Service />}></Route>
                 <Route path='/transaction' element={<Transaction />}></Route>
+                <Route path='/confirm' element={<Protected><Confirm /></Protected>}></Route>
                 <Route path='/unauthorized' element={<UnAuthorized />}></Route> 
                 <Route path='/*' element={<NotFound />}></Route> 
             </Routes>

@@ -6,10 +6,11 @@ import { ValidOrInvalid } from "../pages/admin/transactions/modals/ValidOrInvali
 type OpenRequestProps = 
 {
     validate?: boolean,
-    onClick: (value: boolean) => void
+    detail?: any,
+    onClick: (value: boolean | string) => void
 }
 
-export const ApproveRequest = ({ onClick } : OpenRequestProps)  =>
+export const ApproveRequest = ({ onClick, detail } : OpenRequestProps)  =>
 {
   const [validOrInvalid, setValidOrInvalid] = useState<boolean>(false)
   const [validate, setValidate] = useState<string>("")
@@ -26,7 +27,7 @@ export const ApproveRequest = ({ onClick } : OpenRequestProps)  =>
                     setValidOrInvalid(true)
                 }}
               >
-                Valid
+                Invalid
               </div>
               <div 
                 className="px-3 py-1 bg-green-800 text-center text-white text-sm rounded-lg"
@@ -35,19 +36,20 @@ export const ApproveRequest = ({ onClick } : OpenRequestProps)  =>
                     setValidOrInvalid(true)
                 }}
               >
-                Invalid
+                Valid
               </div>
           </div>
 
           
 
           {
-              validOrInvalid && <ValidOrInvalid onClick={(x) => {
+              validOrInvalid && <ValidOrInvalid onClick={(x: boolean | string) => {
                                                     setValidOrInvalid(false)
                                                     onClick(x)
                                             } } 
                                             validOrInvalidModal={validOrInvalid} 
                                             validate={validate}
+                                            detail={detail}  
                                         />
           }
         </>

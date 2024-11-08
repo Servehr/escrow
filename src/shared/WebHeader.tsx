@@ -55,7 +55,7 @@ export default function WebHeader()
   return (
       <>
           <div 
-                          className='container mx-auto flex justify-between items-center'
+                className='container mx-auto flex justify-between items-center'
                     >
                         <div 
                             className='col-span-3 text-2xl pt-2'

@@ -84,7 +84,6 @@ function Register()
                      setValidationMessage('')
                   }, 5000)         
             } 
-
       }
 
       const allFields = () => 

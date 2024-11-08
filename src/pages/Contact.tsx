@@ -1,7 +1,7 @@
 import HomeLayout from "../shared/HomeLayout"
 
 export const ContactUs = () =>
-  {
+{
     return (
         <HomeLayout pageName="Contact Us"
         >

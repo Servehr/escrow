@@ -4,6 +4,8 @@ import ActiveTransactions from './transactions/ActiveTransactions';
 import CompletedTransactions from './transactions/CompletedTransactions';
 import CancelledTransactions from './transactions/CancelledTransactions';
 import FlaggedTransactions from './transactions/FlaggedTransactions';
+import RejectedTransactions from './transactions/RejectedTransactions';
+import DeclinedTransactions from './transactions/DeclinedTransactions';
 
 
 export default function Transactions() 
@@ -11,14 +13,22 @@ export default function Transactions()
     const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
 
     const tabsData = [   
-       {
+      {
             label: "Pending",
             content: <FlaggedTransactions />
-       },
-       {
+      },
+      {
+        label: "Declined",
+        content: <DeclinedTransactions />
+      },  
+      {
         label: "Open",
         content: <ActiveTransactions />
-      }, 
+      },
+      {
+        label: "Rejected",
+        content: <RejectedTransactions />
+      },
       {
         label: "Completed",
         content: <CompletedTransactions />
@@ -87,4 +97,3 @@ export default function Transactions()
         </DashboardLayout>
     )
 }
-; 'b'

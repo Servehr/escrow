@@ -1,24 +1,65 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../../../../component/Modal";
 import { BeatLoader } from "react-spinners";
+import { useTransaction } from "../../../../auth/hook/useTransaction";
+import delay from "delay";
+import Message from "../../../../auth/helper/Message";
 
 type AcceptOrRejectedModalPropos = 
 {
-    onClick: (isOpen: boolean) => void,
+    onClick: (isOpen: boolean | string) => void,
     acceptOrRejectModal: boolean,
     acceptOrReject?: string,
     returnTo?: string,
     message?: string,
-    validate: string
+    validate: string,
+    detail: any
 } 
 
-export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate}: AcceptOrRejectedModalPropos)  =>
+export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate, detail}: AcceptOrRejectedModalPropos)  =>
 {
-        const [loading, setIsLoading] = useState(false)
+        const { DeliveryStatus } = useTransaction()
+        const [isRejecting, setIsRejecting] = useState<boolean>(false)
+        const [isReceiving, setIsReceiving] = useState<boolean>(false)
+        const [rejectMessage, setRejectMessage] = useState<string>("")
+        const [message, setMessage] = useState<string>('')
+        const [errMsgStyle, setErrMsgStyle] = useState<string>('')
+        const [error, setError] = useState<string>('')
 
-        useEffect(() => {
-                setIsLoading(false)
-        })
+        useEffect(() => 
+        {
+           setErrMsgStyle('text-md text-red-600 font-bold')
+        }, [])
+
+        const IsDelivered = async (status: string, type: string) => 
+        {
+            if(status === "rejected")
+            { 
+                setIsRejecting(true) 
+                if(message === "" || message == undefined || message === null)
+                {
+                   setRejectMessage("Enter Message")
+                   setIsRejecting(false)
+                   return false
+                }
+
+            }
+            if(status === "received"){ setIsReceiving(true)  }
+            
+            await delay(2000)
+            const validityCheck = DeliveryStatus(detail?.sellerId, detail?.buyerId, type, detail?.id, message, status)
+            validityCheck.then(() => 
+            {
+                setIsRejecting(false)
+                setIsReceiving(false)
+                onClick('successful')
+            }).then(() => {
+                setIsRejecting(false)
+                setIsReceiving(false)
+                setError("Try again")
+                console.log(error)
+            })     
+        }
 
         return (
                 <Modal 
@@ -41,8 +82,19 @@ export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate}: AcceptO
                                                                 className="w-full border rounded-md p-3 bg-white bg-opacity-75 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
                                                                 name="password" id="password" placeholder="Tell us your reason why you are rejecting" 
                                                                 rows={3}
+                                                                onChange={(e: any) => {
+                                                                    let selected: string = e.target.value
+                                                                    if(!selected)
+                                                                    {
+                                                                        setRejectMessage("Enter message before sending")
+                                                                    } else {
+                                                                        setMessage(e.target.value)
+                                                                        setRejectMessage("")
+                                                                    }
+                                                                }}
                                                         >
-                                                        </textarea>                                     
+                                                        </textarea>  
+                                                        { rejectMessage && <Message msg={rejectMessage} status={errMsgStyle} /> }                                   
                                                 </div>
                                                 <div 
                                                   className="items-center gap-5 mt-2 sm:flex flex justify-between mb-2 mx-5 mt-5"
@@ -58,9 +110,11 @@ export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate}: AcceptO
                                                         {
                                                         <button 
                                                                         className="py-3 px-4 bg-red-600 hover:bg-red-800 text-white font-semibold text-sm rounded-xl w-max"
-                                                                        onClick={() => console.log('')}
-                                                                                >
-                                                                        {       loading ? ( <BeatLoader size={9} color="#fff" />) : ( "Reject" )          }
+                                                                        onClick={() => {
+                                                                                IsDelivered('rejected', 'open')
+                                                                        }}
+                                                                        >
+                                                                        {       isRejecting ? ( <BeatLoader size={9} color="#fff" />) : ( "Reject" )          }
                                                         </button>
                                                         }
                                                 </div>
@@ -82,9 +136,11 @@ export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate}: AcceptO
                                                         {
                                                         <button 
                                                                         className="py-4 px-4 bg-green-800 hover:bg-green-700 text-white font-semibold text-sm rounded-xl w-full"
-                                                                        onClick={() => console.log('')}
-                                                                                >
-                                                                        {       loading ? ( <BeatLoader size={9} color="#fff" />) : ( "Accept" )          }
+                                                                        onClick={() => {
+                                                                                IsDelivered('received', 'open')
+                                                                        }}
+                                                                        >
+                                                                        {       isReceiving ? ( <BeatLoader size={9} color="#fff" />) : ( "Accept" ) }
                                                         </button>
                                                         }
                                                 </div>

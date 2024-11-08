@@ -1,184 +1,270 @@
 import { CellContext, ColumnDef } from "@tanstack/react-table"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Show } from "../../../shared/Show"
 import { Icons } from "../../../shared/Icons"
 import { Table } from "../../../shared/Table"
 import { HiFlag } from "react-icons/hi"
 import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
-import { ApproveRequest } from "../../../shared/ApproveRequest"
+import { useTransaction } from "../../../auth/hook/useTransaction"
+import { RotateLoader } from "react-spinners"
+import currencyFormatter from "../../../util/currency-formatter"
+import { appStore } from "../../../state/store"
 
 
 export default function FlaggedTransactions() 
 {
+    const tabPage = appStore((state) => state)
 
-  const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
-  const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
+    const { PendingTransaction } = useTransaction()
+    const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
+    const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
+    const [pendingTransaction, setPendingTransaction] = useState<any[]>([])
 
+    const [showingStates, setShowStates] = useState<boolean>(false)
 
-  const [showingStates, setShowStates] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [refreshPage, setRefreshPage] = useState<number>(tabPage.getActiveTab())
+    const [error, setError] = useState<string>('')
+
+    const [rowId, setRowId] = useState<number>(-1)
+    const [detail, setDetail] = useState<any>("")
+
+    useEffect(() => 
+    {
+        callApi()
+    }, [refreshPage])
+
   
+    useEffect(() => 
+    {
+       setIsLoading(true)
+       callApi()
+       console.log(error)
+    }, [])
 
-  const ShowStates = (page: any) => 
-  {
-      console.log(showingStates)
-      console.log(page)
-      setShowStates(true)
-  }
+    const callApi = () => 
+    {
+            const pending = PendingTransaction()
+            pending.then((pendTrans) => 
+            {  
+            let theData: any[] = []
+            pendTrans?.data?.data?.map((pending: any) => 
+            {
+                let buyer: string = (pending?.buyer != undefined) ? pending?.buyer?.firstname + ' ' + pending?.buyer?.surname : 'Awaiting Confirmation'
+                let seller: string = (pending?.seller != undefined) ? pending?.seller?.firstname + ' ' + pending?.seller?.surname : 'Awaiting Confirmation'
+                let category: string = pending?.category?.name
+                let name: string = pending?.transaction?.name
+                let id: string = pending?.transaction?.id
+                let amount: string = pending?.transaction?.amount
+                let request: string = pending?.transaction?.request
+                let start: string = pending?.transaction?.start
+                let end: string = pending?.transaction?.end
+                let validity: string = pending?.transaction?.validity
+                let identifier: string = pending?.transaction?.identifier
+                let delivery_status: string = pending?.transaction?.delivery_status
+                let data:any = {seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: pending?.images, description: pending?.transaction?.description, agreement: pending?.transaction?.agreement }
+                theData.push({id, seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, data })
+            })
+            setPendingTransaction(theData)
+            setIsLoading(false)
+        }).then(() => {
+            setError("Try again")
+            setIsLoading(false)
+            })
+    }
 
-  type ActiveTransProps =
-  {
-      category: string,
-      seller: string,
-      buyer: string,
-      transactionId: string,
-      amount: number,
-      initiatedDate: string,
-      percentage: number,
-  }
+    const ShowStates = (page: any) => 
+    {
+        console.log(showingStates)
+        console.log(page)
+        setShowStates(true)
+    }
     
-  const ActiveTrans: ActiveTransProps[] = 
-  [
-      {
-        category: 'E-Commerce',
-        seller: 'Kingsley Effiong',
-        buyer: 'Mathew Peter',
-        transactionId: 'UF79KFKCUF0EODKE',
-        amount: 4500,
-        percentage: 450,
-        initiatedDate: '10-11-2024',
-      },
-      {
-        category: 'Mortgage',
-        seller: 'Thomas Lee',
-        buyer: 'Christain Pulisic',
-        transactionId: 'QPF0948464JRKFMFFRMGJ',
-        amount: 2900,
-        percentage: 290,
-        initiatedDate: '15-11-2024',
-      },
-      {
-        category: 'Cars',
-        seller: 'Tijani Bayero',
-        buyer: 'Emeka Paul',
-        transactionId: '183736DDHCJKICKOOEKEJ',
-        amount: 5500,
-        percentage: 550,
-        initiatedDate: '20-12-2024',
-      },
-  ]
+    const FlaggedColumnId = (x: boolean, id: any) =>
+    {
+        setRowId(id)
+        setFlagModalOpen(x)
+    }
 
-  const AllActiveTransactions = () => 
-  {
-      return ActiveTrans
-  }
+    const ViewColumnId = (x: boolean, trans: any) =>
+    {
+        setDetail(trans)
+        setVeiwTransactionDetail(x)
+    }
 
-  const ActiveTransAct = useMemo<ColumnDef<ActiveTransProps>[]>(
-      () => [
-      {
-        header: 'Category',
-        cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-        accessorKey: 'category',
-      },
-      {
-          header: 'Seller',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-          accessorKey: 'seller',
-      },
-      {
-          header: 'Buyer',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-          accessorKey: 'buyer',
-      },
-      {
-          header: 'Transaction Id',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-          accessorKey: 'transactionId',
-      },
-      {
-          header: 'Amount',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-          accessorKey: 'amount',
-      },
-      {
-          header: 'Date',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-          accessorKey: 'initiatedDate',
-      },
-      {
-          header: 'Percentage',
-          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
-          accessorKey: 'percentage',
-      },
-      {
-          header: 'Validate',
-          cell: () => (<a href="#">
-                                                                <ApproveRequest onClick={(x) => {
-                                                                            console.log(x)
-                                                                    }}
-                                                                />
-          </a>),
-          accessorKey: 'percentage',
-      },
-      {
-          header: 'Flag',
-          cell: () => (<a href="#" onClick={() => setFlagModalOpen(true)}><HiFlag className="text-black-600 hover:text-red-600" width={5} height={5}/></a>),
-          accessorKey: '',
-      },
-      {
-          header: 'View Detail',
-          cell: () => (<a href="#" onClick={() => setVeiwTransactionDetail(true)}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
-          accessorKey: '',
-      }
-  ],[])
+    type ActiveTransProps =
+    {
+        id: number,
+        category: string, 
+        name: string,
+        seller: string,
+        buyer: string,
+        validity: string,
+        amount: string,
+        request: string,
+        start: string,
+        end: string,
+        data: any
+    }
 
 
+    const AllActiveTransactions = () => 
+    {
+        return pendingTransaction
+    }
 
-return (
-      <>            
-          <div 
-                className='mx-5 font-bold text-md mt-5 text-blue-700 uppercase'
-          > 
-                  <h1 
-                       className='text-black'
-                  >
-                      All Flagged Transactions
-                  </h1>
-          </div>
-           
-          <div 
-                className=''
-          >                          
-              <Table data={AllActiveTransactions()} 
-                      columns={ActiveTransAct} 
-                      showNavigation={false} 
-                      searchPlaceHolder='search for transactions ...' 
-                      path='transactions' 
-                      from='transactions' 
-                      headerTextColor="white"
-              /> 
+    const ActiveTransAct = useMemo<ColumnDef<ActiveTransProps>[]>(
+        () => [
+        {
+            header: 'Category',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'category',
+        },
+        {
+            header: 'Service/Product Name',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'name',
+        },
+        {
+            header: 'Seller',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'seller',
+        },
+        {
+            header: 'Buyer',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'buyer',
+        },
+        {
+            header: 'Request',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'request',
+        },
+        //   {
+        //       header: 'Validity',
+        //       cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+        //       accessorKey: 'validity',
+        //   },
+        {
+            header: 'Amount',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={currencyFormatter(row.renderValue())} /></a>),
+            accessorKey: 'amount',
+        },
+        {
+            header: 'Start Date',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'start',
+        },
+        {
+            header: 'End Date',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'end',
+        },
+        {
+            header: 'Product Code',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            accessorKey: 'identifier',
+        },
+        //   {
+        //       header: 'Validate',
+        //       cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#">
+        //                                 <ApproveRequest onClick={(x) => {
+                                            
+        //                                 }}
+        //                                 detail={row.renderValue()}
+        //                     />
+        //       </a>),
+        //       accessorKey: 'transaction',
+        //   },
+        {
+            header: 'Flag',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => FlaggedColumnId(true, row.renderValue())}><HiFlag className="text-black-600 hover:text-red-600" width={5} height={5}/></a>),
+            accessorKey: 'id',
+        },
+        {
+            header: 'View Detail',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ViewColumnId(true, row.renderValue())}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
+            accessorKey: 'data',
+        }
+    ],[])
 
-              <div 
-                    className="py-10"
-              >
-              </div>              
-          </div>
 
-          {
-              openFlagModal && <FlagModal onClick={() => {
-                                              setFlagModalOpen(false)
-                                      } } 
-                                      flagModal={openFlagModal} 
-                                  />
-          }
 
-          {
-              viewTransactionDetail && <TransactionDetailModal onClick={() => {
-                                              setVeiwTransactionDetail(false)
-                                      } } 
-                                      transactionModal={viewTransactionDetail} 
-                                  />
-          }
-      </>
-)
+    return (
+        <>   
+                {
+                    ((isLoading === true) && (pendingTransaction.length === 0)) && <div className="col-span-12 h-[300px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+                    >
+                        <RotateLoader className='w-12 h-12' />
+                    </div>
+                }
+                {
+                    ((isLoading === false) && (pendingTransaction.length === 0)) && <div className="col-span-12 h-[500px] flex justify-center items-center bg-white" style={{ marginTop: '10px', paddingTop: '0px' }}
+                    >
+                        <h1 className="font-bold text-blue-400">No Pending Transaction</h1>
+                    </div>
+                }    
+                { 
+                
+                    ((isLoading === false) && pendingTransaction && (pendingTransaction.length > 0)) && <>
+                        <div 
+                                className='mx-5 font-bold text-md mt-5 text-blue-700 uppercase'
+                        > 
+                                <h1 
+                                    className='text-black'
+                                >
+                                    All Pending Transactions
+                                    {/* <span className="mr-20 cursor-pointer" onClick={() => { setRefreshPage(Math.random()*776612) }}>Refresh</span> */}
+                                </h1>
+                        </div>
+                        
+                        <div 
+                                className=''
+                        >                          
+                            <Table data={AllActiveTransactions()} 
+                                    columns={ActiveTransAct} 
+                                    showNavigation={false} 
+                                    searchPlaceHolder='search for transactions ...' 
+                                    path='transactions' 
+                                    from='transactions' 
+                                    headerTextColor="white"
+                            /> 
+
+                            <div 
+                                    className="py-10"
+                            >
+                            </div>              
+                        </div>
+                    </>
+                }
+
+            {
+                openFlagModal && <FlagModal onClick={(x) =>
+                                        {                    
+                                            if(x === 'successful')
+                                            {
+                                                setTimeout(() => {
+                                                    setRefreshPage(Math.random()*((3391)*3219))
+                                                })
+                                            }
+                                                setFlagModalOpen(false)
+                                        } } 
+                                        flagModal={openFlagModal} 
+                                        rowId={rowId}
+                                    />
+            }
+
+            {
+                viewTransactionDetail && <TransactionDetailModal onClick={(x) => 
+                                        {
+                                                setVeiwTransactionDetail(false)
+                                        } } 
+                                        transactionModal={viewTransactionDetail} 
+                                        detail={detail}
+                                    />
+            }
+
+        </>
+    )
 }

@@ -5,13 +5,15 @@ import { AcceptOrReject } from "../pages/admin/transactions/modals/AcceptOrRejec
 type OpenRequestProps = 
 {
     validate?: boolean,
-    onClick: (value: boolean) => void
+    detail?: any,
+    onClick: (value: boolean| string) => void
 }
 
-export const OpenRequest = ({ onClick } : OpenRequestProps)  =>
+export const OpenRequest = ({ onClick, detail } : OpenRequestProps)  =>
 {
   const [acceptOrReject, setAcceptOrReject] = useState<boolean>(false)
   const [validate, setValidate] = useState<string>("")
+  
   
   return (
         <>
@@ -41,12 +43,13 @@ export const OpenRequest = ({ onClick } : OpenRequestProps)  =>
           
 
           {
-              acceptOrReject && <AcceptOrReject onClick={(x) => {
+              acceptOrReject && <AcceptOrReject onClick={(x: any) => {
                                                     setAcceptOrReject(false)
                                                     onClick(x)
                                             } } 
                                             acceptOrRejectModal={acceptOrReject} 
                                             validate={validate}
+                                            detail={detail}                                            
                                         />
           }
         </>

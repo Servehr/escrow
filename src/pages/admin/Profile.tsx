@@ -42,7 +42,10 @@ export default function Profile()
     {
        setErrMsgStyle('text-md text-red-600 font-bold')
        setValidationMessage("")
-       allFields()
+       if(2 > 3)
+       {
+            allFields()
+       }
     }, [])
     
     const allFields = () => 
@@ -77,69 +80,79 @@ export default function Profile()
         <DashboardLayout pageName="Profile"
         >
             <div
-                className="w-12/12 md:px-5 border-2 pt-5 pb-14 bg-white border-[#d1dbea]" 
+                className="w-12/12 md:px-5 border-2 pt-5 pb-14 bg-white border-[#d1dbea] px-2" 
             >
                 <div 
-                    className='grid grid-cols-12 px-5 mx-auto mt-1'
+                    className='grid grid-cols-12 mx-auto mt-1 px-2 md:px-0'
                 >
                     <div 
-                        className='col-span-12 md:col-span-6 pl-1 md:mt-5'
-                    >                        
+                        className='col-span-12 md:col-span-4 px-1 md:px-1 mt-5 md:mt-20 md:-ml-10'
+                    >                       
                         <div 
-                            className='w-full d-flex md:flex gap-10 mb-5'
+                            className='w-full d-flex md:flex gap-10 mb-5 px-5'
                         >           
                             <div 
-                                className="mb-4 w-6/12 rounded-lg bg-gray-200 h-[350px] mx-auto"
+                                className="mb-4 md:-mt-12 flex justify-left w-10/12 rounded-lg bg-gray-200 h-[350px] mx-auto"
                             >
                                 
                             </div>
-                        </div>
-
+                        </div> 
+                        <div className="md:hidden h-[70px]"></div> 
+                    </div>
+                    <div 
+                        className='col-span-12 md:col-span-8 pl-1 md:mt-8'
+                    >  
                         <div 
-                                          className='w-full d-flex md:flex gap-10 md:mb-3'
-                                    >           
-                                          <div 
-                                                className="mb-4 md:w-1/2 w-2/2"
-                                          >
-                                                <input  
-                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                            type="text" name="firstname" id="firstname" placeholder="Enter Firtsname"
-                                                            onChange={(e) => {
-                                                                  setFirstName(e.target.value)
-                                                            }}
-                                                            onBlur={(e) => {
-                                                                  if(e.target.value === "")
-                                                                  {
-                                                                        setFirstNameMessage(FIRSTNAME_MESSAGE)
-                                                                  }
-                                                            }}
-                                                            onFocus={() => {
-                                                                  setFirstNameMessage("")                                                            
-                                                            }}
-                                                      />
-                                                      { firstnameMessage && <Message msg={firstnameMessage} status={errMsgStyle} />}
-                                          </div>
-                                          <div 
-                                                className="mb-4 md:w-1/2 w-2/2"
-                                          >
-                                                <input  
-                                                            className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                                            type="text" name="surname" id="surname" placeholder="Enter Surname" 
-                                                            onChange={(e) => {
-                                                            setSurname(e.target.value)
-                                                            }}
-                                                            onBlur={(e) => {
-                                                            if(e.target.value === "")
-                                                            {
-                                                                  setSurnameMessage(SURNAME_MESSAGE)
-                                                            }
-                                                            }}
-                                                            onFocus={() => {
-                                                            setSurnameMessage("")                                                            
-                                                            }}
-                                                      />
-                                                      { surnameMessage && <Message msg={surnameMessage} status={errMsgStyle} />}
-                                          </div>
+                            className='w-full d-flex md:flex gap-10 md:mb-3'
+                        >           
+                            <div 
+                                className="mb-4 md:w-1/2 w-2/2"
+                            >
+                                <input  
+                                    className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                    type="text" name="firstname" id="firstname" placeholder="Enter Firtsname"
+                                    onChange={(e) => 
+                                    {
+                                        setFirstName(e.target.value)
+                                    }}
+                                    onBlur={(e) => 
+                                    {
+                                        if(e.target.value === "")
+                                        {
+                                            setFirstNameMessage(FIRSTNAME_MESSAGE)
+                                        }
+                                    }}
+                                    onFocus={() => 
+                                    {
+                                        setFirstNameMessage("")                                                            
+                                    }}
+                                />
+                                { firstnameMessage && <Message msg={firstnameMessage} status={errMsgStyle} />}
+                            </div>
+                            <div 
+                                className="mb-4 md:w-1/2 w-2/2"
+                            >
+                                <input  
+                                    className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
+                                    type="text" name="surname" id="surname" placeholder="Enter Surname" 
+                                    onChange={(e) => 
+                                    {
+                                        setSurname(e.target.value)
+                                    }}
+                                    onBlur={(e) => 
+                                    {
+                                        if(e.target.value === "")
+                                        {
+                                            setSurnameMessage(SURNAME_MESSAGE)
+                                        }
+                                    }}
+                                    onFocus={() => 
+                                    {
+                                        setSurnameMessage("")                                                            
+                                    }}
+                                />
+                                { surnameMessage && <Message msg={surnameMessage} status={errMsgStyle} />}
+                            </div>
                         </div>
                         <div  
                             className='w-full d-flex md:flex gap-10 md:mb-3'
@@ -251,7 +264,7 @@ export default function Profile()
                         >
                             <input  
                                 className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
-                                type="text" name="state" id="state" placeholder="Enter Steate"
+                                type="text" name="state" id="state" placeholder="Enter State"
                                 onChange={(e) => {
                                     setState(e.target.value)
                                 }}
@@ -272,7 +285,7 @@ export default function Profile()
                             validationMsg && <Message msg={validationMsg} status={errMsgStyle} customStyle="bg-red-600 p-3 text-white font-bold rounded-md" />
                         }
                         <div  
-                            className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-5'
+                            className='w-full flex justify-end md:flex gap-10 md:mb-3 mt-5'
                         >   
                             <button 
                                     className="block w-fit bg-[#435f88] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
@@ -281,90 +294,13 @@ export default function Profile()
                                     }}
                                     disabled={isLoading}
                             >
-                               {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Save" ) }
+                               {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Update" ) }
                             </button>
                         </div>
-
-                        <div className="hidden md:h-[550px]"></div>
                     </div>
-
-                    <div 
-                        className='col-span-12 md:col-span-6 px-1 md:px-5 md:px-10 mt-20 md:mt-5'
-                    >                       
-                        <div 
-                            className='w-full d-flex md:flex gap-10 mb-5'
-                        >           
-                            <div 
-                                className="mb-4 w-6/12 rounded-lg bg-gray-200 h-[350px] mx-auto"
-                            >
-                                
-                            </div>
-                        </div>                  
-                        <div 
-                            className='col-span-12 md:col-span-6 px-1 md:px-5 md:px-10 mt-20 md:mt-0'
-                        >
-                            <div 
-                                className='w-full d-flex md:flex gap-10 md:mb-3'
-                            >           
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">Firstname</p>
-                                </div>
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">Surname</p>
-                                </div>
-                            </div>
-                            <div 
-                                className='w-full d-flex md:flex gap-10 md:mb-3'
-                            >           
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">Phone</p>
-                                </div>
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">Email</p>
-                                </div>
-                            </div>
-                            <div 
-                                className='w-full d-flex md:flex gap-10 md:mb-3'
-                            >           
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">Gender</p>
-                                </div>
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">...</p>
-                                </div>
-                            </div>
-                            <div 
-                                className='w-full d-flex md:flex gap-10 md:mb-3'
-                            >           
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">Country</p>
-                                </div>
-                                <div 
-                                    className="mb-4 md:w-1/2 w-2/2 border-2 border-gray-200 p-3"
-                                >
-                                    <p className="text-gray-500">State</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="md:hidden h-[200px]"></div> 
-                    </div>
-
                 </div>
+                
+                <div className="md:h-[290px]"></div>
             </div>
         </DashboardLayout>
     )
