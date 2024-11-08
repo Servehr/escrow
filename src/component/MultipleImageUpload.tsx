@@ -37,6 +37,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
     useEffect(() => 
     {        
         let photo: HTMLInputElement | null = null
+        console.log(photo)
         photo = document.querySelector('#passport')!
         onClick(previewUrls, true)  
     }, [userPassport, refresh, previewUrls])
@@ -44,6 +45,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
     const hover = () => 
     {
         let photo: HTMLInputElement | null = null
+        console.log(photo)
         photo = document.querySelector('#passport')!
         if(photo === null)
         {
@@ -141,6 +143,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
 
     const handleDeleteImage = (image: string, index: number) => 
     {
+        console.log({image})
         const newImages = [...images];
         newImages.splice(index, 1);
         setImages(newImages);

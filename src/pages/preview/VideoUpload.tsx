@@ -20,7 +20,8 @@ export default function VideoUpload({width, ICloudColour, allowedFileTypes, onCl
     const [video, setVideo] = useState<boolean>(false)
     const [uploadText, setUploadText] = useState<string>("Click to upload vidoes")
     /* tslint:disable:no-unused-variable */
-    let videograph: HTMLDivElement
+    let videograph: HTMLDivElement | null = null
+    console.log(videograph)
     const ALLOWED_VIDEO_SIZE: number = 5240000
 
     useEffect(() => 
@@ -35,7 +36,8 @@ export default function VideoUpload({width, ICloudColour, allowedFileTypes, onCl
     /* tslint:disable:no-unused-variable */
     useEffect(() => 
     {        
-        let vid: HTMLInputElement
+        let vid: HTMLInputElement | null = null
+        console.log(vid)
         vid = document.querySelector('#video')!
         onClick(userVideo, true)
     }, [userVideo, video])
@@ -56,10 +58,10 @@ export default function VideoUpload({width, ICloudColour, allowedFileTypes, onCl
 
     const displayVideo = (e: any) => 
     {
-        /* tslint:disable:no-unused-variable */
-        let vid: HTMLInputElement
-        /* tslint:disable:no-unused-variable */
-        let cloud: HTMLInputElement
+        let vid: HTMLInputElement | null = null
+        console.log(vid)
+        let cloud: HTMLInputElement | null = null
+        console.log(vid)
         vid = document.querySelector('.theAreaVideo')!
         cloud = document.querySelector('.cloudy')!
         

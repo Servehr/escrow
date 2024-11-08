@@ -33,6 +33,7 @@ export default function SingleImageUpload({width, ICloudColour}: ImageProps)
     useEffect(() => 
     {                
         let photo: HTMLInputElement | null = null
+        console.log(photo)
         photo = document.querySelector('#passport')!
     }, [userPassport])
 
