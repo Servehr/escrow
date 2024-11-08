@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HiCloudUpload } from 'react-icons/hi'
 import { determineFileType, reduceImageSize } from '../util/image'
 
@@ -14,14 +14,14 @@ type ImageProps =
 
 export default function MultipleImageUpload({width, ICloudColour, allowedFileTypes, onClick}: ImageProps) 
 {
-    const [userPassport, setUserPassport] = useState<string>("")
+    const [userPassport] = useState<string>("")
     const [uploadText, setUploadText] = useState<string>("Click to upload pictures")
     let photograph!: HTMLDivElement
 
-    
+    console.log(photograph)
     const [previewUrls, setPreviewUrls] = useState<any[]>([]);   
     const [thumbnail, setImages] = useState<any[]>([])
-    const [imageSizes, setImageSizes] = useState([])
+    const [imageSizes] = useState([])
     const [images, setProductImages] = useState<any[]>([]);   
     const [refresh, setRefresh] = useState<number>(0);    
 
@@ -31,6 +31,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
         {   
             photograph = document.querySelector('.theArea')!
         }, 200)
+        console.log({thumbnail, width})
     }, [])
 
     useEffect(() => 
