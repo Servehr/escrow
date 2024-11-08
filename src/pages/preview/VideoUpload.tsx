@@ -61,7 +61,7 @@ export default function VideoUpload({width, ICloudColour, allowedFileTypes, onCl
         let vid: HTMLInputElement | null = null
         console.log(vid)
         let cloud: HTMLInputElement | null = null
-        console.log(vid)
+        console.log(cloud)
         vid = document.querySelector('.theAreaVideo')!
         cloud = document.querySelector('.cloudy')!
         
