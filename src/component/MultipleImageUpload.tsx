@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HiCloudUpload } from 'react-icons/hi'
 import { determineFileType, reduceImageSize } from '../util/image'
 
@@ -16,15 +16,14 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
 {
     const [userPassport, setUserPassport] = useState<string>("")
     const [uploadText, setUploadText] = useState<string>("Click to upload pictures")
-    let photograph: HTMLDivElement
+    let photograph!: HTMLDivElement
 
     
     const [previewUrls, setPreviewUrls] = useState<any[]>([]);   
-    // const [thumbnail, setImages] = useState<any[]>([])
+    const [thumbnail, setImages] = useState<any[]>([])
     const [imageSizes, setImageSizes] = useState([])
     const [images, setProductImages] = useState<any[]>([]);   
     const [refresh, setRefresh] = useState<number>(0);    
-    
 
     useEffect(() => 
     {
@@ -32,14 +31,11 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
         {   
             photograph = document.querySelector('.theArea')!
         }, 200)
-        setUserPassport('')
-        setImageSizes([])
-        console.log(width)
     }, [])
 
     useEffect(() => 
     {        
-        let photo: HTMLInputElement
+        let photo: HTMLInputElement | null = null
         photo = document.querySelector('#passport')!
         onClick(previewUrls, true)  
     }, [userPassport, refresh, previewUrls])
@@ -146,8 +142,7 @@ export default function MultipleImageUpload({width, ICloudColour, allowedFileTyp
     {
         const newImages = [...images];
         newImages.splice(index, 1);
-        // setImages(newImages);
-        console.log({image})
+        setImages(newImages);
         const newPreviewUrls = [...previewUrls];
         imageSizes.splice(index, 1);
         newPreviewUrls.splice(index, 1);
