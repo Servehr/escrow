@@ -17,6 +17,7 @@ export default function SingleImageUpload({width, ICloudColour}: ImageProps)
     const [userPassport, setUserPassport] = useState<string>("")
     const [passport, setPassport] = useState<string>("")
     const [uploadText, setUploadText] = useState<string>("Click to upload passport")
+    /* tslint:disable:no-unused-variable */
     let photograph!: HTMLDivElement
 
     useEffect(() => 
@@ -28,8 +29,9 @@ export default function SingleImageUpload({width, ICloudColour}: ImageProps)
         console.log({passport, width, photograph})
     }, [])
 
+    /* tslint:disable:no-unused-variable */
     useEffect(() => 
-    {        
+    {                
         let photo: HTMLInputElement | null = null
         photo = document.querySelector('#passport')!
     }, [userPassport])
