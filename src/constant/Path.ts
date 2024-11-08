@@ -8,10 +8,10 @@ const URL =
         path: 'https://www.scentsbyhoppey.com/', 
         status: false
     },
-    connectTo: 'offline'
+    connectTo: 'online'
 }
 
-const DESTINATION = (URL.connectTo === 'offline') ? URL.offline.path : URL.online.path
+const DESTINATION = (URL.connectTo === 'online') ? URL.offline.path : URL.online.path
 
 export const BASE_URL = `${DESTINATION}api/`;
 
