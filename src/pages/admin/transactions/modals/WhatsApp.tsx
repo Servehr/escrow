@@ -59,8 +59,8 @@ export const WhatsApp = ({onClick, toggleModal}: WhatsAppProps)  =>
         const allFields = () => 
         {
                 let valid = 'valid'
-                if(!phonenoMessage){ setPhoneNoMessage('Enter Phone Number'); valid = 'invalid' }
-                if(!chatMessage){ setChatMessage('Enter Message to start chatting'); valid = 'invalid' }
+                if(!phoneno){ setPhoneNoMessage('Enter Phone Number'); valid = 'invalid' }
+                if(!chat){ setChatMessage('Enter Message to start chatting'); valid = 'invalid' }
                 return valid
         }
 
