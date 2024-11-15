@@ -16,7 +16,7 @@ export default function CompletedTransactions()
     const { CompletedTransaction } = useTransaction()
     const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
     const [completedTransaction, setCompletedTransaction] = useState<any[]>([])
-    const [payment, setPayment] = useState<boolean>(false)
+    const [payment] = useState<boolean>(false)
   
     const [showingStates, setShowStates] = useState<boolean>(false)
   
