@@ -75,10 +75,10 @@ export default function CompletedTransactions()
       setVeiwTransactionDetail(x)
     }
 
-    const MakePayment = (x: boolean, trans: any) =>
-    {
-      setPayment(trans)
-    }
+    // const MakePayment = (x: boolean, trans: any) =>
+    // {
+    //   setPayment(trans)
+    // }
   
     type ActiveTransProps =
     {
@@ -245,6 +245,7 @@ export default function CompletedTransactions()
                                     onClick={() => {
 
                                     }} 
+                                    detail={''}
                 />
             }
     </>

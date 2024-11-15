@@ -191,7 +191,7 @@ export default function FlaggedTransactions()
         },
         {
             header: 'WhatsAp',
-            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ConnectWhatsApp(true)}><MdOutlineWhatsapp className="w-5 h-5 text-green-600 hover:text-green-800" /></a>),
+            cell: () => (<a href="#" onClick={() => ConnectWhatsApp(true)}><MdOutlineWhatsapp className="w-5 h-5 text-green-600 hover:text-green-800" /></a>),
             accessorKey: 'id',
         },
         {
