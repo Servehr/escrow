@@ -2,7 +2,7 @@ import React from 'react'
 import { HiMiniPower } from 'react-icons/hi2'
 import MobileHeader from './MobileHeader'
 import DashBoardSideBar from './DashBoardSideBar'
-import { logUserOut } from '../auth/hook/useAuth'
+import { logUserOut } from '../hook/useAuth'
 
 
 type ILayoutProps = {

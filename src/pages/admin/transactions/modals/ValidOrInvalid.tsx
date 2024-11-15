@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../../../../component/Modal";
 import { BeatLoader } from "react-spinners";
-import { useTransaction } from "../../../../auth/hook/useTransaction";
+import { useTransaction } from "../../../../hook/useTransaction";
 
 type ValidOrInvalidedModalPropos = 
 {
@@ -55,9 +55,9 @@ export const ValidOrInvalid = ({onClick, validOrInvalidModal, validate, detail}:
                                 </div>
                                 {  (validate === "invalid") &&
                                         <>
-                                             <div 
-                                                 className="px-4 py-2"
-                                             >
+                                                <div 
+                                                        className="px-4 py-2"
+                                                >
                                                         <textarea  
                                                                 className="w-full border rounded-md p-3 bg-white bg-opacity-75 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
                                                                 name="text" id="message" placeholder="Tell us your reason why you consider it invalid" 

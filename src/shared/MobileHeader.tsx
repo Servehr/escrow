@@ -7,7 +7,7 @@ import GpayLogo from './Logo'
 import clsx from 'clsx'
 import { BsFillTelephoneInboundFill, BsXCircle } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
-import { logUserOut } from '../auth/hook/useAuth'
+import { logUserOut } from '../hook/useAuth'
 
 export default function WebHeader() 
 {    

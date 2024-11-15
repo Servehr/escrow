@@ -3,7 +3,7 @@ import { HiHome } from "react-icons/hi";
 import { useState, useEffect } from "react";
 import Message from "./helper/Message";
 import { BeatLoader } from "react-spinners";
-import { useForgot } from "./hook/useAuth";
+import { useForgot } from "../hook/useAuth";
 import GpayLogo from "../shared/Logo";
 
 export default function ForgotPassword() 

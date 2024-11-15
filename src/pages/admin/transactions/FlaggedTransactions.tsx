@@ -6,10 +6,12 @@ import { Table } from "../../../shared/Table"
 import { HiFlag } from "react-icons/hi"
 import { FlagModal } from "./modals/FlagModal"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
-import { useTransaction } from "../../../auth/hook/useTransaction"
+import { useTransaction } from "../../../hook/useTransaction"
 import { RotateLoader } from "react-spinners"
 import currencyFormatter from "../../../util/currency-formatter"
 import { appStore } from "../../../state/store"
+import { MdOutlineWhatsapp } from "react-icons/md"
+import { WhatsApp } from "./modals/WhatsApp"
 
 
 export default function FlaggedTransactions() 
@@ -20,6 +22,7 @@ export default function FlaggedTransactions()
     const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
     const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
     const [pendingTransaction, setPendingTransaction] = useState<any[]>([])
+    const [openWhatsApp, setOpenWhatsApp] = useState<any>("")
 
     const [showingStates, setShowStates] = useState<boolean>(false)
 
@@ -93,6 +96,11 @@ export default function FlaggedTransactions()
         setVeiwTransactionDetail(x)
     }
 
+    const ConnectWhatsApp = (x: boolean) => 
+    {
+        setOpenWhatsApp(x)
+    }
+
     type ActiveTransProps =
     {
         id: number,
@@ -107,7 +115,6 @@ export default function FlaggedTransactions()
         end: string,
         data: any
     }
-
 
     const AllActiveTransactions = () => 
     {
@@ -183,8 +190,13 @@ export default function FlaggedTransactions()
             accessorKey: 'id',
         },
         {
+            header: 'WhatsAp',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ConnectWhatsApp(true)}><MdOutlineWhatsapp className="w-5 h-5 text-green-600 hover:text-green-800" /></a>),
+            accessorKey: 'id',
+        },
+        {
             header: 'View Detail',
-            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ViewColumnId(true, row.renderValue())}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
+            cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ViewColumnId(true, row.renderValue())}><Icons iconName="eye" color="blue" width={6} height={6}/></a>),
             accessorKey: 'data',
         }
     ],[])
@@ -263,6 +275,14 @@ export default function FlaggedTransactions()
                                         transactionModal={viewTransactionDetail} 
                                         detail={detail}
                                     />
+            }
+
+            {
+                openWhatsApp && <WhatsApp toggleModal={openWhatsApp} onClick={() => 
+                    {
+                        setOpenWhatsApp(false)  
+                    }} 
+                />
             }
 
         </>

@@ -7,7 +7,7 @@ import MultipleImageUpload from '../../component/MultipleImageUpload';
 import VideoUpload from '../preview/VideoUpload';
 import delay from 'delay';
 import { appStore } from '../../state/store';
-import { useTransaction } from '../../auth/hook/useTransaction';
+import { useTransaction } from '../../hook/useTransaction';
 import { useNavigate } from 'react-router-dom';
 
 

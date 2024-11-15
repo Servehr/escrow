@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom"
 import HomeLayout from "../shared/HomeLayout"
-import { useTransaction } from "../auth/hook/useTransaction"
+import { useTransaction } from "../hook/useTransaction"
 import { useState, useEffect } from "react"
 import delay from "delay"
 import { BeatLoader, RotateLoader } from "react-spinners"

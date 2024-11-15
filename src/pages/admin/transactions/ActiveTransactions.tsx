@@ -8,9 +8,10 @@ import { Table } from "../../../shared/Table"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
 import { OpenRequest } from "../../../shared/OpenRequest"
 import currencyFormatter from "../../../util/currency-formatter"
-import { useTransaction } from "../../../auth/hook/useTransaction"
+import { useTransaction } from "../../../hook/useTransaction"
 import { RotateLoader } from "react-spinners"
 import { appStore } from "../../../state/store"
+import { PayModal } from "./modals/PayModal"
 
 
 export default function ActiveTransactions() 
@@ -20,6 +21,7 @@ export default function ActiveTransactions()
     // const [openFlagModal, setFlagModalOpen] = useState<boolean>(false)
     const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
     const [openTransaction, setOpenTransaction] = useState<any[]>([])
+    const [payment, setPayment] = useState<boolean>(false)
   
     const [showingStates, setShowStates] = useState<boolean>(false)
     const [refreshPage, setRefreshPage] = useState<number>(tabPage.getFlagPendingTab())
@@ -64,8 +66,9 @@ export default function ActiveTransactions()
                  let validity: string = open?.transaction?.validity
                  let identifier: string = open?.transaction?.identifier
                  let delivery_status: string = open?.transaction?.delivery_status
-                 let data:any = {id: open?.transaction?.id, sellerId, buyerId, seller, buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: open?.images, description: open?.transaction?.description, agreement: open?.transaction?.agreement }
-                 theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, data })
+                 let payment: string = open?.transaction?.payment
+                 let data:any = {id: open?.transaction?.id, sellerId, buyerId, seller, buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: open?.images, description: open?.transaction?.description, agreement: open?.transaction?.agreement, payment: open?.transaction?.payment  }
+                 theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, payment, data })
            })
            setOpenTransaction(theData)
            setIsLoading(false)
@@ -80,6 +83,12 @@ export default function ActiveTransactions()
         console.log(showingStates)
         console.log(page)
         setShowStates(true)
+    }
+
+    const MakePayment = (x: boolean, trans: any) =>
+    {
+        setPayment(x)
+        setDetail(trans)
     }
 
     // const FlaggedColumnId = (x: boolean, id: any) =>
@@ -173,6 +182,35 @@ export default function ActiveTransactions()
             enableHiding: true
         },
         {
+            header: 'Pay',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => {
+                                                            const value:any = row.renderValue() as {}
+                                                            const payment: string = value?.payment
+                                                            return (                                                                                                                               
+                                                                <>
+                                                                    {
+                                                                        (payment === 'not-paid') && <>
+                                                                            <span className="px-2 py-2 font-semibold cursor-pointer text-xs hover:text-white rounded-xl bg-yellow-400 hover:bg-yellow-700"
+                                                                                onClick={() => MakePayment(true, value)}
+                                                                            >
+                                                                                {'Make Payment'}
+                                                                            </span>
+                                                                        </>
+                                                                    }
+                                                                    {
+                                                                        (payment === 'paid') && <>
+                                                                            <span className="px-2 py-2 font-semibold text-xs hover:text-white rounded-xl bg-green-400 hover:bg-green-700"
+                                                                                >
+                                                                                {payment}
+                                                                            </span>
+                                                                        </>
+                                                                    }
+                                                                </>
+                                                            )
+                                                        },
+            accessorKey: 'data',
+        },
+        {
             header: 'Accept/Reject',
             cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#"><OpenRequest onClick={(x: string | boolean) => {
                                             if(x === 'successful')
@@ -264,6 +302,15 @@ export default function ActiveTransactions()
                                         transactionModal={viewTransactionDetail} 
                                         detail={detail}
                                     />
+            }
+            {
+                payment && <PayModal 
+                                    payModal={payment} 
+                                    onClick={() => {
+                                        setPayment(false)
+                                    }} 
+                                    detail={detail}
+                />
             }
         </>
     )

@@ -14,8 +14,8 @@ export default function Transactions()
 
     const tabsData = [   
       {
-            label: "Pending",
-            content: <FlaggedTransactions />
+        label: "Pending",
+        content: <FlaggedTransactions />
       },
       {
         label: "Declined",

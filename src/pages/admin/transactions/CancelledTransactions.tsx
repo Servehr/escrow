@@ -5,7 +5,7 @@ import { Icons } from "../../../shared/Icons"
 import { Table } from "../../../shared/Table"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
 import currencyFormatter from "../../../util/currency-formatter"
-import { useTransaction } from "../../../auth/hook/useTransaction"
+import { useTransaction } from "../../../hook/useTransaction"
 import { RotateLoader } from "react-spinners"
 
 

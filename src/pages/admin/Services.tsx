@@ -8,7 +8,7 @@ import DashboardLayout from '../../shared/DashboardLayout'
 import { DeleteServiceModal } from "./services/modals/DeleteServiceModal"
 import { AddServiceModal } from "./services/modals/AddServiceModal"
 import { EditServiceModal } from "./services/modals/EditServiceModal"
-import { useTransaction } from '../../auth/hook/useTransaction';
+import { useTransaction } from '../../hook/useTransaction';
 import { RotateLoader } from "react-spinners"
 
 

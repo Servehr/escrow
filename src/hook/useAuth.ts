@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom"
-import { handShake } from "../../service/handshake"
-import { IAuthModel } from "../../state/slices/interface/IAuth"
-import { appStore } from "../../state/store"
-import { ILogin } from "../Interface/Auth/ILogin"
-import { IRegistration } from "../Interface/Auth/IRegistration"
-import { IReset } from "../Interface/Auth/IReset"
+import { handShake } from "../service/handshake"
+import { IAuthModel } from "../state/slices/interface/IAuth"
+import { appStore } from "../state/store"
+import { ILogin } from "../auth/Interface/Auth/ILogin"
+import { IRegistration } from "../auth/Interface/Auth/IRegistration"
+import { IReset } from "../auth/Interface/Auth/IReset"
 // import { TLoginHandShake } from "../type/TLoginHandShake"
 
 

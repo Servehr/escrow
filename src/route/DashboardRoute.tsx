@@ -8,6 +8,7 @@ import Settings from '../pages/admin/Settings';
 import NotFound from '../auth/notFound';
 import History from '../pages/admin/History';
 import Profile from '../pages/admin/Profile';
+import Payment from '../pages/admin/Payment';
 
 
 
@@ -21,6 +22,7 @@ export const DashboardRoute = () =>
                 <Route path='/transactions' element={<Transactions />}></Route> 
                 <Route path='/users' element={<Members />}></Route> 
                 <Route path='/services' element={<Services />}></Route> 
+                <Route path='/payments' element={<Payment />}></Route> 
                 <Route path='/history' element={<History />}></Route> 
                 <Route path='/profile' element={<Profile />}></Route> 
                 <Route path='/settings' element={<Settings />}></Route> 

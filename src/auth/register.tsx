@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { HiHome } from "react-icons/hi";
 import { useEffect, useState } from "react";
-import { useRegister } from "./hook/useAuth";
+import { useRegister } from "../hook/useAuth";
 import { BeatLoader } from "react-spinners";
 import Message from "./helper/Message";
 import GpayLogo from "../shared/Logo";

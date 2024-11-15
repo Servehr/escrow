@@ -4,7 +4,7 @@ import { HiMiniPencilSquare, HiMiniPower } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
 import { appStore } from '../state/store'
 import GpayLogo from './Logo'
-import { logUserOut } from '../auth/hook/useAuth'
+import { logUserOut } from '../hook/useAuth'
 
 
 export default function WebHeader() 

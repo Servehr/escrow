@@ -3,7 +3,7 @@ import { HiHome, HiOutlineUserGroup, HiOutlineViewList, HiUser, HiViewGrid } fro
 import { HiMiniPencilSquare, HiCog6Tooth, HiMiniPower } from "react-icons/hi2"
 import { Link } from "react-router-dom"
 import GpayLogo from "./Logo"
-import { logUserOut } from "../auth/hook/useAuth"
+import { logUserOut } from "../hook/useAuth"
 import { appStore } from "../state/store"
 
 
@@ -42,8 +42,8 @@ export default function DashBoardSideBar()
           icon: <HiOutlineUserGroup className='mr-2 mt-1 text-md' />
       },
       {
-          name: "History",
-          url: "/dashboard/history",
+          name: "Payment",
+          url: "/dashboard/payments",
           icon: <HiViewGrid className='mr-2 mt-1 text-md' />
       },
       {

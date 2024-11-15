@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../../../../component/Modal";
 import { BeatLoader } from "react-spinners";
-import { useTransaction } from "../../../../auth/hook/useTransaction";
+import { useTransaction } from "../../../../hook/useTransaction";
 import delay from "delay";
 import Message from "../../../../auth/helper/Message";
 

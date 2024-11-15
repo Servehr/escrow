@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { HiHome } from 'react-icons/hi'
 import { useState, useEffect } from 'react'
-import { useLogin } from './hook/useAuth'
+import { useLogin } from '../hook/useAuth'
 import Message from './helper/Message'
 import { BeatLoader } from 'react-spinners'
 import { appStore } from "../state/store";

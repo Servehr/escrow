@@ -3,7 +3,7 @@ import { HiHome } from "react-icons/hi";
 import { useState, useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 import Message from "./helper/Message";
-import { useReset } from "./hook/useAuth";
+import { useReset } from "../hook/useAuth";
 import GpayLogo from "../shared/Logo";
 
 

@@ -1,6 +1,6 @@
 // import { useQuery } from "@tanstack/react-query"
-import { handShake } from "../../service/handshake"
-import { appStore } from "../../state/store"
+import { handShake } from "../service/handshake"
+import { appStore } from "../state/store"
 // import { TLoginHandShake } from "../type/TLoginHandShake"
 
 
@@ -179,6 +179,29 @@ export const useTransaction = () =>
         return await handShake(dataPoint) 
     }
 
+    const MakePayment = async (id: number) => 
+    {
+        const dataPoint: any = {
+            url: [`payment/pay`],
+            method: 'POST',
+            isHeader: true,
+            data: { id: id },
+            token: token
+        }
+        return await handShake(dataPoint) 
+    }
+
+    const VerifyPayment = async (data: string) => 
+    {
+        const dataPoint: any = {
+            url: [`payment/verify/${data}`],
+            method: 'GET',
+            isHeader: true,
+            token: token
+        }
+        return await handShake(dataPoint) 
+    }
+
     // const Pending = async () => 
     // {
         // const dataPoint: any = {
@@ -214,6 +237,8 @@ export const useTransaction = () =>
                 Initiate,
                 InvalidTransaction,
                 RejectedTransaction,
-                DeclinedTransaction
+                DeclinedTransaction,
+                MakePayment,
+                VerifyPayment
     }
 }

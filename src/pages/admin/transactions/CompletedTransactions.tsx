@@ -5,8 +5,9 @@ import { Icons } from "../../../shared/Icons"
 import { Table } from "../../../shared/Table"
 import { TransactionDetailModal } from "./modals/TransactionDetailModal"
 import currencyFormatter from "../../../util/currency-formatter"
-import { useTransaction } from "../../../auth/hook/useTransaction"
+import { useTransaction } from "../../../hook/useTransaction"
 import { RotateLoader } from "react-spinners"
+import { PayModal } from "./modals/PayModal"
 
 
 export default function CompletedTransactions() 
@@ -15,6 +16,7 @@ export default function CompletedTransactions()
     const { CompletedTransaction } = useTransaction()
     const [viewTransactionDetail, setVeiwTransactionDetail] = useState<boolean>(false)
     const [completedTransaction, setCompletedTransaction] = useState<any[]>([])
+    const [payment, setPayment] = useState<boolean>(false)
   
     const [showingStates, setShowStates] = useState<boolean>(false)
   
@@ -48,8 +50,9 @@ export default function CompletedTransactions()
               let validity: string = complete?.transaction?.validity
               let identifier: string = complete?.transaction?.identifier
               let delivery_status: string = complete?.transaction?.delivery_status
-              let data:any = {seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: complete?.images, description: complete?.transaction?.description, agreement: complete?.transaction?.agreement }
-              theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, data })
+              let payment: string = complete?.transaction?.payment
+              let data:any = {seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: complete?.images, description: complete?.transaction?.description, agreement: complete?.transaction?.agreement, payment: complete?.transaction?.payment }
+              theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, payment, data })
           })
           setCompletedTransaction(theData)
           setIsLoading(false)
@@ -70,6 +73,11 @@ export default function CompletedTransactions()
     {
       setDetail(trans)
       setVeiwTransactionDetail(x)
+    }
+
+    const MakePayment = (x: boolean, trans: any) =>
+    {
+      setPayment(trans)
     }
   
     type ActiveTransProps =
@@ -139,6 +147,35 @@ export default function CompletedTransactions()
             accessorKey: 'identifier',
         },
         {
+            header: 'Pay',
+            cell: (row: CellContext<ActiveTransProps, unknown>) => {
+                                                            const value:any = row.renderValue() as {}
+                                                            const payment: string = value?.payment
+                                                            return (                                                                                                                               
+                                                                <>
+                                                                    {
+                                                                        (payment === 'not-paid') && <>
+                                                                            <span className="px-2 py-2 font-semibold cursor-pointer text-xs hover:text-white rounded-xl bg-yellow-400 hover:bg-yellow-700"
+                                                                                // onClick={() => MakePayment(true, payment)}
+                                                                            >
+                                                                                {payment}
+                                                                            </span>
+                                                                        </>
+                                                                    }
+                                                                    {
+                                                                        (payment === 'paid') && <>
+                                                                            <span className="px-2 py-2 font-semibold text-xs hover:text-white rounded-xl bg-green-400 hover:bg-green-700"
+                                                                                >
+                                                                                {payment}
+                                                                            </span>
+                                                                        </>
+                                                                    }
+                                                                </>
+                                                            )
+                                                        },
+            accessorKey: 'data',
+        },
+        {
             header: 'View Detail',
             cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ViewColumnId(true, row.renderValue())}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
             accessorKey: 'data',
@@ -201,6 +238,14 @@ export default function CompletedTransactions()
                                         transactionModal={viewTransactionDetail} 
                                         detail={detail}
                                     />
+            }
+            {
+                payment && <PayModal 
+                                    payModal={payment} 
+                                    onClick={() => {
+
+                                    }} 
+                />
             }
     </>
     )
