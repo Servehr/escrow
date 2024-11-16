@@ -43,7 +43,10 @@ export const WhatsApp = ({onClick, toggleModal}: WhatsAppProps)  =>
                 setPhoneNo("")
                 setChat("")
                 onClick(false)
-                window.open(`https://wa.me/${phoneno}/?text=${chat}`, "_blank")
+                // window.open(`https://wa.me/${phoneno}/?text=${chat}`, "_blank")
+                // https://web.whatsapp.com/send?phone=xxxxxxxxxxxx&text=Hi!
+                // window.open(`https://wa.me/send?phone=${phoneno}&text=${chat}`, "_blank")
+                window.open(`https://web.whatsapp.com/send?phone=${phoneno}&text=${chat}`, "_blank")
             } else {
                 setIsLoading(false)
                 setTimeout(() => 
