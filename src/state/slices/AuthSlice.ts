@@ -32,6 +32,26 @@ const createAuthSlice: StateCreator<IAuthentication> = (set, get) => (
         setUser(user: any)
         {
             set(() => ({ user: user }))
+        },
+        
+        passport: '',
+        getPassport()
+        {
+            return get().passport
+        },
+        setPassport(passport: any)
+        {
+            set(() => ({ passport: passport }))
+        },
+        
+        allow: "loggedOut",
+        getAllow()
+        {
+            return get().allow
+        },
+        setAllow(allow: any)
+        {
+            set(() => ({ allow: allow }))
         }
     }   
 )

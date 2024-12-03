@@ -2,8 +2,6 @@ import { getCoreRowModel, useReactTable, flexRender, getPaginationRowModel } fro
 import type { ColumnDef } from '@tanstack/react-table';
 import { Icons } from './Icons';
 import { useState } from 'react';
-// import { Fields } from '../../controls/Fields';
-// import {v4 as uuidv4} from 'uuid';
 
 
 interface ReactTableProps<T extends object> 
@@ -96,7 +94,7 @@ export const Table = <T extends object>({ data, columns, headerNavigation=true, 
                         <thead className="border-1 bg-gray-50 shadow-sm shadow-black">
                         {
                             table.getHeaderGroups().map((headerGroup) => (
-                                <tr key={headerGroup.id} className='px-5 py-3 border-b-2 border-gray-200 text-left bg-[#395988] text-white text-[11px] font-semibold uppercase tracking-wider'>
+                                <tr key={headerGroup.id} className='px-5 py-3 border-b-2 border-gray-200 text-left bg-[#119dd5] text-white text-[11px] font-semibold uppercase tracking-wider'>
                                     {
                                         headerGroup.headers.map((header) => (
                                             <th key={header.id} className="px-6 py-4 text-[13px] font-bold text-black" style={{backgroundColor: headerColor, color: headerTextColor  }}>

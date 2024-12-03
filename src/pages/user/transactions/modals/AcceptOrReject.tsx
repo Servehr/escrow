@@ -31,7 +31,7 @@ export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate, detail}:
            setErrMsgStyle('text-md text-red-600 font-bold')
         }, [])
 
-        const IsDelivered = async (status: string, type: string) => 
+        const IsDelivered = async (status: string) => 
         {
             if(status === "rejected")
             { 
@@ -47,7 +47,7 @@ export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate, detail}:
             if(status === "received"){ setIsReceiving(true)  }
             
             await delay(2000)
-            const validityCheck = DeliveryStatus(detail?.sellerId, detail?.buyerId, type, detail?.id, message, status)
+            const validityCheck = DeliveryStatus(detail?.sellerId, detail?.buyerId, detail?.id, message, status)
             validityCheck.then(() => 
             {
                 setIsRejecting(false)
@@ -111,7 +111,7 @@ export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate, detail}:
                                                         <button 
                                                                         className="py-3 px-4 bg-red-600 hover:bg-red-800 text-white font-semibold text-sm rounded-xl w-max"
                                                                         onClick={() => {
-                                                                                IsDelivered('rejected', 'open')
+                                                                                IsDelivered('rejected')
                                                                         }}
                                                                         >
                                                                         {       isRejecting ? ( <BeatLoader size={9} color="#fff" />) : ( "Reject" )          }
@@ -137,7 +137,7 @@ export const AcceptOrReject = ({onClick, acceptOrRejectModal, validate, detail}:
                                                         <button 
                                                                         className="py-4 px-4 bg-green-800 hover:bg-green-700 text-white font-semibold text-sm rounded-xl w-full"
                                                                         onClick={() => {
-                                                                                IsDelivered('received', 'open')
+                                                                                IsDelivered('received')
                                                                         }}
                                                                         >
                                                                         {       isReceiving ? ( <BeatLoader size={9} color="#fff" />) : ( "Accept" ) }

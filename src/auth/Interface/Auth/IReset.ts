@@ -1,6 +1,6 @@
 export interface IReset 
 {
-    id: number,
+    id?: string,
     password: string,
     confirm_password: string
 }

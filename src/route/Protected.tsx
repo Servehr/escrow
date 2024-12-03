@@ -16,11 +16,14 @@ export default function Protected({ children }: ProtectedProps)
 
     useEffect(() => 
     {
-        if(appState.getUser().token === "")
+        if(appState.getUser().token)
         {
-          navigate('/auth/login')
+           if(appState.getAllow() === 'loggedOut')
+           {      
+              navigate('/passport')                  
+           }
         }
-    })
+    }, [])
     
     return children
 }

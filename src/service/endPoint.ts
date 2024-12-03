@@ -13,21 +13,21 @@ export const request = async ( options: any ) =>
     }
     const onSuccess = async (responseData: any) => 
     {
-        if(responseData.data.status === 403)
+        if(responseData?.data?.status === 403)
         {
             let msg: string | string[] = []
-            if(responseData.data.data.length > 0)
+            if(responseData?.data?.data?.length > 0)
             {
-                for (let index = 0; index < responseData.data.data.length; index++) 
+                for (let index = 0; index < responseData?.data?.data?.length; index++) 
                 {
-                    msg.push(`${responseData.data.data[index]}`);
+                    msg.push(`${responseData?.data?.data[index]}`);
                 }
             } else {
-                msg =  responseData.data.message
+                msg =  responseData?.data?.message
             }
             const response: any = 
             {
-                statusCode: responseData.data.status,
+                statusCode: responseData?.data?.status,
                 message: msg,
                 statusText: "",
             }
@@ -36,10 +36,10 @@ export const request = async ( options: any ) =>
         if(responseData.data.status === 200)
         {
             const response: any = {
-                statusCode: responseData.data.status,
-                message: responseData.data.message,
-                statusText: responseData.statusText,
-                data: responseData.data
+                statusCode: responseData?.data?.status,
+                message: responseData?.data?.message,
+                statusText: responseData?.statusText,
+                data: responseData?.data
             }
             return await response
         }
@@ -50,9 +50,9 @@ export const request = async ( options: any ) =>
         {
             const response: any = 
             {
-                statusCode: error.response.status,
+                statusCode: error?.response?.status,
                 message: "Application Error NF", //error.response.data.message,
-                statusText: error.response.statusText,
+                statusText: error?.response?.statusText,
             }
             return response
         }
@@ -60,9 +60,9 @@ export const request = async ( options: any ) =>
         {
             const response: any = 
             {
-                statusCode: error.response.status,
-                message: error.response.data.message,
-                statusText: error.response.statusText,
+                statusCode: error?.response?.status,
+                message: error?.response?.data?.message,
+                statusText: error?.response?.statusText,
             }
             return response
         }

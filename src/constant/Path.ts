@@ -8,7 +8,7 @@ const URL =
         path: 'https://www.scentsbyhoppey.com/', 
         status: false
     },
-    connectTo: 'online'
+    connectTo: 'offline'
 }
 
 const DESTINATION = (URL.connectTo === 'offline') ? URL.offline.path : URL.online.path
@@ -19,6 +19,7 @@ export const USAGE_PATH =
 {
     PRODUCT_IMAGE : `${DESTINATION}transaction/`,
     PRODUCT_VIDEO : `${DESTINATION}video/`,
+    PROFILE_PICTURE : `${DESTINATION}image/`,
 }
 
 

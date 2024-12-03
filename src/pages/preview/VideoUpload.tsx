@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { HiCloudUpload } from 'react-icons/hi'
 import '../css/upload.css'
-import { determineFileType, readableFileSize } from '../../util/image'
+import { determineFileType } from '../../util/image'
 
 type VideoProps = 
 {
@@ -69,7 +69,6 @@ export default function VideoUpload({width, ICloudColour, allowedFileTypes, onCl
         const videoSize = e.target.files[0].size
         if(videoSize > ALLOWED_VIDEO_SIZE)
         {
-            onClick(`File is large - (${readableFileSize(videoSize, 0, 1024, 2)}), cannot be more than ${readableFileSize(ALLOWED_VIDEO_SIZE, 0, 1024, 2)}`, false)
             return false
         }
 

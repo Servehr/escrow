@@ -55,12 +55,12 @@ export default function WebHeader()
   return (
       <>
           <div 
-                className='container mx-auto flex justify-between items-center'
+                className='container mx-auto flex justify-between items-center -mb-5 py-3'
                     >
                         <div 
                             className='col-span-3 text-2xl pt-2'
                         >
-                            <GpayLogo width={200} /> 
+                            <GpayLogo width={70} /> 
                         </div>
                         <div 
                             className='col-span-6 hidden md:block'
@@ -78,7 +78,7 @@ export default function WebHeader()
                                                         onClick={() => { setMenu(false) }}
                                                   >
                                                       <li 
-                                                            className='flex px-5 py-3 rounded-full bg-[#506f9d] hover:bg-[#395988] hover:border-t-2 hover:border-b-2 hover:border-white mb-1 cursor-pointer text-left text-[14px] font-bold text-white hover:text-white'
+                                                            className='flex px-5 py-3 rounded-full bg-[#0878a5] hover:bg-[#395988] hover:border-t-2 hover:border-b-2 hover:border-white mb-1 cursor-pointer text-left text-[14px] font-bold text-white hover:text-white'
                                                       >                                                
                                                           {user?.icon} {user?.name}
                                                       </li>
@@ -116,7 +116,7 @@ export default function WebHeader()
                             {
                                 user && <>
                                     <Link to={'/dashboard'} 
-                                        className='hover:text-[#506f9d] hover:font-bold px-3 py-1 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
+                                        className='hover:text-white hover:font-bold px-3 py-1 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
                                     >
                                         Dashboard
                                     </Link>

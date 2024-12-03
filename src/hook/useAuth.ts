@@ -66,7 +66,7 @@ export const useReset = () =>
         const dataPoint: any = {
             url: ['auth/set-new-password'],
             method: 'PUT',
-            data: user,
+            data: { user: user?.id, password: user?.password, confirm_password: user?.confirm_password },
             isHeader: false
         }
         return await handShake(dataPoint) 
@@ -99,13 +99,17 @@ export const logUserOut = () =>
     {
         const credentials: IAuthModel = 
         {
-           firstname: "",
-           surname: "",
-           token: "",
-           verified: "",
-           reset: ""
-       }
+            id: -1,
+            firstname: "",
+            surname: "",
+            token: "",
+            verified: "",
+            reset: "",
+            userIdentifier: "",
+            userType: ""
+        }
        appState.setUser(credentials)
+       appState.setAllow("loggedOut")
        localStorage.clear()
        setTimeout(() => {            
             navigate('/auth/login')

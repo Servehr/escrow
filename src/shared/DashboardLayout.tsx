@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { HiMiniPower } from 'react-icons/hi2'
 import MobileHeader from './MobileHeader'
 import DashBoardSideBar from './DashBoardSideBar'
-import { logUserOut } from '../hook/useAuth'
+import { appStore } from '../state/store'
+import { Logout } from '../component/Logout'
 
 
 type ILayoutProps = {
@@ -12,12 +13,13 @@ type ILayoutProps = {
 
 export default function DashboardLayout({children, pageName}: ILayoutProps) 
 {
-    const { LogOut } = logUserOut()
+    const userState = appStore((state) => state)
+    const [openLogOut, setIsLogOut] = useState<boolean>(false)
     
 
     return (
           <div 
-                className="relative min-h-screen md:flex bg-gray-100"
+             className="relative min-h-screen md:flex bg-gray-100"
           >
 
               <MobileHeader /> 
@@ -28,7 +30,7 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
                     className='w-full'
                 >
                     <div 
-                          className='md:bg-[#d1dbea] flex justify-between'
+                          className='md:bg-[#aac84f] flex justify-between'
                     >
                         <div className='col-span-3 text-2xl p-5'>{pageName}</div>
                         <div className='col-span-6'></div>
@@ -36,24 +38,27 @@ export default function DashboardLayout({children, pageName}: ILayoutProps)
                                 className='flex col-span-6 font-bold text-md p-5'
                         >
                             {/* <HiOutlineUser className='text-[30px] mx-2 text-blue-600' /> */}
-                            <span className='text-[16px] mx-2 text-blue-600 mt-1'>Welcome User</span>
+                            <span className='text-[16px] mx-2 text-black mt-1'>Welcome {userState.getUser().firstname} {userState.getUser().surname}</span>
                             <div 
                                     className='flex justify-left font-bold text-md'
                             >
                                 <HiMiniPower 
-                                        className='mr-1 text-[30px] mt-1 cursor-pointer hover:text-red-600'                                
-                                        onClick={LogOut}
+                                        className='mr-1 text-[30px] mt-1 cursor-pointer hover:text-red-600' 
+                                        onClick={() => setIsLogOut(true)}
                                 />
                             </div>
                         </div>
                     </div>
 
                     <div 
-                            className=''
+                        className=''
                     >
                         { children }
                     </div>
               </div>
+             
+
+              { openLogOut && <Logout openLogOutModal={openLogOut} onClick={() => console.log("")} /> }
 
           </div>
     )

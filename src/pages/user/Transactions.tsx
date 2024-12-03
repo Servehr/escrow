@@ -72,7 +72,7 @@ export default function Transactions()
                                                         key={index}
                                                         className={` rounded-none py-2 rounded-2xl flex justify-between items-center border-b-4 px-5 m-auto font-semibold transition-colors duration-300 text-md border-t-1 ${
                                                         index === activeTabIndex
-                                                        ? "border-black bg-[#506f9d] text-white font-bold"
+                                                        ? "border-black bg-[#119dd5] text-white font-bold"
                                                         : "border-transparent hover:border-green-700 text-black"
                                                         }`}
                                                         style={{fontSize:"12px", paddingTop: '15px', fontWeight: 'bolder'}}

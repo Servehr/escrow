@@ -7,6 +7,7 @@ import { TransactionDetailModal } from "./modals/TransactionDetailModal"
 import { useTransaction } from "../../../hook/useTransaction"
 import { RotateLoader } from "react-spinners"
 import currencyFormatter from "../../../util/currency-formatter"
+import { RejectedMessage } from "./modals/RejectedMessage"
 
 
 export default function DeclinedTransactions() 
@@ -22,6 +23,8 @@ export default function DeclinedTransactions()
   const [error, setError] = useState<string>('')
 
   const [detail, setDetail] = useState<any>("")
+  const [showMessageBox, setShowMessageBox] = useState<boolean>(false)
+  const [sentMessage, setSentMessage] = useState<string>("")
 
   useEffect(() => 
   {
@@ -48,8 +51,9 @@ export default function DeclinedTransactions()
             let validity: string = declined?.transaction?.validity
             let identifier: string = declined?.transaction?.identifier
             let delivery_status: string = declined?.transaction?.delivery_status
+            let message: string = declined?.message?.message
             let data:any = {id: declined?.id, seller, buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: declined?.images, description: declined?.transaction?.description, agreement: declined?.transaction?.agreement }
-            theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, data })
+            theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, message, data })
         })
         setDeclinedTransaction(theData)
         setIsLoading(false)
@@ -58,6 +62,12 @@ export default function DeclinedTransactions()
         setIsLoading(false)
      })
   }, [])
+
+  const ShowMessage = (x: boolean, msg: any) => 
+  {
+        setSentMessage(msg)
+        setShowMessageBox(x)
+  }
 
   const ShowStates = (page: any) => 
   {
@@ -144,7 +154,12 @@ export default function DeclinedTransactions()
         header: 'View Detail',
         cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ViewColumnId(true, row.renderValue())}><Icons iconName="eye" color="blue" width={4} height={4}/></a>),
         accessorKey: 'data',
-      }
+      },
+      {
+          header: 'Message',
+          cell: (row: CellContext<ActiveTransProps, unknown>) => (<a href="#" onClick={() => ShowMessage(true, row.renderValue())}><Icons iconName="message" color="red" width={4} height={4}/></a>),
+          accessorKey: 'message',
+      },
   ],[])
 
 
@@ -202,6 +217,17 @@ export default function DeclinedTransactions()
                                         } } 
                                         transactionModal={invalidTransaction} 
                                         detail={detail}
+                                    />
+            }
+
+            
+
+            {
+                showMessageBox && <RejectedMessage onClick={() => {
+                                                setShowMessageBox(false)
+                                        } } 
+                                        rejectedMessageModal={showMessageBox}
+                                        msg={sentMessage}
                                     />
             }
 

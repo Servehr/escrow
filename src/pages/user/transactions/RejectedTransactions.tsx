@@ -71,7 +71,7 @@ export default function RejectedTransactions()
   }
 
   const ShowMessage = (x: boolean, msg: any) => 
-  {console.log(msg)
+  {
         setSentMessage(msg)
         setShowMessageBox(x)
   }

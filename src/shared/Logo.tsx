@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import Logo from '../assets/middleman.png'
 
 export default function GpayLogo({width}: { width: number })
 {
@@ -7,12 +8,12 @@ export default function GpayLogo({width}: { width: number })
   return (
       <>
           <img 
-                src="/logo/Gpay.png"
+                src={Logo}
                 width={width}
                 onClick={() => {
                     navigate('/')
                 }}
-                className="cursor-pointer"
+                className="cursor-pointer p-1 bg-white rounded-full"
              />
       </>
   )

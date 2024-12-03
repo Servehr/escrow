@@ -1,4 +1,4 @@
-import { BsArrowBarRight } from "react-icons/bs"
+import { BsArrowBarRight, BsBackpack2Fill } from "react-icons/bs"
 import HomeLayout from "../shared/HomeLayout"
 import { BeatLoader } from "react-spinners"
 import { useEffect, useState } from "react"
@@ -6,6 +6,12 @@ import { useNavigate } from "react-router-dom"
 import { HiOutlineShoppingCart, HiOutlineLibrary, HiOutlineTruck } from "react-icons/hi"
 import Message from "../auth/helper/Message"
 import delay from "delay"
+import { motion } from 'framer-motion'
+import BuyerAndSellerAgree from '../assets/buyer-seller-agree.png'
+import BuyerMakePayment from '../assets/make-payment.png'
+import Delivery from '../assets/delivery.png'
+import Approval from '../assets/approval.png'
+import PaymentRelease from '../assets/payment-release.png'
 
 type CategoryProp = 
 {
@@ -80,6 +86,11 @@ export const Home = () =>
             value: 3,
             icon: <HiOutlineTruck />
         },
+        {
+            name: 'Electronics',
+            value: 4,
+            icon: <BsBackpack2Fill />
+        }
     ]
 
     const Search = () => 
@@ -98,7 +109,14 @@ export const Home = () =>
                     <div 
                          className='w-2/2 md:w-1/2 container mx-auto md:mx-0'
                     >    
-                        <h1 className="text-[30px] md:text-[44px] text-center md:text-left mb-5 -mt-10 md:-mt-0">GPay Escrow Payment Made Easy</h1> 
+                        <motion.h1 
+                            initial={{ y: -30 }}
+                            animate={{ y: 1 }}
+                            transition={{ delay: 0.5, type: 'spring' }}
+                            className="text-[30px] md:text-[44px] text-center md:text-left mb-5 -mt-10 md:-mt-0"
+                        >
+                            MiddleMan Payment Made Easy
+                        </motion.h1> 
                         <p className="text-center md:text-left pr-0 md:pr-20 text-md md:text-xl"
                         >
                             With GPay you can buy and sell anything safely without the risk of being scammed.
@@ -108,11 +126,14 @@ export const Home = () =>
                             {
                                 whyUs.map((why, index) => {
                                     return (
-                                        <li 
+                                        <motion.li
+                                            initial={{ y: '-100vh' }}
+                                            animate={{ y: '00vh' }}
+                                            transition={{ delay: .5, duration: .7 }}
                                             key={index} className="flex items-center text-lg py-2 hoverfont-bold text-blue-600 mr-10 hover:text-black cursor-pointer"
                                         >
                                             {why} <BsArrowBarRight className="mt-1 font-bold border-2 text-red-600 text-[17px]" />
-                                        </li>
+                                        </motion.li>
                                     )
                                 })
                             }
@@ -153,7 +174,7 @@ export const Home = () =>
                             />
                             {/* bg-[#435f88] hover:bg-[#6f7277] */}
                             <button 
-                                    className="block w-full bg-blue-900 hover:bg-[#435f88] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
+                                    className="block w-full bg-[#0878a5] hover:bg-[#056991] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
                                     onClick={Confirm}
                                     disabled={isLoading}
                             >
@@ -165,20 +186,20 @@ export const Home = () =>
                 </div>
             </div>     
             <div 
-                className='pt-8 pb-3 bg-[#506f9d] p-5 -mt-10 md:mt-0'
+                className='pt-8 pb-3 bg-[#0878a5] p-5 -mt-10 md:mt-0'
             >
                 <div 
-                    className='md:container d-flex md:flex mx-auto mt-5 md:mt-0 gap-5 md:py-5 rounded-xl justity-center items-center'
+                    className='md:container d-flex md:flex mx-auto mt-5 md:mt-5 gap-10 md:py-3 rounded-xl justity-center items-center'
                 > 
                     {
                         categories.map((category: CategoryProp, index: number) => {
                             return (                                                               
                                 <div 
                                     key={index}
-                                    className="flex justify-center items-center w-12/12 md:w-4/12 mb-5 text-md md:text-2xl text-center border-2 border-gray-200 bg-blue-100 md:col-span-6 h-fit md:p-10 rounded-lg"
+                                    className="flex justify-center items-center w-12/12 md:w-4/12 mb-5 text-md md:text-2xl text-center border-2 border-gray-200 bg-blue-100 md:col-span-6 h-fit md:p-5 rounded-lg"
                                 >     
                                     <span 
-                                        className="w-fll px-5 md:py-2 py-5 text-5xl -mr-5"
+                                        className="px-5 md:py-1 py-3 text-5xl -mr-5"
                                     >
                                         {category?.icon}
                                     </span>
@@ -190,54 +211,119 @@ export const Home = () =>
                                 </div> 
                             )
                         })
-                    }                      
+                    }                    
+                </div>
+                <div className="container flex justify-center items-center mx-auto text-white font-bold text-md cursor-pointer mb-20">and many more ...</div>  
+
+                <div 
+                    className='container grid md:grid-cols-12 hidden d-flex md:flex mx-auto mt-5 md:mt-10 gap-5 md:py-5 rounded-xl space-x-10'
+                > 
+                    <div 
+                        className="col-span-10 md:col-span-2 mx-auto"
+                    >
+                        <img src={BuyerAndSellerAgree} width={240} />
+                    </div>  
+                    <div 
+                        className="col-span-10 md:col-span-2 mx-auto"
+                    >
+                        <img src={BuyerMakePayment} width={240} />
+                    </div> 
+                    <div 
+                        className="col-span-10 md:col-span-2 mx-auto"
+                    >
+                        <img src={Delivery} width={240} />
+                    </div> 
+                    <div 
+                        className="col-span-10 md:col-span-2 mx-auto"
+                    >
+                        <img src={Approval} width={240} />
+                    </div> 
+                    <div 
+                        className="col-span-10 md:col-span-2 mx-auto"
+                    >
+                        <img src={PaymentRelease} width={240} />
+                    </div>                  
                 </div>
 
                 <div 
-                    className='md:container md:px-10 d-flex md:flex mx-auto md:p-5 pt-7 md:mt-0 gap-10 rounded-xl justity-center items-center'
+                    className='container grid grid-cols-12 md:hidden d-flex md:flex mx-auto mt-5 md:mt-10 gap-5 md:py-5 rounded-xl space-x-10'
                 > 
                     <div 
-                        className="w-full flex justify-center items-center -mt-5 md:mt-0 mb-5 md:mb-5"
+                        className="col-span-12 flex gap-10 mx-auto"
                     >
-                        <button 
-                                className="flex justify-center items-center block w-fit bg-[#435f88] hover:bg-blue-900 border-shadow text-white font-bold px-20 py-7 rounded-lg ring-2 ring-inset"
-                                onClick={() => {
-                                    navigate('/dashboard/create-transaction')
-                                    Search()
-                                }}
-                                disabled={isLoading}
+                        <div 
+                            className="col-span-6 md:col-span-2 mx-auto"
                         >
-                            {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Start Transaction" )          }
-                        </button>
+                            <img src={BuyerAndSellerAgree} width={240} />
+                        </div>  
+                        <div 
+                            className="col-span-6 md:col-span-2 mx-auto"
+                        >
+                            <img src={BuyerMakePayment} width={240} />
+                        </div>
+                    </div> 
+                    <div 
+                        className="col-span-12 flex gap-10 mx-auto"
+                    >
+                        <div 
+                            className="col-span-6 md:col-span-2 mx-auto -ml-10"
+                        >
+                            <img src={Delivery} width={240} />
+                        </div>  
+                        <div 
+                            className="col-span-6 md:col-span-2 mx-auto"
+                        >
+                            <img src={Approval} width={240} />
+                        </div>
                     </div>
+                    <div 
+                        className="col-span-12 flex justify-center items-center gap-10 mx-auto"
+                    >
+                        <div 
+                            className="col-span-6 md:col-span-2 mx-auto"
+                        >
+                            <img src={PaymentRelease} width={275} className="-ml-10" />
+                        </div>
+                    </div>                 
                 </div>
+                 
+                
+                 <div 
+                     className='md:container md:px-10 d-flex md:flex mx-auto md:p-5 pt-5 mt-10 gap-10 rounded-xl justity-center items-center mb-14'
+                 > 
+                     <div 
+                         className="w-full flex justify-center items-center md:mt-0 mb-5 md:mb-5"
+                     >
+                         <button 
+                                 className="flex justify-center items-center block w-fit bg-[#0878a5] hover:bg-green-600 border-shadow text-white font-bold px-20 py-7 rounded-lg ring-2 ring-inset"
+                                 onClick={() => {
+                                     navigate('/dashboard/create-transaction')
+                                     Search()
+                                 }}
+                                 disabled={isLoading}
+                         >
+                             {  isLoading ? ( <BeatLoader size={9} color="#fff" />) : ( "Start Transaction" )          }
+                         </button>
+                     </div>
+                 </div>
+
             </div>
                                            
             <div 
-                className='w-full py-60 bg-white'
+                className='w-full bg-white py-10'
             >
                 <div 
-                        className='container mx-auto flex justify-between items-center gap-5'
+                        className='container mx-auto md:flex justify-center items-center gap-10 p-5'
                     >
                         <div 
-                            className='col-span-3 text-2xl'
+                            className='w-12/12 md:w-6/12 text-2xl h-[500px] border-2 border-gray-200 rounded-xl mb-10 md:mb-0'
                         >
                                 
                         </div>
                         <div 
-                            className='col-span-3 text-2xl pt-2'
+                            className='w-12/12 md:w-6/12 text-2xl h-[500px] border-2 border-gray-200 rounded-xl'
                         >
-                                                            
-                        </div>
-                        <div 
-                            className='col-span-3 text-2xl pt-2'
-                        >
-                                                               
-                        </div>
-                        <div 
-                            className='col-span-3 text-2xl pt-2'
-                        >
-                                                               
+                                                        
                         </div>
                     </div>
             </div>

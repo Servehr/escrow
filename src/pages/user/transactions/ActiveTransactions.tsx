@@ -65,10 +65,11 @@ export default function ActiveTransactions()
                  let end: string = open?.transaction?.end
                  let validity: string = open?.transaction?.validity
                  let identifier: string = open?.transaction?.identifier
+                 let by: string = open?.posted_by?.id
                  let delivery_status: string = open?.transaction?.delivery_status
                  let payment: string = open?.transaction?.payment
-                 let data:any = {id: open?.transaction?.id, sellerId, buyerId, seller, buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, images: open?.images, description: open?.transaction?.description, agreement: open?.transaction?.agreement, payment: open?.transaction?.payment  }
-                 theData.push({seller,  buyer, category, name, amount, request, start, end, validity, identifier, delivery_status, payment, data })
+                 let data:any = {id: open?.transaction?.id, identification: open?.buyer?.identification_no, sellerId, buyerId, seller, buyer, category, name, amount, request, start, end, validity, by, delivery_status, images: open?.images, description: open?.transaction?.description, agreement: open?.transaction?.agreement, payment: open?.transaction?.payment  }
+                 theData.push({seller,  buyer, category, name, amount, request, start, end, validity, by, delivery_status, payment, data, identifier })
            })
            setOpenTransaction(theData)
            setIsLoading(false)
@@ -189,11 +190,20 @@ export default function ActiveTransactions()
                                                             return (                                                                                                                               
                                                                 <>
                                                                     {
-                                                                        (payment === 'not-paid') && <>
+                                                                        ((payment === 'not-paid') && (value?.by != Number(tabPage.getUser().id)))&& <>
                                                                             <span className="px-2 py-2 font-semibold cursor-pointer text-xs hover:text-white rounded-xl bg-yellow-400 hover:bg-yellow-700"
                                                                                 onClick={() => MakePayment(true, value)}
                                                                             >
                                                                                 {'Make Payment'}
+                                                                            </span>
+                                                                        </>
+                                                                    }
+                                                                    {
+                                                                        ((payment === 'not-paid') && (value?.by === Number(tabPage.getUser().id)))&& <>
+                                                                            <span className="px-2 py-2 font-semibold cursor-pointer text-xs hover:text-white rounded-xl bg-yellow-400 hover:bg-yellow-700"
+                                                                                onClick={() => MakePayment(true, value)}
+                                                                            >
+                                                                                {'Not Paid'}
                                                                             </span>
                                                                         </>
                                                                     }
@@ -262,7 +272,7 @@ export default function ActiveTransactions()
                             <h1 
                                 className='text-black'
                             >
-                                All Active Transactions
+                                All Active Transactions - {tabPage.getUser().userIdentifier}
                             </h1>
                     </div>
                     

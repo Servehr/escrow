@@ -41,7 +41,7 @@ function Registered()
                         <div 
                               className='w-full flex justify-center items-center mb-10'
                               >
-                              <GpayLogo width={200} />
+                              <GpayLogo width={80} />
                         </div>
                         <div 
                               className='w-full d-flex gap-10'

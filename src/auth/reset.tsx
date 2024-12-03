@@ -12,7 +12,7 @@ export default function ResetPassword()
       const { ResetUser } = useReset()
       const navigate = useNavigate()
       const [searchParams, setSearchParams] = useSearchParams()
-      const userId: string | null = searchParams.get('user')
+      const userId: string = searchParams.get('miorftfdwcdfyhnvgfedd')!
 
       const PASSWORD_MESSAGE = "Enter Password"
       const CONFIRM_PASSWORD_MESSAGE = "Enter Password Again"
@@ -47,7 +47,7 @@ export default function ResetPassword()
             valid = allFields()
 
             const confirm_password: string = confirmPassword
-            const id:number = Number(userId)
+            const id:string | null = userId
             const user = { id, password, confirm_password }
             if(valid === 'passed')
             {
@@ -103,7 +103,7 @@ export default function ResetPassword()
                   <div 
                         className='w-full flex justify-center items-center mb-10'
                         >
-                        <GpayLogo width={200} />
+                        <GpayLogo width={80} />
                   </div>                
                   <div 
                               className='w-full'

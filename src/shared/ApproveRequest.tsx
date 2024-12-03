@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ValidOrInvalid } from "../pages/admin/transactions/modals/ValidOrInvalid"
+import { ValidOrInvalid } from "../pages/user/transactions/modals/ValidOrInvalid"
 
 
 

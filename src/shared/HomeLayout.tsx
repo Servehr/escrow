@@ -20,7 +20,7 @@ export default function HomeLayout({children, pageName}: ILayoutProps)
               <MobileHeader /> 
 
               <div 
-                    className='w-full md:bg-[#d1dbea]'
+                    className='w-full md:bg-[#aac84f]'
                 >
                     
                     <WebHeader />

@@ -8,10 +8,10 @@ type CategoryModalProps =
 {
     onClick: (isOpen: boolean) => void,
     categoryModal: boolean
-    categId: number
+    category: { id: number, name: string, description: string }
 } 
 
-export const EditServiceModal = ({onClick, categoryModal, categId}: CategoryModalProps)  =>
+export const EditServiceModal = ({onClick, categoryModal, category}: CategoryModalProps)  =>
 {
         const [loading, setIsLoading] = useState(false)
         const [validationMsg, setValidationMessage] = useState<string>('')
@@ -24,15 +24,23 @@ export const EditServiceModal = ({onClick, categoryModal, categId}: CategoryModa
         const [categoryName, setCategoryName] = useState<string>('')
         const [categoryNameMessage, setCategoryNameMessage] = useState<string>('')
     
-        const [description, setDescription] = useState<string>('')
+        const [description, setDescription] = useState<string>("")
         const [descriptionMessage, setDescriptionMessage] = useState<string>('')
+        
 
         useEffect(() => 
         {       
+           setCategoryName(category?.name)
+           setDescription(category?.description)
            setErrMsgStyle('text-md text-red-600 font-bold')
            setIsLoading(false)
-           console.log(categId)
+           console.log(category?.name)
         }, [])
+
+        useEffect(() => 
+        {       
+                
+        }, [categoryName, description])
 
         const SaveService = async () => 
         {
@@ -87,6 +95,7 @@ export const EditServiceModal = ({onClick, categoryModal, categId}: CategoryModa
                                         className="mb-4 md:w-full"
                                 >
                                         <input  
+                                                defaultValue={category?.name}
                                                 className="w-full border rounded-md p-3 bg-gray-100 bg-opacity-75 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
                                                 type="text" name="categoryName" id="categoryName" placeholder="Enter Category Name"
                                                 onChange={(e: any) => {
@@ -118,6 +127,7 @@ export const EditServiceModal = ({onClick, categoryModal, categId}: CategoryModa
                                         className="mb-4 md:w-full"
                                 >
                                         <textarea  
+                                                defaultValue={description}
                                                 className="w-full border rounded-md p-3 bg-gray-100 bg-opacity-75 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
                                                 name="password" id="password" placeholder="Enter Service Description" 
                                                 rows={5}

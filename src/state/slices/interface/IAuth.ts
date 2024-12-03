@@ -1,19 +1,27 @@
 export interface IAuthModel
 {
-    firstname: string;
-    surname: string;
-    token: string;
-    verified: string;
-    reset: string;
+    id?: number;
+    firstname?: string;
+    surname?: string;
+    token?: string;
+    verified?: string;
+    reset?: string;
+    userIdentifier?: string
+    passport?: string
+    userType?: string
 }
 
 export const AuthInitialData = 
 {
+    id: -1,
     firstname: "",
     surname: "",
     token: "",
     verified: "",
-    reset: ""
+    reset: "",
+    userIdentifier: "",
+    passport: "",
+    userType: ""
 }
 
 export interface IAuthentication
@@ -29,4 +37,12 @@ export interface IAuthentication
     user: IAuthModel
     getUser: () => void
     setUser: (user: any) => void
+    
+    passport: string
+    getPassport: () => void
+    setPassport: (passport: any) => void
+    
+    allow: string
+    getAllow: () => void
+    setAllow: (allow: any) => void
 }

@@ -34,7 +34,12 @@ function Login()
       {
          if(appState.getUser().token)
          {
-            navigate('/dashboard')
+            if(appState.getAllow() === 'loggedIn')
+            {                  
+               navigate('/dashboard')
+            } else {
+               navigate('/passport')                  
+            }
          }
          setErrMsgStyle('text-md text-red-600 font-bold')
       }, [])
@@ -53,25 +58,36 @@ function Login()
                   const accessingApplication = LoginUser(user)
                   accessingApplication.then((res: any) => 
                   { 
-                        if(res.statusCode === 200)
+                     if(res.statusCode === 200)
+                     {
+                        const credentials: IAuthModel = 
                         {
-                              const credentials: IAuthModel = {
-                                    firstname: res.data.data.firstname,
-                                    surname: res.data.data.surname,
-                                    token: res.data.plus,
-                                    verified: res.data.data.verified,
-                                    reset: res.data.data.reset,
-                              }
-                              appState.setUser(credentials)
-                              setIsLoading(false) 
-                              navigate('/')
+                           id: res?.data?.data?.id,
+                           firstname: res?.data?.data?.firstname,
+                           surname: res?.data?.data?.surname,
+                           token: res?.data?.plus,
+                           verified: res?.data?.data?.verified,
+                           reset: res?.data?.data?.reset,
+                           userIdentifier: res?.data?.data?.identification,
+                           userType: res?.data?.data?.user_type
+                        }
+                        appState.setUser(credentials)
+                        appState.setPassport(res?.data?.data?.passport)
+                        setIsLoading(false) 
+                        if(res?.data?.data?.first_timer === 1)
+                        {
+                           navigate('/passport')
                         } else {
-                              setValidationMessage(res.message)
-                              setIsLoading(false) 
-                              setTimeout(() => {
-                                 setValidationMessage("")
-                              }, 10000)  
-                        }      
+                           appState.setAllow('loggedIn')
+                           navigate('/')
+                        }
+                     } else {
+                        setValidationMessage(res.message)
+                        setIsLoading(false) 
+                        setTimeout(() => {
+                           setValidationMessage("")
+                        }, 10000)  
+                     }      
                   }).catch(() => {
                         setValidationMessage("Check your internet connecteion")
                         setIsLoading(false)
@@ -110,7 +126,7 @@ function Login()
                         <div 
                               className='w-full flex justify-center items-center mb-10'
                               >
-                              <GpayLogo width={200} /> 
+                              <GpayLogo width={80} /> 
                         </div>
                         <div 
                               className='w-full d-flex gap-10'

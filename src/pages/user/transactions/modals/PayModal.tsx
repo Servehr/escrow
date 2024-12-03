@@ -4,6 +4,7 @@ import { BeatLoader } from "react-spinners";
 import delay from "delay";
 import { useTransaction } from "../../../../hook/useTransaction";
 import Message from "../../../../auth/helper/Message";
+import currencyFormatter from "../../../../util/currency-formatter";
 
 
 type PayModalProps = 
@@ -38,23 +39,23 @@ export const PayModal = ({onClick, payModal, detail}: PayModalProps)  =>
             await delay(2000)
             const initializePayment = MakePayment(detail?.id)
             initializePayment.then((response: any) => 
-            {                
-                if(response?.data?.plus)
+            { 
+                if(response?.statusCode === 200)
                 {
                   const url: string = response?.data?.data?.authorization_url
                   onClick(false)
                   //   window.open(`${url}`, "_blank")
                   window.location.href = url
                 } else {
-                  setError("Payment Unsucessful")
+                  setError(response?.message)
                   setIsLoading(false)                        
                 }
-            }).then(() => {
-                setError("Initializing payment Failed.")
+            }).then((error: any) => {
+                console.log(error)
                 setTimeout(() => 
                 {
                    setError("")
-                }, 5000)
+                }, 10000)
                 setIsLoading(false)
             })
         }
@@ -80,7 +81,7 @@ export const PayModal = ({onClick, payModal, detail}: PayModalProps)  =>
                                 <div 
                                     className="p-3 rounded-lg border-2 border-gray-200 mt-5 flex justify-center items-center text-lg"
                                 >
-                                   <p>{detail?.amount}</p>
+                                   <p>{currencyFormatter(detail?.amount )}</p>
                                 </div>
                                 <div 
                                       className="items-center gap-5 mt-2 sm:flex flex justify-between mb-2 mx-0 mt-5"

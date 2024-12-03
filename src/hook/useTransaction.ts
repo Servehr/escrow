@@ -9,17 +9,6 @@ export const useTransaction = () =>
     const userToken = appStore((state) => state)
     const token = userToken.getUser().token
 
-    const Categories = async () => 
-    {  
-        const dataPoint: any = {
-            url: ['xn/category/all'],
-            method: 'GET',
-            isHeader: true,
-            token: token
-        }
-        return await handShake(dataPoint) 
-    }
-
     const CreateTransaction = async (data: any) => 
     {  
         const dataPoint: any = {
@@ -133,12 +122,12 @@ export const useTransaction = () =>
         return await handShake(dataPoint) 
     }
                                 
-    const DeliveryStatus = async (sellerId: string, buyerId: string, type: string, id: number, message: string, status: string) => 
+    const DeliveryStatus = async (sellerId: string, buyerId: string, id: number, message: string, status: string) => 
     {  
         const dataPoint: any = {
             url: ['transaction/status'],
             method: 'PUT',
-            data: {seller: sellerId, buyer: buyerId, type: type, transaction_id: id, message: message, status: status},
+            data: {seller: sellerId, buyer: buyerId, transaction_id: id, message: message, status: status},
             isHeader: true,
             token: token
         }
@@ -167,13 +156,13 @@ export const useTransaction = () =>
         return await handShake(dataPoint) 
     }
 
-    const Initiate = async (id: number, action: string) => 
+    const Initiate = async (id: number, action: string, message: string) => 
     {
         const dataPoint: any = {
             url: [`transaction/initiate-transaction`],
             method: 'PUT',
             isHeader: true,
-            data: { id: id, action: action },
+            data: { id: id, action: action, message: message },
             token: token
         }
         return await handShake(dataPoint) 
@@ -202,28 +191,7 @@ export const useTransaction = () =>
         return await handShake(dataPoint) 
     }
 
-    // const Pending = async () => 
-    // {
-        // const dataPoint: any = {
-        //     url: ['transaction/pending'],
-        //     method: 'GET',
-        //     isHeader: true,
-        //     token: token
-        // }
-        // const pnd:any = await handShake(dataPoint) 
-
-        // const { data, isLoading, refetch, isRefetching } = useQuery(['exam-date-for-user'], () => UserExamDate(userId), { cacheTime: 0 })
-        // const { data, isLoading, refetch, isRefetching } = useQuery(["pendingit"], () => pnd)
-        // console.log(data)
-
-        // return useQuery("user", fetchProfile, {
-        //     enabled: !!token,
-        //     staleTime: Infinity,
-        //   });
-    // }
-
     return {    
-                Categories,
                 CreateTransaction, 
                 PendingTransaction, 
                 OpenTransaction, 

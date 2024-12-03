@@ -8,14 +8,14 @@ import DashboardLayout from '../../shared/DashboardLayout'
 import { DeleteServiceModal } from "./services/modals/DeleteServiceModal"
 import { AddServiceModal } from "./services/modals/AddServiceModal"
 import { EditServiceModal } from "./services/modals/EditServiceModal"
-import { useTransaction } from '../../hook/useTransaction';
 import { RotateLoader } from "react-spinners"
+import { useService } from "../../hook/useService"
 
 
 export default function Services() 
 {
-    const { Categories } = useTransaction()
-    const [categon, setCategories] = useState<any[]>([])
+    const { GetService } = useService()
+    const [categon, setCategories] = useState<any>([])
     const [error, setError] = useState<string>('')
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -24,6 +24,8 @@ export default function Services()
     const [addService, setServiceToAdd] = useState<boolean>(false)
 
     const [editService, setServiceToEdit] = useState<boolean>(false)
+    const [editServ, setEditService] = useState<any>({})
+    // const [categoryName, setCategoryName] = useState<string>('')
     const [deleteServiceModal, setServiceToDelete] = useState<boolean>(false)
 
     const [showingStates, setShowStates] = useState<boolean>(false)
@@ -31,20 +33,29 @@ export default function Services()
     useEffect(() => 
     {
         setIsLoading(true)
-        const allCategories = Categories()
-        allCategories.then((categories) => 
-        {
-            setCategories(categories?.data?.data)
-            console.log(categories?.data?.data)
-            setIsLoading(false)
-        }).then(() => {
-            setError("Try again")
-            setIsLoading(false)
-        })
+        callApi()
         setCategId(-1)
         setCategName("")
         console.log(error)
     }, [])
+
+    useEffect(() => 
+    {
+        
+    }, [editServ])
+
+    const callApi = () => 
+    {
+        const allCategories = GetService()
+        allCategories.then((categories) => 
+        {
+            setCategories(categories?.data?.data)
+            setIsLoading(false)
+        }).then(() => {
+            setError("Try again")
+            setIsLoading(false)
+        })        
+    }
 
     const ShowStates = (page: any) => 
     {
@@ -53,8 +64,16 @@ export default function Services()
         setShowStates(true)
     }
 
+    const ServiceEdit = (x: boolean, data: any) => 
+    {
+        let currentValue = categon.filter((y: any) => y.id === data)
+        setEditService(currentValue)
+        setServiceToEdit(x)
+    }
+
     type ServiceProps =
     {
+        id: number,
         name: string,
         description: string,
     }
@@ -78,8 +97,11 @@ export default function Services()
         },
         {
             header: 'Edit',
-            cell: () => (<a href="#" onClick={() => setServiceToEdit(true)}><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
-            accessorKey: '',
+            cell: (row: CellContext<ServiceProps, unknown>) => (<a href="#" onClick={() => {
+                     ServiceEdit(true, row.renderValue())
+                }}
+            ><Icons iconName="edit" color="blue" width={4} height={4}/></a>),
+            accessorKey: 'id',
         },
         {
             header: 'Delete',
@@ -138,6 +160,7 @@ export default function Services()
             
             {
                 addService && <AddServiceModal onClick={() => {
+                                                callApi()
                                                 setServiceToAdd(false)
                                         } }
                                         categoryModal={addService}
@@ -149,7 +172,7 @@ export default function Services()
                                                 setServiceToEdit(false)
                                         } } 
                                         categoryModal={editService} 
-                                        categId={categId}
+                                        category={editServ}
                                     />
             }
 

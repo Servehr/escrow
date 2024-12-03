@@ -1,3 +1,5 @@
+
+import DOMPurify from "dompurify"
 import { Modal } from "../../../../component/Modal";
 import { USAGE_PATH } from "../../../../constant/Path";
 
@@ -106,12 +108,12 @@ console.log(detail)
                                         <div 
                                               className='w-full d-flex md:flex gap-10 md:mb-3 bg-gray-100 p-4'
                                         >          
-                                            <span className="text-sm text-lg w-2/12">Description:</span> <span className="font-semibold text-lg w-10/12">{ detail?.description }</span>
+                                            <span className="text-sm text-lg w-2/12">Description:</span> <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(detail?.description!) }}></span>
                                         </div>
                                         <div 
                                               className='w-full d-flex md:flex gap-10 md:mb-3 bg-gray-100 p-4'
                                         >          
-                                            <span className="text-sm text-lg w-2/12">Agreement:</span> <span className="font-semibold text-lg w-10/12">{ detail?.agreement }</span>
+                                            <span className="text-sm text-lg w-2/12">Agreement:</span> <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(detail?.agreement!) }}></span>
                                         </div>
                                         <div 
                                               className='grid grid-cols-12 gap-5 pt-10'

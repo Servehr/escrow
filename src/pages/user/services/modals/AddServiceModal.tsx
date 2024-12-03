@@ -3,15 +3,17 @@ import { Modal } from "../../../../component/Modal";
 import { BeatLoader } from "react-spinners";
 import delay from "delay";
 import Message from "../../../../auth/helper/Message";
+import { useService } from "../../../../hook/useService";
 
 type CategoryModalProps = 
 {
-    onClick: (isOpen: boolean) => void,
+    onClick: () => void,
     categoryModal: boolean
 } 
 
 export const AddServiceModal = ({onClick, categoryModal}: CategoryModalProps)  =>
 {
+        const { AddService } = useService()
         const [loading, setIsLoading] = useState(false)
         const [validationMsg, setValidationMessage] = useState<string>('')
 
@@ -39,9 +41,18 @@ export const AddServiceModal = ({onClick, categoryModal}: CategoryModalProps)  =
                 if(valid === "passed")
                 {
                    setIsLoading(true)
-                   await delay(3000)
-                   setIsLoading(false)
-                   alert("Great")
+                   await delay(2000)
+                   const AddCategory = AddService(categoryName, description)
+                   AddCategory.then((serv) => 
+                   {
+                      setIsLoading(false)
+                      if(serv?.statusCode === 200)
+                      {
+                         onClick()
+                      }
+                   }).catch(() => {
+
+                   })
                 } else {
                    setValidationMessage('Attempt all fields')
                    setTimeout(() => 
@@ -151,7 +162,7 @@ export const AddServiceModal = ({onClick, categoryModal}: CategoryModalProps)  =
                                         {
                                                 <button 
                                                         className="py-3 px-4 bg-red-700 hover:bg-red-800 text-white font-semibold text-sm rounded-xl w-max"
-                                                        onClick={() => onClick(categoryModal) }
+                                                        onClick={() => onClick() }
                                                 >
                                                                 Close
                                                 </button>
