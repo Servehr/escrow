@@ -75,7 +75,7 @@ export default function SingleImageUpload({width, ICloudColour}: ImageProps)
                 reader.onload = async () => 
                 {                        
                     let sizeToCalculate = reader.result as string
-                    let x = await reduceImageSize(sizeToCalculate, 0, 1024, 2)
+                    let x = await reduceImageSize(sizeToCalculate)
                     resolve(x)
                 }
                 reader.onerror = (error) => reject(error);

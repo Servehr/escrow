@@ -9,13 +9,15 @@ import delay from 'delay';
 import { appStore } from '../../state/store';
 import { useTransaction } from '../../hook/useTransaction';
 import { useNavigate } from 'react-router-dom';
+import { useService } from '../../hook/useService';
 
 
 export default function CreateTransactions() 
 {
     const navigate = useNavigate()
     const createTransaction = appStore((state) => state)
-    const { Categories, CreateTransaction } = useTransaction()
+    const { CreateTransaction } = useTransaction()
+    const { GetService } = useService()
     const [categon, setCategories] = useState<any[]>([])
     const [error, setError] = useState<string>('')
 
@@ -26,7 +28,7 @@ export default function CreateTransactions()
     useEffect(() => 
     {
         setIsLoading(true)
-        const allCategories = Categories()
+        const allCategories = GetService()
         allCategories.then((categories) => 
         {
             setCategories(categories?.data?.data)
