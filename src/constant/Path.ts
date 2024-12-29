@@ -9,7 +9,7 @@ const URL =
         // path: 'https://api.scentsbyhoppey.com/',
         status: false
     },
-    connectTo: 'offline'
+    connectTo: 'online'
 }
 
 const DESTINATION = (URL.connectTo === 'offline') ? URL.offline.path : URL.online.path
