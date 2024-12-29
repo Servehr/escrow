@@ -55,7 +55,7 @@ function Login()
                   const accessingApplication = LoginUser(user)
                   accessingApplication.then((res: any) => 
                   { 
-                     if(res.statusCode === 200)
+                     if(res.statusCode === 200 && res.data.data.first_timer === "yes")
                      {
                         const credentials: IAuthModel = 
                         {
@@ -69,16 +69,25 @@ function Login()
                            userType: res?.data?.data?.user_type
                         }
                         appState.setUser(credentials)
-                        appState.setPassport(res?.data?.data?.passport)
-                        if(res.data.data.first_timer === "yes")
+                        appState.setPassport(res?.data?.data?.passport)                        
+                        navigate('/passport')
+                     } if(res.statusCode === 200 && res.data.data.first_timer === "no") {
+                        const credentials: IAuthModel = 
                         {
-                           navigate('/passport')
-                        } else {
-                           appState.setAllow('loggedIn')
-                           alert(res?.data?.data?.first_timer)
-                           setIsLoading(false) 
-                           navigate('/')
+                           id: res?.data?.data?.id,
+                           firstname: res?.data?.data?.firstname,
+                           surname: res?.data?.data?.surname,
+                           token: res?.data?.plus,
+                           verified: res?.data?.data?.verified,
+                           reset: res?.data?.data?.reset,
+                           userIdentifier: res?.data?.data?.identification,
+                           userType: res?.data?.data?.user_type
                         }
+                        appState.setUser(credentials)
+                        appState.setPassport(res?.data?.data?.passport)                        
+                        setIsLoading(false) 
+                        navigate('/')
+                  
                      } else {
                         setValidationMessage(res.message)
                         setIsLoading(false) 
