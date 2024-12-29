@@ -71,7 +71,8 @@ function Login()
                         appState.setUser(credentials)
                         appState.setPassport(res?.data?.data?.passport)
                         setIsLoading(false) 
-                        if(Number(res?.data?.data?.first_timer) === 1)
+                        let x: number = Number(res?.data?.data?.first_timer)
+                        if(x === 1)
                         {
                            navigate('/passport')
                         } else {
