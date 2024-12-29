@@ -10,6 +10,7 @@ import History from '../pages/user/History';
 import Profile from '../pages/user/Profile';
 import Payment from '../pages/user/Payment';
 import { ChangePassword } from '../pages/user/ChangePassword';
+import ContactMessages from '../pages/user/ContactMessages';
 
 
 
@@ -27,6 +28,7 @@ export const DashboardRoute = () =>
                 <Route path='/history' element={<History />}></Route> 
                 <Route path='/profile' element={<Profile />}></Route> 
                 <Route path='/settings' element={<Settings />}></Route> 
+                <Route path='/messages' element={<ContactMessages />}></Route> 
                 <Route path='/change-password' element={<ChangePassword />}></Route> 
                 <Route path='/*' element={<NotFound />}></Route> 
             </Routes>

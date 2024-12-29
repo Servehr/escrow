@@ -86,5 +86,16 @@ export const useUser = () =>
         return await handShake(dataPoint) 
     }
 
-    return { UserSummary, UserProfile, UploadPassport, ChangePassport, UpdateUser, ChangeUserPassword, PaymentHistory }
+    const Users = async () => 
+    {  
+        const dataPoint: any = {
+            url: ['xn/users/all'],
+            method: 'GET',
+            isHeader: true,
+            token: appState.getUser().token
+        }
+        return await handShake(dataPoint) 
+    }
+
+    return { UserSummary, UserProfile, UploadPassport, ChangePassport, UpdateUser, ChangeUserPassword, PaymentHistory, Users }
 }

@@ -12,7 +12,7 @@ type ProtectedProps =
 export default function Protected({ children }: ProtectedProps) 
 {
     const navigate = useNavigate()
-    const appState = appStore((state: any) => state)
+    const appState = appStore((state: any) => state)    
 
     useEffect(() => 
     {
@@ -22,6 +22,8 @@ export default function Protected({ children }: ProtectedProps)
            {      
               navigate('/passport')                  
            }
+        } else {
+            navigate('/auth/login')             
         }
     }, [])
     

@@ -23,22 +23,26 @@ export const IStartTransactionInitialData =
 }
 
 export interface IStartTransaction
-{      
-    isLoading: boolean,
-    getLoading: () => void
-    setLoading: (loading: boolean) => void
-
-    error: null,
-    getError: () => void
-    setError: (err: any) => void
-    
-    category: number
-    getCategory: () => void
-    setCategory: (category: number) => void
-    
+{    
     as: string
     getAs: () => void
     setAs: (as: string) => void
+
+    payer: string
+    getPayer: () => void
+    setPayer: (payer: string) => void
+
+    category: number
+    getCategory: () => void
+    setCategory: (category: number) => void
+
+    others: boolean
+    getOthers: () => void
+    setOthers: (category: boolean) => void
+
+    othersName: string
+    getOthersName: () => void
+    setOthersName: (category: string) => void
 
     serviceName: string
     getServiceName:  () => void

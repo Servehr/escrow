@@ -42,7 +42,6 @@ export const ChangePassword = () =>
         setIsLoading(true)
         const checkFields: string = allFields()
         
-
         if(checkFields === 'valid')
         {
            const change = ChangeUserPassword(currentPassword, password, confirmPassword)
@@ -92,16 +91,16 @@ export const ChangePassword = () =>
     }
   
     return (
-        <DashboardLayout pageName="Payment Decline"
+        <DashboardLayout pageName="Change Password"
         >
         <div 
             className='md:col-span-6 col-span-12 d-flex  md:block h-[fit] px-3 md:px-10 py-5 mt-3 md:rounded-2xl -mb-24 md:mb-0'
         >
-            <h1 
+            {/* <h1 
                 className='font-bold'
             >
                 Get A New Password
-            </h1>           
+            </h1>            */}
             <div  
                 className='w-full d-flex gap-10 md:mb-3 pt-4'
             > 

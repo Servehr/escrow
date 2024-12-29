@@ -68,7 +68,7 @@ export default function ActiveTransactions()
                  let by: string = open?.posted_by?.id
                  let delivery_status: string = open?.transaction?.delivery_status
                  let payment: string = open?.transaction?.payment
-                 let data:any = {id: open?.transaction?.id, identification: open?.buyer?.identification_no, sellerId, buyerId, seller, buyer, category, name, amount, request, start, end, validity, by, delivery_status, images: open?.images, description: open?.transaction?.description, agreement: open?.transaction?.agreement, payment: open?.transaction?.payment  }
+                 let data:any = {id: open?.transaction?.id, identification: open?.buyer?.identification_no, sellerId, buyerId, seller, buyer, category, name, amount, request, start, end, validity, by, delivery_status, images: open?.images, description: open?.transaction?.description, agreement: open?.transaction?.agreement, payment: open?.transaction?.payment, identifier: identifier  }
                  theData.push({seller,  buyer, category, name, amount, request, start, end, validity, by, delivery_status, payment, data, identifier })
            })
            setOpenTransaction(theData)

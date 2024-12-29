@@ -26,19 +26,19 @@ export default function DashBoardSideBar()
           name: "Dashboard",
           url: "/dashboard",
           icon: <HiHome className='mr-2 mt-1 text-md' />,
-          type: ['user', 'admin']
+          type: ['member', 'admin']
       },
       {
           name: "Create Transactions",
           url: "/dashboard/create-transaction",
           icon: <HiMiniPencilSquare className='mr-2 mt-1 text-md' />,
-          type: ['user']
+          type: ['member', 'admin']
       },
       {
           name: "Transactions",
           url: "/dashboard/transactions",
           icon: <HiMiniPencilSquare className='mr-2 mt-1 text-md' />,
-          type: ['user', 'admin']
+          type: ['member', 'admin']
       },
       {
           name: "Users",
@@ -50,7 +50,7 @@ export default function DashBoardSideBar()
           name: "Payment History",
           url: "/dashboard/payments",
           icon: <HiViewGrid className='mr-2 mt-1 text-md' />,
-          type: ['user', 'admin']
+          type: ['member', 'admin']
       },
       {
           name: "Services",
@@ -62,19 +62,25 @@ export default function DashBoardSideBar()
           name: "Profile",
           url: "/dashboard/profile",
           icon: <HiUser className='mr-2 mt-1 text-md' />,
-          type: ['user', 'admin']
+          type: ['member', 'admin']
       },
-      //   {
-      //       name: "Settings",
-      //       url: "/dashboard/settings",
-      //       icon: <HiCog6Tooth className='mr-2 mt-1 text-md' />,
-      //       type: 'user'
-      //   },
       {
           name: "Change Password",
           url: "/dashboard/change-password",
           icon: <HiCog6Tooth className='mr-2 mt-1 text-md' />,
-          type: ['user', 'admin']
+          type: ['member', 'admin']
+      },
+      {
+          name: "Messages",
+          url: "/dashboard/messages",
+          icon: <HiCog6Tooth className='mr-2 mt-1 text-md' />,
+          type: ['admin']
+      },
+      {
+          name: "Settings",
+          url: "/dashboard/settings",
+          icon: <HiCog6Tooth className='mr-2 mt-1 text-md' />,
+          type: ['admin']
       },
   ]
 

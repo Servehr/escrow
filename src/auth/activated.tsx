@@ -41,7 +41,7 @@ function Activated()
       return (
             <>
                   <main 
-                        className="flex md:d-flex xl:flex-row h-screen bg-[#435f88]"
+                        className="flex md:d-flex xl:flex-row h-screen bg-[#076d96]"
                   >
                         <div 
                               className="w-full md:w-5/12 mx-auto my-4 d-flex items-center justify-center px-3 py-5 md:p-10 mt-20 gap-5"

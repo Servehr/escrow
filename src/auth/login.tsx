@@ -34,12 +34,9 @@ function Login()
       {
          if(appState.getUser().token)
          {
-            if(appState.getAllow() === 'loggedIn')
-            {                  
-               navigate('/dashboard')
-            } else {
-               navigate('/passport')                  
-            }
+            navigate('/dashboard')  
+         } else {
+            navigate('/auth/login')             
          }
          setErrMsgStyle('text-md text-red-600 font-bold')
       }, [])
@@ -118,7 +115,7 @@ function Login()
       return (
               <>
                   <main 
-                        className="flex md:d-flex xl:flex-row h-screen bg-[#435f88]"
+                        className="flex md:d-flex xl:flex-row h-screen bg-[#076d96]"
                   >
                         <div 
                               className="w-full md:w-5/12 mx-auto my-4 d-flex items-center justify-center px-3 py-5 md:p-10 mt-20 gap-5"
@@ -141,13 +138,13 @@ function Login()
                                     </h3>
                               </div> */}
                               <div 
-                                    className="w-full p-10 md:px-9 md:pt-10 md:pb-5 d-flex items-center justify-center rounded-md md:rounded-xl bg-white mb-20 md:mb-0"
+                                    className="w-full md:p-10 py-5 px-5 md:px-9 md:pt-10 md:pb-5 d-flex items-center justify-center rounded-md md:rounded-xl rounded-xl bg-white hover:text-white mb-20 md:mb-0 border-2 border-green-700"
                               >
                                           <div  
                                                 className='w-full d-flex gap-10 md:mb-3'
                                           > 
                                                 <div 
-                                                      className="mb-4 md:w-full"
+                                                      className="mb-4 md:w-full mt-2"
                                                 >
                                                       <input  
                                                             className="w-full border rounded-md p-3 bg-opacity-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 leading-8 transition-colors duration-200 ease-in-out" 
@@ -196,7 +193,7 @@ function Login()
                                                 className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-5'
                                           >   
                                                 <button 
-                                                            className="block w-fit bg-[#435f88] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
+                                                            className="block w-fit bg-[#096083] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
                                                             onClick={() => {
                                                                   AuthenticateUser()
                                                             }}
@@ -206,27 +203,27 @@ function Login()
                                                 </button>
                                           </div>
                                           <div  
-                                                className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-10 px-5'
+                                                className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-10 px-5 mb-10 -ml-5 text-black'
                                           >   
                                                 <div 
                                                       className='d-flex justify-center text-center'
                                                 >
-                                                <div className=''>If you don't have an account </div>
+                                                <div className='hidden md:block'>If you don't have an account </div>
                                                 <div className='text-md hover:text-blue-300 font-bold'>
-                                                      <Link to={'/auth/register'}>Create one now.</Link>
+                                                      <Link to={'/auth/register'} className='text-[13px] md:text-[14px] whitespace-nowrap'>Create one now.</Link>
                                                 </div>
                                                 </div> 
                                                 <div 
-                                                      className='text-md d-flex justify-center items-center text-black hover:text-blue-300 font-bold text-md cursor-pointer'
+                                                      className='text-md text-blue-200 hover:text-blue-500 font-bold text-md'
                                                 >
                                                       <div className=''>
                                                             <Link to={'/'}
                                                             >                                
-                                                                  <HiHome className='ml-1 text-2xl mt-2'/> 
+                                                                  <div className='mt-1 mr-2 flex justify-center items-center'><HiHome className='ml-2 text-2xl md:mt-2'/></div>
                                                             </Link>
                                                       </div>
                                                       <div 
-                                                            className='text-md hover:text-blue-300 font-bold'
+                                                            className='text-md font-bold'
                                                       >
                                                             <Link to={'/'}
                                                             >                                
@@ -237,9 +234,9 @@ function Login()
                                                 <div 
                                                       className='d-flex justify-center text-center'
                                                 >
-                                                <div className=''>I can remember my password again</div>
+                                                <div className='hidden md:block'>I can remember my password again</div>
                                                 <div className='text-md hover:text-blue-300 font-bold'>
-                                                      <Link to={'/auth/forgot'}>Reset It Here</Link>
+                                                      <Link to={'/auth/forgot'} className='text-[13px] md:text-[14px] whitespace-nowrap'>Forgot Password</Link>
                                                 </div>
                                                 </div>
                                           </div>

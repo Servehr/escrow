@@ -19,14 +19,13 @@ export default function Services()
     const [error, setError] = useState<string>('')
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [categId, setCategId] = useState<number>(-1)
-    const [categName, setCategName] = useState<string>("")
     const [addService, setServiceToAdd] = useState<boolean>(false)
 
     const [editService, setServiceToEdit] = useState<boolean>(false)
     const [editServ, setEditService] = useState<any>({})
     // const [categoryName, setCategoryName] = useState<string>('')
     const [deleteServiceModal, setServiceToDelete] = useState<boolean>(false)
+    const [deleteServ, setDeleteService] = useState<any>({})
 
     const [showingStates, setShowStates] = useState<boolean>(false)
     
@@ -34,8 +33,6 @@ export default function Services()
     {
         setIsLoading(true)
         callApi()
-        setCategId(-1)
-        setCategName("")
         console.log(error)
     }, [])
 
@@ -49,8 +46,11 @@ export default function Services()
         const allCategories = GetService()
         allCategories.then((categories) => 
         {
-            setCategories(categories?.data?.data)
-            setIsLoading(false)
+            if(categories.statusCode === 200)
+            {                
+                setCategories(categories?.data?.data)
+                setIsLoading(false)
+            }
         }).then(() => {
             setError("Try again")
             setIsLoading(false)
@@ -66,9 +66,16 @@ export default function Services()
 
     const ServiceEdit = (x: boolean, data: any) => 
     {
-        let currentValue = categon.filter((y: any) => y.id === data)
+        let currentValue = categon.filter((y: { id: number, name: string }) => y.id === data)[0]
         setEditService(currentValue)
         setServiceToEdit(x)
+    }
+
+    const ServiceDelete = (x: boolean, data: any) => 
+    {
+        let currentValue = categon.filter((y: { id: number, name: string }) => y.id === data)[0]
+        setDeleteService(currentValue)
+        setServiceToDelete(x)
     }
 
     type ServiceProps =
@@ -105,8 +112,11 @@ export default function Services()
         },
         {
             header: 'Delete',
-            cell: () => (<a href="#" onClick={() => setServiceToDelete(true)}><Icons iconName="delete" color="red" width={4} height={4}/></a>),
-            accessorKey: '',
+            cell: (row: CellContext<ServiceProps, unknown>) => (<a href="#" onClick={() => {
+                ServiceDelete(true, row.renderValue())
+           }}
+            ><Icons iconName="delete" color="red" width={4} height={4}/></a>),
+            accessorKey: 'id',
         }
     ],[])
     
@@ -124,16 +134,15 @@ export default function Services()
                 />
             </div>
             {
-               ((isLoading === true) && (categon.length === 0)) && <div className="col-span-12 h-[500px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+               (isLoading === true) && <div className="col-span-12 h-[500px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
                >
                    <RotateLoader className='w-12 h-12' />
                </div>
             }
             {
-               ((isLoading === false) && (categon.length === 0)) && <div className="col-span-12 h-[500px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+               ((isLoading === false) && (categon.length === 0)) && <div className="col-span-12 h-[300px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
                >
-                   {/* <h1>Category is empty, transaction cannot begin</h1> */}
-                   <RotateLoader className='w-12 h-12' />
+                  <h1 className="font-bold text-blue-400">No Service Created Yet</h1>
                </div>
             }
             { 
@@ -169,6 +178,7 @@ export default function Services()
 
             {
                 editService && <EditServiceModal onClick={() => {
+                                                callApi()
                                                 setServiceToEdit(false)
                                         } } 
                                         categoryModal={editService} 
@@ -178,11 +188,11 @@ export default function Services()
 
             {
                 deleteServiceModal && <DeleteServiceModal onClick={() => {
+                                                callApi()
                                                 setServiceToDelete(false)
                                         } } 
                                         categoryModal ={deleteServiceModal} 
-                                        categName={categName}
-                                        categId={categId}
+                                        category={deleteServ}
                                     />
             }
         </DashboardLayout>

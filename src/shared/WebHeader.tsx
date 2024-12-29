@@ -1,19 +1,26 @@
-import { useEffect, useState } from 'react'
-import { HiHome, HiTemplate, HiPuzzle, HiPhoneOutgoing } from 'react-icons/hi'
-import { HiMiniPencilSquare, HiMiniPower } from 'react-icons/hi2'
+import { useEffect, useRef, useState } from 'react'
+import { HiHome, HiTemplate, HiPhoneOutgoing } from 'react-icons/hi'
+import { HiMiniPower } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
 import { appStore } from '../state/store'
 import GpayLogo from './Logo'
-import { logUserOut } from '../hook/useAuth'
+import { Logout } from '../component/Logout'
+
+
+// type TRef = 
+// {
+//     ref: React.MutableRefObject<HTMLDivElement | null>
+// }
 
 
 export default function WebHeader() 
 {
-  const appState = appStore((state: any) => state)
+  const appState = appStore((state: any) => state)  
+  const viewRef = useRef<HTMLDivElement | null>(null)
   // const navigate = useNavigate()
   const [isMenuOpen, setMenu] = useState<boolean>(false)
   const [user, setUser] = useState<any>()
-  const { LogOut } = logUserOut()
+  const [openLogOut, setIsLogOut] = useState<boolean>(false)
 
   useEffect(() => 
   {
@@ -29,21 +36,21 @@ export default function WebHeader()
           url: "/",
           icon: <HiHome className='mr-2 mt-1 text-md' />
       },
-      {
-          name: "Why Us",
-          url: "/why-us",
-          icon: <HiMiniPencilSquare className='mr-2 mt-1 text-md' />
-      },
+    //   {
+    //       name: "Why Us",
+    //       url: "/why-us",
+    //       icon: <HiMiniPencilSquare className='mr-2 mt-1 text-md' />
+    //   },
       {
           name: "About Us",
           url: "/about-us",
           icon: <HiTemplate className='mr-2 mt-1 text-md' />
       },
-      {
-          name: "Our Services",
-          url: "/services",
-          icon: <HiPuzzle className='mr-2 mt-1 text-md' />
-      },
+    //   {
+    //       name: "Our Services",
+    //       url: "/services",
+    //       icon: <HiPuzzle className='mr-2 mt-1 text-md' />
+    //   },
       {
           name: "Contact Us",
           url: "/contact-us",
@@ -58,7 +65,7 @@ export default function WebHeader()
                 className='container mx-auto flex justify-between items-center -mb-5 py-3'
                     >
                         <div 
-                            className='col-span-3 text-2xl pt-2'
+                            className='col-span-3 text-2xl pt-2 ml-3'
                         >
                             <GpayLogo width={70} /> 
                         </div>
@@ -75,7 +82,11 @@ export default function WebHeader()
                                                 <Link 
                                                         to={`${user?.url}`}
                                                         key={index}
-                                                        onClick={() => { setMenu(false) }}
+                                                        onClick={() => 
+                                                        { 
+                                                            setMenu(false)
+                                                            viewRef.current?.scrollIntoView({ behavior: 'smooth' })
+                                                        }}
                                                   >
                                                       <li 
                                                             className='flex px-5 py-3 rounded-full bg-[#0878a5] hover:bg-[#395988] hover:border-t-2 hover:border-b-2 hover:border-white mb-1 cursor-pointer text-left text-[14px] font-bold text-white hover:text-white'
@@ -114,6 +125,9 @@ export default function WebHeader()
                                 </>
                             }
                             {
+                               user && <p className='text-[13px] font-bold rounded-md bg-white p-2'>Welcome {appState.getUser().firstname} {appState.getUser().surname}</p>
+                            }
+                            {
                                 user && <>
                                     <Link to={'/dashboard'} 
                                         className='hover:text-white hover:font-bold px-3 py-1 text-sm hover:border-2 hover:border-[#506f9d] hover:rounded-full flex justify-center items-center'
@@ -122,14 +136,16 @@ export default function WebHeader()
                                     </Link>
                                     <Link to={'/#'} 
                                         className='hover:text-red-600 hover:font-bold px-3 py-1 text-sm hover:border-2 hover:border-red-600 hover:rounded-full flex justify-center items-center'
-                                        onClick={LogOut}
+                                        onClick={() => setIsLogOut(true)}
                                     >
                                         <HiMiniPower className='mr-1 text-xl mt-0 cursor-pointer hover:text-red-600'/> Logout
                                     </Link>
                                 </>
                             }
                         </div>
-                    </div>
+          </div>
+                    
+          { openLogOut && <Logout openLogOutModal={openLogOut} onClick={() => console.log("")} /> }
       </>
   )
 }

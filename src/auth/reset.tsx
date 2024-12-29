@@ -5,12 +5,15 @@ import { BeatLoader } from "react-spinners";
 import Message from "./helper/Message";
 import { useReset } from "../hook/useAuth";
 import GpayLogo from "../shared/Logo";
+import { appStore } from "../state/store";
 
 
 export default function ResetPassword() 
 {
-      const { ResetUser } = useReset()
+      const appState = appStore((state: any) => state)
       const navigate = useNavigate()
+      
+      const { ResetUser } = useReset()
       const [searchParams, setSearchParams] = useSearchParams()
       const userId: string = searchParams.get('miorftfdwcdfyhnvgfedd')!
 
@@ -30,6 +33,12 @@ export default function ResetPassword()
 
       useEffect(() => 
       {
+         if(appState.getUser().token)
+         {
+            navigate('/dashboard')  
+         } else {
+            navigate('/auth/login')             
+         }
          setErrMsgStyle('text-md text-red-600 font-bold')
       }, [])
 
@@ -95,7 +104,7 @@ export default function ResetPassword()
       return (
       <>  
             <main 
-                  className="flex md:d-flex xl:flex-row h-screen bg-[#435f88]"
+                  className="flex md:d-flex xl:flex-row h-screen bg-[#076d96]"
             >
                   <div 
                         className="w-full md:w-5/12 mx-auto my-4 d-flex items-center justify-center px-3 py-5 md:p-10 mt-20 gap-5"
@@ -106,22 +115,22 @@ export default function ResetPassword()
                         <GpayLogo width={80} />
                   </div>                
                   <div 
-                              className='w-full'
-                        >
-                              <h3 
-                                    className='flex text-white text-xl font-bold justify-center mb-5 uppercase'
-                              >
-                              Create a new password
-                              </h3>
-                        </div>
+                     className='w-full'
+                  >
+                     <h3 
+                        className='flex text-white text-xl font-bold justify-center mb-5 uppercase'
+                     >
+                        Create a new password
+                     </h3>
+                  </div>
                   <div 
                         className='w-full d-flex gap-10'
                   >
                         <div 
-                              className="w-full p-10 md:px-9 md:pt-10 md:pb-5 d-flex items-center justify-center rounded-md md:rounded-xl bg-white mb-20 md:mb-0"
+                              className="w-full px-4 py-4 md:px-9 md:pt-10 md:pb-5 pb-14 d-flex items-center justify-center rounded-md md:rounded-xl bg-white hover:text-white mb-20 md:mb-0 border-2 border-green-700"
                         >
                                     <div  
-                                          className='w-full d-flex gap-10 md:mb-3'
+                                          className='w-full d-flex gap-10 md:mb-3 mt-3'
                                     > 
                                           <div 
                                                 className="mb-4 md:w-full"
@@ -173,7 +182,7 @@ export default function ResetPassword()
                                           className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-5'
                                     >   
                                           <button 
-                                                      className="block w-full bg-[#435f88] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
+                                                      className="block w-full bg-[#096083] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
                                                       onClick={() => {
                                                             UserResetPassword()
                                                       }}
@@ -184,38 +193,26 @@ export default function ResetPassword()
                                           </button>
                                     </div>
                                     <div  
-                                          className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-10 px-5'
+                                          className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-10 px-5 pb-5'
                                     >                                       
                                           <div 
-                                                className='d-flex justify-center text-center'
+                                                className='d-flex justify-center text-center text-black'
                                           >
-                                                <div className=''>Access your account</div>
+                                                <div className='hidden md:block'>Access your account</div>
                                                 <div className='text-md hover:text-blue-300 font-bold'>
                                                       <Link to={'/auth/login'}>Login</Link>
                                                 </div>
-                                          </div>
-                                          <div 
-                                                className='text-md d-flex justify-center items-center text-black hover:text-blue-300 font-bold text-md cursor-pointer'
-                                          >
-                                                <div className=''>
-                                                      <Link to={'/'}
-                                                      >                                
-                                                            <HiHome className='ml-1 text-2xl mt-2'/> 
-                                                      </Link>
-                                                </div>
-                                                <div 
-                                                      className='text-md hover:text-blue-300 font-bold'
-                                                >
-                                                      <Link to={'/'}
-                                                      >                                
-                                                            <div className='mt-1 flex justify-center text-xs items-center'>Home</div>
-                                                      </Link>
-                                                </div>
+                                          </div>  
+                                          <div className='text-md text-black hover:text-blue-300 font-bold text-md'>
+                                                <Link to={'/'}
+                                                >                                
+                                                      <div className='mt-1 mr-2 flex justify-center items-center'><HiHome className='mr-1 text-2xl md:mt-2'/></div>
+                                                </Link>
                                           </div> 
                                           <div 
-                                                className='d-flex justify-center text-center'
+                                                className='d-flex justify-center text-center text-black'
                                           >
-                                          <div className=''>If you don't have an account </div>
+                                          <div className='hidden md:block'>If you do not have an account </div>
                                           <div className='text-md hover:text-blue-300 font-bold'>
                                                 <Link to={'/auth/register'}>Create one now.</Link>
                                           </div>

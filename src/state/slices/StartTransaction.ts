@@ -4,24 +4,24 @@ import { IStartTransaction } from "./interface/IStartTransaction";
 
 const createStartTransactionSlice: StateCreator<IStartTransaction> = (set, get) => (
     {            
-        isLoading: false,
-        getLoading()
+        as: "",
+        getAs()
         {
-            return get().isLoading
+            return get().as
         },
-        setLoading(loading: any)
+        setAs(as: any)
         {
-            set(() => ({isLoading: loading}))
+            set(() => ({ as: as }))
         },
-
-        error: null,
-        getError()
+        
+        payer: "",
+        getPayer()
         {
-            return get().error
+            return get().payer
         },
-        setError(error: any)
+        setPayer(payer: any)
         {
-            set(() => ({error: error}))
+            set(() => ({ payer: payer }))
         },
         
         category: -1,
@@ -34,14 +34,24 @@ const createStartTransactionSlice: StateCreator<IStartTransaction> = (set, get) 
             set(() => ({ category: category }))
         },
         
-        as: "none",
-        getAs()
+        others: false,
+        getOthers()
         {
-            return get().as
+            return get().others
         },
-        setAs(as: any)
+        setOthers(others: any)
         {
-            set(() => ({ as: as }))
+            set(() => ({ others: others }))
+        },
+        
+        othersName: "",
+        getOthersName()
+        {
+            return get().othersName
+        },
+        setOthersName(othersName: any)
+        {
+            set(() => ({ othersName: othersName }))
         },
 
         serviceName: "",

@@ -47,7 +47,7 @@ export const Passport = () =>
                setIsLoading(false)
                UseState.setPassport(response?.data?.data?.passport)
                UseState.setAllow("loggedIn")
-               navigate('/dashboard')
+               navigate('/')
             } else {
                setIsLoading(false)
                setErrorMessage("Error Uploading Passport")
@@ -110,7 +110,7 @@ export const Passport = () =>
                             { 
                                 imgUrl &&
                                 <div 
-                                    className="col-span-3 bg-white border-2 border-gray-200  shadow-md w-[400px] mx-auto justify-center item-center"
+                                    className="col-span-3 bg-white border-2 border-gray-200 shadow-md w-[400px] mx-auto justify-center item-center"
                                 >
                                     <img src={imgUrl} alt="Product image" className="object-cover" />
                                 </div>

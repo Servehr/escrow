@@ -5,13 +5,15 @@ import { useRegister } from "../hook/useAuth";
 import { BeatLoader } from "react-spinners";
 import Message from "./helper/Message";
 import GpayLogo from "../shared/Logo";
+import { appStore } from "../state/store";
 
 
 function Register()
 {
-      const { RegisterUser } = useRegister()
+      const appState = appStore((state: any) => state)
       const navigate = useNavigate()
 
+      const { RegisterUser } = useRegister()
       const FIRSTNAME_MESSAGE = "Enter First name"
       const SURNAME_MESSAGE = "Enter Surname"
       const EMAIL_MESSAGE = "Enter Email Address"
@@ -44,6 +46,12 @@ function Register()
 
       useEffect(() => 
       {
+         if(appState.getUser().token)
+         {
+            navigate('/dashboard')  
+         } else {
+            navigate('/auth/login')             
+         }
          setErrMsgStyle('text-md text-red-600 font-bold')
       }, [])
 
@@ -64,7 +72,7 @@ function Register()
                   { 
                         if(res.statusCode === 200)
                         {
-                              navigate('/auth/registered')
+                              navigate('/auth/login')
                         } else {
                               setValidationMessage(res.message)
                               setIsLoading(false) 
@@ -106,13 +114,13 @@ function Register()
     return (
         <>  
             <main 
-                    className="flex md:d-flex xl:flex-row h-screen bg-[#435f88]"
+                    className="flex md:d-flex xl:flex-row h-screen bg-[#076d96]"
             >
                 <div 
-                      className="w-full md:w-6/12 mx-auto my-4 d-flex items-center justify-center px-3 py-5 md:p-10 -mt-3 md:-mt-1 mt-20 gap-5"
+                      className="w-full md:w-6/12 mx-auto my-4 d-flex items-center justify-center px-3 py-5 md:p-10 md:mt-5 mt-20 gap-5"
                 >            
                     <div 
-                          className='w-full flex justify-center items-center mb-10'
+                          className='w-full flex justify-center items-center mb-10 -mt-16 md:mt-0'
                       >
                           <GpayLogo width={80} /> 
                     </div>
@@ -120,19 +128,19 @@ function Register()
                           className='w-full d-flex gap-10'
                     >
                         <div 
-                              className='w-full'
+                              className='w-full -mt-3 md:mt-0'
                         >
                               <h3 
-                                    className='flex text-white text-xl font-bold justify-center mb-5 uppercase'
+                                    className='flex text-white text-[17px] md:text-[20px] font-bold justify-center mb-2 md:mb-5 uppercase'
                                     >
                                     Signup to become a member
                               </h3>
                         </div>
                         <div 
-                                    className="w-full p-10 md:px-9 md:pt-10 md:pb-5 d-flex items-center justify-center rounded-md md:rounded-xl bg-gray-200 hover:text-white mb-20 md:mb-0"
-                              >
+                              className="w-full px-4 py-4 md:px-9 md:pt-10 md:pb-5 pb-14 d-flex items-center justify-center rounded-md md:rounded-xl bg-white hover:text-white mb-8 md:mb-0 border-2 border-green-700"
+                        >
                                     <div 
-                                          className='w-full d-flex md:flex gap-10 md:mb-3'
+                                          className='w-full d-flex md:flex gap-10 md:mb-3 mt-3'
                                     >           
                                           <div 
                                                 className="mb-4 md:w-1/2 w-2/2"
@@ -276,7 +284,7 @@ function Register()
                                           className='w-full flex justify-between md:flex gap-10 md:mb-3 mt-5'
                                     >   
                                           <button 
-                                                      className="block w-fit bg-[#435f88] hover:bg-[#6f7277] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
+                                                      className="block w-fit bg-[#435f88] hover:bg-[#096083] border-shadow text-white font-bold p-4 rounded-lg ring-2 ring-inset"
                                                       onClick={() => {
                                                             CreateUser()
                                                       }}

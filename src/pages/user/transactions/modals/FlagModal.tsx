@@ -55,9 +55,9 @@ export const FlagModal = ({onClick, flagModal, rowId}: FlaggedModalPropos)  =>
                                         className='col-span-12 pt-1 pb-5 overflow-y-auto xm:overflow-y-scroll justify-center item-center'
                         >
                                 <h1 
-                                        className="text-black font-bold w-full flex justify-center text-center mb-10"
+                                        className="text-black font-bold w-full flex justify-center text-center mb-10 uppercase text-2xl"
                                 >
-                                        You are about to flag selected transaction
+                                        You are about to cancel this transaction
                                 </h1>
                                 <div 
                                       className="items-center gap-5 mt-2 sm:flex flex justify-between mb-2 mx-5 mt-5"

@@ -140,7 +140,7 @@ export const Confirm = () =>
                                 className="w-full md:px-2 pb-1 md:px-0 px-2 mb-2" 
                             >
                                 <div 
-                                    className='grid grid-cols-12 mx-auto mt-1 px-2 md:px-0 gap-10'
+                                    className='w-full md:grid md:grid-cols-12 mx-auto mt-1 px-2 md:px-0 gap-10'
                                 >
                                     <div 
                                         className='col-span-12 md:col-span-7 md:mt-5'
@@ -148,7 +148,7 @@ export const Confirm = () =>
                                         <SlideShowThumbnail data={image} imageSize={image?.length} waterMark={'nothing'} />
                                     </div>
                                     <div 
-                                        className="col-span-12 md:col-span-5 -mt-14 md:mt-0 mb-10"
+                                        className="w-full md:col-span-12 md:col-span-5 -mt-14 md:mt-0 mb-10"
                                     > 
                                     {   (foundProduct[0]?.request === 'pending') &&
                                         <div 
@@ -187,7 +187,7 @@ export const Confirm = () =>
                                                 <div 
                                                     className="w-full md:h-[400px] flex justify-center items-center"
                                                 >
-                                                    <h1 className="text-[30px] font-bold text-red-600 md:mt-20">Product request already declined</h1>
+                                                    <h1 className="text-[24px] md:text-[30px] font-bold whitespace-nowrap text-green-800 md:mt-20">Product request already declined</h1>
                                                 </div>
                                             </>
                                         } 
@@ -195,7 +195,7 @@ export const Confirm = () =>
                                                 <div 
                                                     className="w-full md:h-[400px] flex justify-center items-center"
                                                 >
-                                                    <h1 className="text-[30px] font-bold text-green-800 md:mt-20">Product request already accepted</h1>
+                                                    <h1 className="text-[24px] md:text-[30px] font-bold whitespace-nowrap text-green-800 md:mt-20">Product request already accepted</h1>
                                                 </div>
                                             </>
                                         }   

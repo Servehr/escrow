@@ -6,6 +6,7 @@ import DashboardLayout from '../../shared/DashboardLayout'
 import { HistoryModal } from "./transactions/modals/HistoryModal"
 import { useUser } from "../../hook/useUser"
 import { RotateLoader } from "react-spinners"
+import currencyFormatter from "../../util/currency-formatter"
 
 
 export default function Payment() 
@@ -75,7 +76,7 @@ export default function Payment()
         },
         {
             header: 'Amount',
-            cell: (row: CellContext<PaymentHistoryProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={row.renderValue()} /></a>),
+            cell: (row: CellContext<PaymentHistoryProps, unknown>) => (<a href="#" onClick={() => ShowStates(row.cell.row.getValue)}><Show display={currencyFormatter(row.renderValue())} /></a>),
             accessorKey: 'amount',
         },
         {
@@ -92,9 +93,15 @@ export default function Payment()
                     className='mx-1 md:mx-4 -mt-5'
                 >                   
                 {
-                    (isLoading === true) && <div className="col-span-12 h-[300px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+                    (isLoading === true) && <div className="col-span-12 h-[500px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
                     >
                         <RotateLoader className='w-12 h-12' />
+                    </div>
+                }
+                {
+                    (isLoading === false) && (paymentTransactions.length === 0) && <div className="col-span-12 h-[300px] flex justify-center items-center" style={{ marginTop: '60px', paddingTop: '0px' }}
+                    >
+                        <h1 className="font-bold text-blue-400">No Payment Made Yet</h1>
                     </div>
                 }
                 {

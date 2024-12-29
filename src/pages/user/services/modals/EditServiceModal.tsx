@@ -3,16 +3,19 @@ import { Modal } from "../../../../component/Modal";
 import { BeatLoader } from "react-spinners";
 import delay from "delay";
 import Message from "../../../../auth/helper/Message";
+import { useService } from "../../../../hook/useService";
+
 
 type CategoryModalProps = 
 {
-    onClick: (isOpen: boolean) => void,
+    onClick: () => void,
     categoryModal: boolean
     category: { id: number, name: string, description: string }
 } 
 
 export const EditServiceModal = ({onClick, categoryModal, category}: CategoryModalProps)  =>
 {
+        const { UpdateService } = useService()
         const [loading, setIsLoading] = useState(false)
         const [validationMsg, setValidationMessage] = useState<string>('')
 
@@ -34,7 +37,6 @@ export const EditServiceModal = ({onClick, categoryModal, category}: CategoryMod
            setDescription(category?.description)
            setErrMsgStyle('text-md text-red-600 font-bold')
            setIsLoading(false)
-           console.log(category?.name)
         }, [])
 
         useEffect(() => 
@@ -42,26 +44,34 @@ export const EditServiceModal = ({onClick, categoryModal, category}: CategoryMod
                 
         }, [categoryName, description])
 
-        const SaveService = async () => 
+        const ChangeService = async () => 
         {
-                let valid: string = 'passed'
-                valid = allFields()
-                if(valid === "passed")
-                {
-                   setIsLoading(true)
-                   await delay(3000)
-                   setIsLoading(false)
-                   alert("Great")
-                } else {
-                   setValidationMessage('Attempt all fields')
-                   setTimeout(() => 
-                   {
-                      setValidationMessage('')
-                   }, 5000)
-                }
-        }
-
-        
+            let valid: string = 'passed'
+            valid = allFields()
+            if(valid === "passed")
+            {
+               setIsLoading(true)
+               await delay(2000)
+               const UpdateServ = UpdateService(category?.id, categoryName, description)
+               UpdateServ.then((serv) => 
+               {
+                  if(serv.statusCode === 200)
+                  {
+                     setIsLoading(false)
+                     onClick()
+                  }    
+               }).catch(() => {                   
+                   setValidationMessage('Updating failed')
+                   setIsLoading(false)                   
+               })
+            } else {
+               setValidationMessage('')
+               setTimeout(() => 
+               {
+                  setValidationMessage('')
+               }, 5000)
+            }
+        }        
 
         const allFields = () => 
         {
@@ -82,7 +92,7 @@ export const EditServiceModal = ({onClick, categoryModal, category}: CategoryMod
                                 <h1 
                                         className="text-black font-bold w-full flex justify-left text-center mb-5"
                                 >
-                                        Create A Service
+                                        Edit Service
                                 </h1>
                                 <div 
                                         className='mb-2 mt-10 mb-5 w-full flex justify-center items-center'
@@ -163,7 +173,7 @@ export const EditServiceModal = ({onClick, categoryModal, category}: CategoryMod
                                         {
                                                 <button 
                                                         className="py-3 px-4 bg-red-700 hover:bg-red-800 text-white font-semibold text-sm rounded-xl w-max"
-                                                        onClick={() => onClick(categoryModal) }
+                                                        onClick={() => onClick() }
                                                 >
                                                                 Close
                                                 </button>
@@ -171,9 +181,9 @@ export const EditServiceModal = ({onClick, categoryModal, category}: CategoryMod
                                         {
                                                <button 
                                                         className="py-3 px-4 bg-green-800 hover:bg-green-700 text-white font-semibold text-sm rounded-xl w-max"
-                                                        onClick={SaveService}
+                                                        onClick={ChangeService}
                                                                 >
-                                                        {       loading ? ( <BeatLoader size={9} color="#fff" />) : ( "Create" )          }
+                                                        {       loading ? ( <BeatLoader size={9} color="#fff" />) : ( "Update" )          }
                                               </button>
                                         }
                                 </div>

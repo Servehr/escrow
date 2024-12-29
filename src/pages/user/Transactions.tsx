@@ -6,36 +6,44 @@ import CancelledTransactions from './transactions/CancelledTransactions';
 import FlaggedTransactions from './transactions/FlaggedTransactions';
 import RejectedTransactions from './transactions/RejectedTransactions';
 import DeclinedTransactions from './transactions/DeclinedTransactions';
+import { appStore } from '../../state/store';
 
 
 export default function Transactions() 
 {  
+    const userState = appStore((state) => state)
     const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
 
     const tabsData = [   
       {
         label: "Pending",
-        content: <FlaggedTransactions />
+        content: <FlaggedTransactions />,
+        type: ['member', 'admin']
       },
       {
         label: "Declined",
-        content: <DeclinedTransactions />
+        content: <DeclinedTransactions />,
+        type: ['member', 'admin']
       },  
       {
         label: "Open",
-        content: <ActiveTransactions />
+        content: <ActiveTransactions />,
+        type: ['member', 'admin']
       },
       {
         label: "Rejected",
-        content: <RejectedTransactions />
+        content: <RejectedTransactions />,
+        type: ['member', 'admin']
       },
       {
         label: "Completed",
-        content: <CompletedTransactions />
+        content: <CompletedTransactions />,
+        type: ['member', 'admin']
       },
       {
         label: "Cancelled",
-        content: <CancelledTransactions />
+        content: <CancelledTransactions />,
+        type: ['member', 'admin']
       }, 
     ]
     
@@ -46,7 +54,7 @@ export default function Transactions()
             <div className='grid grid-cols-12'
             >
                 <div 
-                        className='col-span-12'
+                    className='col-span-12'
                 >
                     <p className='font-bold text-2xl ml-5 mt-0 text-white'>...</p>
                 </div>
@@ -67,19 +75,25 @@ export default function Transactions()
                             >
                                 {
                                     tabsData.map((tab, index) => {
+                                        let contains = tab?.type?.includes(userState.getUser().userType)
                                         return (
-                                                <button
-                                                        key={index}
-                                                        className={` rounded-none py-2 rounded-2xl flex justify-between items-center border-b-4 px-5 m-auto font-semibold transition-colors duration-300 text-md border-t-1 ${
-                                                        index === activeTabIndex
-                                                        ? "border-black bg-[#119dd5] text-white font-bold"
-                                                        : "border-transparent hover:border-green-700 text-black"
-                                                        }`}
-                                                        style={{fontSize:"12px", paddingTop: '15px', fontWeight: 'bolder'}}
-                                                        onClick={() => setActiveTabIndex(index)}>
-                                                        {tab.label.toUpperCase()}
-                                                </button>
-                                                );
+                                              <>
+                                                  {
+                                                      contains && 
+                                                      <button
+                                                          key={index}
+                                                          className={` rounded-none py-2 rounded-2xl flex justify-between items-center border-b-4 px-5 m-auto font-semibold transition-colors duration-300 text-md border-t-1 ${
+                                                          index === activeTabIndex
+                                                          ? "border-black bg-[#119dd5] text-white font-bold"
+                                                          : "border-transparent hover:border-green-700 text-black"
+                                                          }`}
+                                                          style={{fontSize:"12px", paddingTop: '15px', fontWeight: 'bolder'}}
+                                                          onClick={() => setActiveTabIndex(index)}>
+                                                          {tab.label.toUpperCase()}
+                                                      </button>
+                                                  }
+                                              </>                                                
+                                            );
                                         })
                                 }
                             </div>

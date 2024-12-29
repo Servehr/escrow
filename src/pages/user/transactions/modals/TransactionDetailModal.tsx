@@ -55,7 +55,7 @@ console.log(detail)
                                               <div 
                                                     className="mb-4 md:w-1/2 w-2/2 flex md:flex md:mb-1 bg-gray-100 p-4"
                                               >
-                                                   <span className="text-sm text-lg w-3/12">Transaction ID:</span> <span className="font-semibold text-lg w-9/12">{ detail?.transaction_code }</span>
+                                                   <span className="text-sm text-lg w-3/12">Transaction ID:</span> <span className="font-semibold text-lg w-9/12">{ detail?.identifier }</span>
                                               </div>
                                               <div 
                                                     className="mb-4 md:w-1/2 w-2/2 d-flex md:flex md:mb-1 bg-gray-100 p-4"
@@ -81,14 +81,9 @@ console.log(detail)
                                               className='w-full d-flex md:flex gap-10'
                                         >                                          
                                               <div 
-                                                    className="mb-4 md:w-1/2 w-2/2 d-flex md:flex md:mb-1 bg-gray-100 p-4"
+                                                    className="mb-4 w-full d-flex md:flex md:mb-1 bg-gray-100 p-4"
                                               >
                                                    <span className="text-sm text-lg w-3/12">Delivery Status:</span> <span className="font-semibold text-lg w-9/12">{ detail?.delivery_status }</span>
-                                              </div>
-                                              <div 
-                                                    className="mb-4 md:w-1/2 w-2/2 d-flex md:flex md:mb-1 bg-gray-100 p-4"
-                                              >
-                                                   <span className="text-sm text-lg w-3/12">Transaction Validity:</span> <span className="font-semibold text-lg w-9/12">{ detail?.validity }</span>
                                               </div>
                                         </div>
                                         <div  
