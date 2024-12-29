@@ -36,8 +36,6 @@ export default function ResetPassword()
          if(appState.getUser().token)
          {
             navigate('/dashboard')  
-         } else {
-            navigate('/auth/login')             
          }
          setErrMsgStyle('text-md text-red-600 font-bold')
       }, [])

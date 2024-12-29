@@ -31,8 +31,6 @@ export default function ForgotPassword()
             if(appState.getUser().token)
             {
                   navigate('/dashboard')  
-            } else {
-                navigate('/auth/login')             
             }
             setErrMsgStyle('bg-red-600 p-3 text-white font-bold rounded-md')            
       }, [])
