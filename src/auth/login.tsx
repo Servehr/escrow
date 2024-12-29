@@ -70,7 +70,7 @@ function Login()
                         }
                         appState.setUser(credentials)
                         appState.setPassport(res?.data?.data?.passport)
-                        if(res?.data?.data?.first_timer === "yes")
+                        if(res.data.data.first_timer === "yes")
                         {
                            navigate('/passport')
                         } else {
