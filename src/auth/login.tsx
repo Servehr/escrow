@@ -70,7 +70,9 @@ function Login()
                         }
                         appState.setUser(credentials)
                         appState.setPassport(res?.data?.data?.passport)
+                        console.log("++++++++++++")
                         console.log(typeof res?.data?.data?.first_timer)
+                        console.log("++++++++++++")
                         setIsLoading(false) 
                         if(res?.data?.data?.first_timer === "1")
                         {
