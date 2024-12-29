@@ -5,8 +5,8 @@ const URL =
         status: true
     },
     online: {
-        // path: 'https://www.scentsbyhoppey.com/', 
-        path: 'https://api.scentsbyhoppey.com/',
+        path: 'https://www.scentsbyhoppey.com/', 
+        // path: 'https://api.scentsbyhoppey.com/',
         status: false
     },
     connectTo: 'offline'
