@@ -75,11 +75,8 @@ function Login()
                            navigate('/passport')
                         } else {
                            appState.setAllow('loggedIn')
-                           
-                        console.log("++++++++++++")
-                        console.log(typeof res?.data?.data?.first_timer)
-                        console.log("++++++++++++")
-                        setIsLoading(false) 
+                           alert(res?.data?.data?.first_timer)
+                           setIsLoading(false) 
                            navigate('/')
                         }
                      } else {
